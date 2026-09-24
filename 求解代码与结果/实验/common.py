@@ -89,6 +89,15 @@ def total_obj(met, hard_penalty=1e6):
     return objective(met) + (0 if met['hard_ok'] else hard_penalty)
 
 
+def set_weights(tardy=1.0, makespan=0.05, energy=0.8, flights=30.0):
+    """覆盖 p2_solve 的目标权重（用于权重调优实验）。"""
+    import p2_solve
+    p2_solve.W_TARDY = tardy
+    p2_solve.W_MAKESPAN = makespan
+    p2_solve.W_ENERGY = energy
+    p2_solve.W_FLIGHTS = flights
+
+
 def summarize(met):
     return {k: (round(v, 2) if isinstance(v, float) else v)
             for k, v in met.items() if k != 'box_time'}

@@ -191,6 +191,20 @@ def destroy_late_boxes(data, flights, rng, k=6, box_time=None):
     return flights, pool
 
 
+def destroy_many(data, flights, rng):
+    """大破坏：移除约 1/3 的架次，制造结构性变化。"""
+    flights = clone_flights(flights)
+    n = len(flights)
+    if n == 0:
+        return flights, []
+    k = max(2, n // 3)
+    idxs = rng.sample(range(n), k)
+    pool = []
+    for i in sorted(idxs, reverse=True):
+        pool.extend(_remove_flight(flights, i))
+    return flights, pool
+
+
 def alns_optimize(data, flights0, budget=None, seed=7, w_removal=0.5,
                   max_no_improve=600, restart_after=4000):
     rng = fresh_rng(seed)
@@ -201,8 +215,9 @@ def alns_optimize(data, flights0, budget=None, seed=7, w_removal=0.5,
     def make_destroyers():
         return [
             lambda fl: destroy_random_flights(data, fl, rng, 3),
-            lambda fl: destroy_by_deadline(data, fl, rng, 8),
-            lambda fl: destroy_random_boxes(data, fl, rng, 6),
+            lambda fl: destroy_many(data, fl, rng),
+            lambda fl: destroy_by_deadline(data, fl, rng, 10),
+            lambda fl: destroy_random_boxes(data, fl, rng, 8),
             lambda fl: destroy_contiguous(data, fl, rng, 3),
             lambda fl: destroy_late_boxes(data, fl, rng, 8,
                                           box_time=cur_met_state.get('box_time')),
@@ -223,7 +238,7 @@ def alns_optimize(data, flights0, budget=None, seed=7, w_removal=0.5,
     best_obj = total_obj(met)
     cur_flights, cur_met, cur_obj = flights, met, best_obj
 
-    T0 = max(best_obj * 0.25, 1.0)
+    T0 = max(best_obj * 0.30, 1.0)
     it = 0
     no_improve = 0
     sigma1, sigma2, sigma3 = 1.5, 0.7, 0.2   # 全局新优 / 改善 / 接收
@@ -256,7 +271,7 @@ def alns_optimize(data, flights0, budget=None, seed=7, w_removal=0.5,
             cnt_d[di] += 1
             continue
         obj2 = total_obj(met2)
-        T = T0 * (0.998 ** it) + 1e-6
+        T = T0 * (0.999 ** it) + 1e-6
         delta = obj2 - cur_obj
         gain = 0.0
         if obj2 < best_obj - 1e-9:
