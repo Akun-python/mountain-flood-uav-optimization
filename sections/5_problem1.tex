@@ -11,6 +11,17 @@
 单位里程能耗越高，架次能耗随之上升，因此最大安全载荷由质量上限、体积上限与
 能量上限三者中的最紧者决定。
 
+图 \ref{fig:demmap} 给出研究区地形与服务区分布：镇龙乡山地位于调度中心西南，
+S002、S004、S008 等远区需跨越 400\,m 以上高差，是载荷与能耗约束最紧的区域；
+三个中继布设点覆盖全部服务区通信需求（详见问题三）。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.96\textwidth]{figures/p1_dem_map.png}
+\caption{研究区地形（30\,m DEM）、服务区、调度中心与中继布设点分布}
+\label{fig:demmap}
+\end{figure}
+
 \subsection{模型建立}
 
 \subsubsection{飞行时间模型}
@@ -26,7 +37,17 @@ t_{\mathrm{fly}}= \frac{h^+}{v_{\mathrm{up}}} + \frac{d}{v_c}
 \end{equation}
 
 其中巡航高度为 $h_{\mathrm{cruise}}=\max_{x\in leg}\mathrm{DEM}(x)+50$\,m，
-作业高度取服务区地面高程，投递悬停 30\,s。
+作业高度取服务区地面高程，投递悬停 30\,s。图 \ref{fig:altprof} 给出四条代表性
+航线的 DEM 高程剖面：山脊横亘于调度中心与远区之间，爬升段在总飞行中占比大，
+因此爬升能耗与时间必须显式建模，等效航程法把水平部分折算为能耗，爬升部分按
+高度差单独计能。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/p1_alt_profiles.png}
+\caption{典型航线 DEM 高程剖面与巡航高度（虚线为巡航高度，点线为作业高度）}
+\label{fig:altprof}
+\end{figure}
 
 \subsubsection{能耗模型}
 
