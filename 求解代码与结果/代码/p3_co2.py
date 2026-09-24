@@ -229,21 +229,40 @@ class Solver:
         e_sorties, e_pos = pack('E')
         n_sorties, n_pos = pack('N')
 
+        def charge_from_to(soc_prev, soc_need, T):
+            """把荷电从 soc_prev 充到 soc_need 所需时长（两阶段曲线，f(soc)=充满时长，
+            差分即分段线性充电时长）；soc_need<=soc_prev 时不充电。"""
+            if soc_need <= soc_prev:
+                return 0.0
+
+            def t_full(soc):
+                if soc <= 0.9:
+                    return T * (0.65 * (0.9 - soc) / 0.9 + 0.35)
+                return T * 0.35 * (1.0 - soc) / 0.1
+
+            return max(0.0, t_full(soc_prev) - t_full(soc_need))
+
         def seq_penalty(sorties, pos, start_ready=0.0):
-            """单机时间线：相邻架次转场（返航+补电+出航+建链）。"""
+            """单机时间线：相邻架次转场（返航+按需充电+出航+建链）。
+            严格口径：每班含 t_prep=180 s 固定准备，两班之间需 t_turn=300 s 周转；
+            转场前按下一班所需荷电按需补电，返场荷电已满足时不等待。"""
             t_out, t_back, _ = relay_mission_time(pos[0], pos[1], pos[2], data)
             pen = 0.0
+            soc_prev = 1.0
             ready = start_ready
             for k, s in enumerate(sorties):
                 dispatch = s['t0'] - t_out - REL['t_link']
+                e = relay_mission_energy(pos[0], pos[1], pos[2], data, s['t1'] - s['t0'])
+                need = REL['rho'] + e / REL['E_use']
+                ch = charge_from_to(soc_prev, need, T_FULL) if k > 0 else 0.0
                 if dispatch < 0:
                     pen += -dispatch
-                if k > 0 and dispatch < ready:
-                    pen += (ready - dispatch)
-                e = relay_mission_energy(pos[0], pos[1], pos[2], data, s['t1'] - s['t0'])
-                soc = 1 - e / REL['E_use']
-                ch = charge_time(soc, T_FULL)
-                ready = s['t1'] + t_back + ch
+                if dispatch < REL['t_prep']:
+                    pen += REL['t_prep'] - dispatch
+                if k > 0 and dispatch < ready + ch + REL['t_turn']:
+                    pen += (ready + ch + REL['t_turn'] - dispatch)
+                soc_prev = 1 - e / REL['E_use']
+                ready = s['t1'] + t_back
             return pen, ready
 
         pen = 0.0
@@ -255,6 +274,7 @@ class Solver:
         r2_all = sorted(e_sorties + n_sorties + tail, key=lambda s: s['t0'])
         pen2 = 0.0
         ready2 = 0.0
+        soc_prev2 = 1.0
         for k, s in enumerate(r2_all):
             if s in e_sorties:
                 g = 'E'
@@ -265,14 +285,17 @@ class Solver:
             pos = POS_OF[g]
             t_out, t_back, _ = relay_mission_time(pos[0], pos[1], pos[2], data)
             dispatch = s['t0'] - t_out - REL['t_link']
+            e = relay_mission_energy(pos[0], pos[1], pos[2], data, s['t1'] - s['t0'])
+            need = REL['rho'] + e / REL['E_use']
+            ch = charge_from_to(soc_prev2, need, T_FULL) if k > 0 else 0.0
             if dispatch < 0:
                 pen2 += -dispatch
-            if k > 0 and dispatch < ready2:
-                pen2 += (ready2 - dispatch)
-            e = relay_mission_energy(pos[0], pos[1], pos[2], data, s['t1'] - s['t0'])
-            soc = 1 - e / REL['E_use']
-            ch = charge_time(soc, T_FULL)
-            ready2 = s['t1'] + t_back + ch
+            if dispatch < REL['t_prep']:
+                pen2 += REL['t_prep'] - dispatch
+            if k > 0 and dispatch < ready2 + ch + REL['t_turn']:
+                pen2 += (ready2 + ch + REL['t_turn'] - dispatch)
+            soc_prev2 = 1 - e / REL['E_use']
+            ready2 = s['t1'] + t_back
         pen += pen2
         energy_sum = sum(
             relay_mission_energy(POS_OF[g][0], POS_OF[g][1], POS_OF[g][2], data,
