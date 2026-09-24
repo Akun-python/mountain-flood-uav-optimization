@@ -1,10 +1,10 @@
 # Fdb version 4
-["xdvipdfmx"] 1790220561.37512 "main.xdv" "main.pdf" "main" 1790220571.72712 0
-  "main.xdv" 1790220560 465052 410b2aba08500c600346a88ed12ea2ef "xelatex"
+["xdvipdfmx"] 1790247170.14142 "main.xdv" "main.pdf" "main" 1790247182.85784 0
+  "main.xdv" 1790247169 449696 7a993944d851767de2fb6b6160d11081 "xelatex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["xelatex"] 1790220558.28289 "main.tex" "main.xdv" "main" 1790220571.70503 0
+["xelatex"] 1790247166.61011 "main.tex" "main.xdv" "main" 1790247182.83368 0
   "c:/Windows/Fonts/msyh.ttc" 1744369746 19704352 1e10e74402e59d54499af795caf0b135 ""
   "c:/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1736157014 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1736158798 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
@@ -241,11 +241,11 @@
   "figures/p1_qstar.png" 1790179069 87490 4de2d0c9ab9fbcd71944c71ecac10f9f ""
   "figures/p1_sensitivity.png" 1790179069 146616 35a621df745e94fe32421d694f72bd51 ""
   "figures/p1_soc.png" 1790179491 74465 cecb59fce1f21b0d7f0f159fe67835d4 ""
-  "figures/p2_battery.png" 1790179492 109788 25259d526e6d0f427634173efbbc1112 ""
-  "figures/p2_delivery.png" 1790179493 168699 f9d0eb8fe7c2f59561ec6c69adf221c4 ""
-  "figures/p2_gantt.png" 1790179071 77587 f8cd3c2b10f2fe1a55cb83f3fb2e6d08 ""
-  "figures/p2_network.png" 1790179491 804430 99c8399c99a9b9808a2cf93bbd9c0fcd ""
-  "figures/p2_pareto2d.png" 1790179493 117391 38011db10218c3383e715e610d36117b ""
+  "figures/p2_battery.png" 1790240813 111622 25e229f38e90204d4297e1266dbc7b1f ""
+  "figures/p2_delivery.png" 1790240403 71029 b1f2b033ceb1b240b4ed6255d0e2ad5b ""
+  "figures/p2_gantt.png" 1790240401 76514 1ddba6d8a30e500bb92cd7cb0f7ea3c7 ""
+  "figures/p2_network.png" 1790240402 609154 b8f5efee506a5141efea537a8a49b55a ""
+  "figures/p2_pareto2d.png" 1790240813 102655 70dd3f2a16fdb4b32aa68660e99252d2 ""
   "figures/p3_comm_tl.png" 1790219172 85503 8fb1ede958797bc2db40399db8cc771d ""
   "figures/p3_coverage.png" 1790219169 134662 188701e222e68e7f4ecb119cd0b46d1e ""
   "figures/p3_gantt.png" 1790219170 150640 957cba25c01f597869a22d03571eb4c3 ""
@@ -256,18 +256,18 @@
   "figures/p4_partition.png" 1790219170 138868 3e1a025664b6bb13396868525e8836e0 ""
   "gmcmthesis.cls" 1790062496 17817 566b7cd2cbb112e7793fafe5ba30da1d ""
   "logo.pdf" 1790062496 112746 c9b882a3c9346bcf37b62b82e519a0e4 ""
-  "main.aux" 1790220560 18385 22926b86299bf03ea0ef102034ec9c33 "xelatex"
-  "main.out" 1790220560 7398 508cd0ba84bedcef163e290fdadc69c4 "xelatex"
-  "main.tex" 1790219781 7911 29187cdacab1d34890194a3cefa23b81 ""
+  "main.aux" 1790247169 17929 3919747a805a990b2558c4a56b3561ff "xelatex"
+  "main.out" 1790247169 7305 8f2e7bf4abdb26448f87a6f8c5f33eaf "xelatex"
+  "main.tex" 1790247054 7955 a256b8db1d3e83b9bdc38277451a3ea1 ""
   "sections/10_problem4.tex" 1790178132 5523 6977590eb7c3194c5e4a5d8e1f6d579d ""
   "sections/1_restatement.tex" 1790177349 2917 4f44bc045d2cd4297a15f91287864656 ""
   "sections/3_assumptions.tex" 1790173394 2779 f2f9284508e9073d2adac5292955acd9 ""
   "sections/4_symbols.tex" 1790173414 1418 0e3a7cb4003068c3d41651bc2b2d072a ""
   "sections/5_problem1.tex" 1790177694 7525 fd491d4aaac61f06c09ac6c408a563b4 ""
-  "sections/6_problem2.tex" 1790215232 10240 de58f4b096b430f85853fe2aa4d19645 ""
-  "sections/7_problem3.tex" 1790219507 12814 0eae4923b2a3e67d9555b33ccf40398d ""
-  "sections/8_sensitivity.tex" 1790220175 4541 dc87b4783257737ff4bd8c4599e8dd04 ""
-  "sections/9_evaluation.tex" 1790174207 2475 ba53de4b7c5fd5077dd656651da54762 ""
+  "sections/6_problem2.tex" 1790243348 10182 5e00e6a0b0ed4d2d67ebea4bdc0be441 ""
+  "sections/7_problem3.tex" 1790244081 10497 5b63c9db2076fddb5898faafc9886cf0 ""
+  "sections/8_sensitivity.tex" 1790243725 4458 240624dc12682de00deca5db933b1525 ""
+  "sections/9_evaluation.tex" 1790243725 2543 c5d11c00a1875e759a056740888cc33a ""
   "sections/A_code.tex" 1790174266 4954 9e47afb02deed8a67ee51b6f93157ebe ""
   "title.pdf" 1790062496 123745 4e419cd42d35fb8ed6a3b4c1ca0627af ""
   (generated)
