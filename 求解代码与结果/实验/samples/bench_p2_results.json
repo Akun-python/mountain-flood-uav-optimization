@@ -1,0 +1,130 @@
+{
+ "seconds": 20.0,
+ "seeds": [
+  7
+ ],
+ "rows": [
+  {
+   "solver": "sa_baseline",
+   "seed": 7,
+   "evals": 23030,
+   "time_s": 20.0,
+   "hard_ok": true,
+   "tardy_w": 0.0,
+   "tardy_max": 0.0,
+   "makespan": 9280.15,
+   "energy": 72.51,
+   "flights": 24
+  },
+  {
+   "solver": "ga",
+   "seed": 7,
+   "evals": 4249,
+   "time_s": 20.0,
+   "hard_ok": true,
+   "tardy_w": 262.59,
+   "tardy_max": 525.19,
+   "makespan": 8585.38,
+   "energy": 85.44,
+   "flights": 32
+  },
+  {
+   "solver": "alns",
+   "seed": 7,
+   "evals": 1197,
+   "time_s": 20.0,
+   "hard_ok": true,
+   "tardy_w": 295.59,
+   "tardy_max": 591.19,
+   "makespan": 8651.38,
+   "energy": 86.82,
+   "flights": 33
+  },
+  {
+   "solver": "tabu",
+   "seed": 7,
+   "evals": 23577,
+   "time_s": 20.0,
+   "hard_ok": true,
+   "tardy_w": 0.0,
+   "tardy_max": 0.0,
+   "makespan": 8337.0,
+   "energy": 68.06,
+   "flights": 21
+  },
+  {
+   "solver": "grasp",
+   "seed": 7,
+   "evals": 11577,
+   "time_s": 20.0,
+   "hard_ok": true,
+   "tardy_w": 295.59,
+   "tardy_max": 591.19,
+   "makespan": 8772.39,
+   "energy": 84.07,
+   "flights": 32
+  }
+ ],
+ "best_by_solver": {
+  "sa_baseline": {
+   "solver": "sa_baseline",
+   "seed": 7,
+   "evals": 23030,
+   "time_s": 20.0,
+   "hard_ok": true,
+   "tardy_w": 0.0,
+   "tardy_max": 0.0,
+   "makespan": 9280.15,
+   "energy": 72.51,
+   "flights": 24
+  },
+  "ga": {
+   "solver": "ga",
+   "seed": 7,
+   "evals": 4249,
+   "time_s": 20.0,
+   "hard_ok": true,
+   "tardy_w": 262.59,
+   "tardy_max": 525.19,
+   "makespan": 8585.38,
+   "energy": 85.44,
+   "flights": 32
+  },
+  "alns": {
+   "solver": "alns",
+   "seed": 7,
+   "evals": 1197,
+   "time_s": 20.0,
+   "hard_ok": true,
+   "tardy_w": 295.59,
+   "tardy_max": 591.19,
+   "makespan": 8651.38,
+   "energy": 86.82,
+   "flights": 33
+  },
+  "tabu": {
+   "solver": "tabu",
+   "seed": 7,
+   "evals": 23577,
+   "time_s": 20.0,
+   "hard_ok": true,
+   "tardy_w": 0.0,
+   "tardy_max": 0.0,
+   "makespan": 8337.0,
+   "energy": 68.06,
+   "flights": 21
+  },
+  "grasp": {
+   "solver": "grasp",
+   "seed": 7,
+   "evals": 11577,
+   "time_s": 20.0,
+   "hard_ok": true,
+   "tardy_w": 295.59,
+   "tardy_max": 591.19,
+   "makespan": 8772.39,
+   "energy": 84.07,
+   "flights": 32
+  }
+ }
+}
