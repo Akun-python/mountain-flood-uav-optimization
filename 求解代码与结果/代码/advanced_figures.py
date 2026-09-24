@@ -237,8 +237,8 @@ def fig2_delivery():
 def fig2_pareto():
     r = load('p2_pareto.json')
     fig, ax = plt.subplots(figsize=(9.2, 5.4))
-    names = {'balanced': '均衡（Tabu 本文）', 'min_flights': '中间权衡',
-             'min_makespan': '最短完工', 'min_energy': '最低能耗重跑'}
+    names = {'balanced': '完工冠军（本文）', 'min_flights': '节能均衡（21 架）',
+             'min_makespan': '最短完工（26 架）', 'min_energy': '最低能耗（19 架）'}
     mk = {'balanced': 'o', 'min_flights': '^', 'min_makespan': 'D', 'min_energy': 's'}
     colors = {'balanced': ps.C_GREEN, 'min_flights': ps.C_BLUE,
               'min_makespan': ps.C_ORANGE, 'min_energy': ps.C_VIOLET}
@@ -465,15 +465,19 @@ def fig4_load():
 
 
 if __name__ == '__main__':
-    fig1_lg_curve()
-    fig1_soc()
-    fig2_network()
-    fig2_battery()
-    fig2_delivery()
-    fig2_pareto()
-    fig3_margin_hist()
-    fig3_relay_tl()
-    fig3_comm_tl()
-    fig4_gap()
-    fig4_load()
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--fig', action='append', default=[],
+                    help='只生成指定图（可多次），例如 --fig p2_battery --fig p2_pareto2d')
+    args = ap.parse_args()
+    all_figs = [fig1_lg_curve, fig1_soc, fig2_network, fig2_battery,
+                fig2_delivery, fig2_pareto, fig3_margin_hist, fig4_gap, fig4_load]
+    wanted = set(args.fig)
+    for fn in all_figs:
+        if wanted and fn.__name__ not in wanted:
+            continue
+        try:
+            fn()
+        except Exception as e:
+            print('skip %s: %s' % (fn.__name__, e))
     print('advanced figures done')

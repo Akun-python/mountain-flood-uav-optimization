@@ -7,7 +7,7 @@
   {
    "solver": "alns",
    "seed": 7,
-   "evals": 2744,
+   "evals": 3021,
    "time_s": 30.0,
    "hard_ok": true,
    "tardy_w": 295.59,
@@ -21,7 +21,7 @@
   "alns": {
    "solver": "alns",
    "seed": 7,
-   "evals": 2744,
+   "evals": 3021,
    "time_s": 30.0,
    "hard_ok": true,
    "tardy_w": 295.59,

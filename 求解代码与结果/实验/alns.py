@@ -110,9 +110,52 @@ def _candidate_flights(data, flights, sid, cutoff=14000.0):
     return out or flights
 
 
+def _is_urgent(data, b):
+    bx = data.boxes[b]
+    return bx['first_batch'] or bx['type'] == '医疗物资'
+
+
+def _urgent_dedicated(data, flights, pool, next_fid):
+    """紧急箱专用紧凑架次：按区聚合，优先小机型（A→B→C），估交付时刻选最优。"""
+    by_area = {}
+    for b in pool:
+        if _is_urgent(data, b):
+            by_area.setdefault(data.boxes[b]['area'], []).append(b)
+    if not by_area:
+        return flights, [b for b in pool if not _is_urgent(data, b)], next_fid
+    normal = [b for b in pool if not _is_urgent(data, b)]
+    for sid in sorted(by_area):
+        rem = list(by_area[sid])
+        while rem:
+            chosen = None
+            best_del = math.inf
+            for g in MODELS:
+                f2 = Flight(next_fid, [(sid, list(rem))], g, data)
+                if not f2.is_feasible():
+                    continue
+                d = f2.prep + f2.flight_time() + f2.handover_time()
+                if d < best_del:
+                    best_del = d
+                    chosen = f2
+            if chosen is None:
+                for g in MODELS:
+                    f2 = Flight(next_fid, [(sid, [rem[0]])], g, data)
+                    if f2.is_feasible():
+                        chosen = f2
+                        break
+            if chosen is None:
+                return flights, normal, next_fid
+            flights.append(chosen)
+            next_fid += 1
+            rem = [b for b in rem if b not in chosen.box_ids]
+    return flights, normal, next_fid
+
+
 def repair_greedy(data, flights, pool, rng):
-    """最优插入修复：按池中箱（时限升序）逐一插入现有架次或开新架次。"""
+    """最优插入修复：紧急箱专用紧凑架次 + 普通箱按时限贪心插入。"""
     flights = rebuild(flights)
+    next_fid = max([f.fid for f in flights], default=0) + 1
+    flights, pool, next_fid = _urgent_dedicated(data, flights, pool, next_fid)
     # 池内排序：紧迫度优先
     def rank(b):
         bx = data.boxes[b]
