@@ -1,18 +1,18 @@
 {
- "solver": "sa_baseline",
- "seed": 7,
+ "solver": "alns",
+ "seed": 13,
  "metrics": {
   "hard_ok": true,
-  "tardy_w": 3.3,
-  "tardy_max": 7.92,
-  "makespan": 9169.6,
-  "energy": 71.78,
-  "flights": 23
+  "tardy_w": 295.59,
+  "tardy_max": 591.19,
+  "makespan": 8651.38,
+  "energy": 86.82,
+  "flights": 33
  },
  "flights": [
   {
    "fid": 1,
-   "model": "B",
+   "model": "A",
    "route": [
     [
      "S001",
@@ -23,7 +23,7 @@
      ]
     ]
    ],
-   "energy": 1.0722,
+   "energy": 1.2622,
    "mass": 20.0,
    "nbox": 3
   },
@@ -60,8 +60,40 @@
    "nbox": 2
   },
   {
+   "fid": 4,
+   "model": "A",
+   "route": [
+    [
+     "S004",
+     [
+      "S004-MED-01",
+      "S004-WAT-01"
+     ]
+    ]
+   ],
+   "energy": 3.0815,
+   "mass": 17.0,
+   "nbox": 2
+  },
+  {
+   "fid": 5,
+   "model": "A",
+   "route": [
+    [
+     "S005",
+     [
+      "S005-MED-01",
+      "S005-WAT-01"
+     ]
+    ]
+   ],
+   "energy": 2.1169,
+   "mass": 17.0,
+   "nbox": 2
+  },
+  {
    "fid": 6,
-   "model": "B",
+   "model": "A",
    "route": [
     [
      "S006",
@@ -71,7 +103,7 @@
      ]
     ]
    ],
-   "energy": 1.0971,
+   "energy": 1.3097,
    "mass": 17.0,
    "nbox": 2
   },
@@ -108,21 +140,84 @@
    "nbox": 2
   },
   {
+   "fid": 9,
+   "model": "A",
+   "route": [
+    [
+     "S009",
+     [
+      "S009-MED-01",
+      "S009-WAT-01"
+     ]
+    ]
+   ],
+   "energy": 2.2509,
+   "mass": 17.0,
+   "nbox": 2
+  },
+  {
    "fid": 10,
-   "model": "B",
+   "model": "A",
    "route": [
     [
      "S010",
      [
       "S010-MED-01",
-      "S010-WAT-01",
-      "S010-FOD-01"
+      "S010-WAT-01"
      ]
     ]
    ],
-   "energy": 1.82,
-   "mass": 25.0,
-   "nbox": 3
+   "energy": 1.9515,
+   "mass": 17.0,
+   "nbox": 2
+  },
+  {
+   "fid": 11,
+   "model": "A",
+   "route": [
+    [
+     "S011",
+     [
+      "S011-MED-01",
+      "S011-WAT-01"
+     ]
+    ]
+   ],
+   "energy": 1.1479,
+   "mass": 17.0,
+   "nbox": 2
+  },
+  {
+   "fid": 12,
+   "model": "A",
+   "route": [
+    [
+     "S012",
+     [
+      "S012-MED-01",
+      "S012-WAT-01"
+     ]
+    ]
+   ],
+   "energy": 2.9549,
+   "mass": 17.0,
+   "nbox": 2
+  },
+  {
+   "fid": 13,
+   "model": "A",
+   "route": [
+    [
+     "S013",
+     [
+      "S013-MED-01",
+      "S013-WAT-01"
+     ]
+    ]
+   ],
+   "energy": 1.9542,
+   "mass": 17.0,
+   "nbox": 2
   },
   {
    "fid": 14,
@@ -131,17 +226,18 @@
     [
      "S014",
      [
+      "S014-MED-01",
       "S014-WAT-01"
      ]
     ]
    ],
-   "energy": 2.2473,
-   "mass": 14.0,
-   "nbox": 1
+   "energy": 2.2864,
+   "mass": 17.0,
+   "nbox": 2
   },
   {
    "fid": 15,
-   "model": "B",
+   "model": "A",
    "route": [
     [
      "S015",
@@ -149,17 +245,11 @@
       "S015-MED-01",
       "S015-WAT-01"
      ]
-    ],
-    [
-     "S003",
-     [
-      "S003-FOD-01"
-     ]
     ]
    ],
-   "energy": 2.9126,
-   "mass": 25.0,
-   "nbox": 3
+   "energy": 2.4673,
+   "mass": 17.0,
+   "nbox": 2
   },
   {
    "fid": 16,
@@ -173,29 +263,33 @@
       "S001-WAT-04",
       "S001-WAT-06",
       "S001-FOD-01",
+      "S001-FOD-02",
       "S001-HYG-01"
      ]
     ]
    ],
-   "energy": 2.7159,
-   "mass": 70.0,
-   "nbox": 6
+   "energy": 2.9908,
+   "mass": 78.0,
+   "nbox": 7
   },
   {
    "fid": 17,
-   "model": "B",
+   "model": "C",
    "route": [
     [
      "S001",
      [
+      "S001-WAT-05",
+      "S001-WAT-07",
+      "S001-WAT-08",
       "S001-FOD-03",
       "S001-HYG-02"
      ]
     ]
    ],
-   "energy": 1.0053,
-   "mass": 14.0,
-   "nbox": 2
+   "energy": 2.401,
+   "mass": 56.0,
+   "nbox": 5
   },
   {
    "fid": 18,
@@ -208,14 +302,28 @@
       "S002-WAT-03",
       "S002-WAT-04",
       "S002-FOD-02",
-      "S002-HYG-01",
+      "S002-HYG-01"
+     ]
+    ]
+   ],
+   "energy": 5.7107,
+   "mass": 56.0,
+   "nbox": 5
+  },
+  {
+   "fid": 19,
+   "model": "B",
+   "route": [
+    [
+     "S002",
+     [
       "S002-FOD-01"
      ]
     ]
    ],
-   "energy": 6.0945,
-   "mass": 64.0,
-   "nbox": 6
+   "energy": 2.2514,
+   "mass": 8.0,
+   "nbox": 1
   },
   {
    "fid": 20,
@@ -227,25 +335,34 @@
       "S003-WAT-02",
       "S003-WAT-04",
       "S003-FOD-02",
-      "S003-HYG-01",
-      "S003-WAT-03"
+      "S003-HYG-01"
      ]
     ]
    ],
-   "energy": 5.7548,
-   "mass": 56.0,
-   "nbox": 5
+   "energy": 5.2788,
+   "mass": 42.0,
+   "nbox": 4
+  },
+  {
+   "fid": 21,
+   "model": "B",
+   "route": [
+    [
+     "S003",
+     [
+      "S003-WAT-03",
+      "S003-FOD-01"
+     ]
+    ]
+   ],
+   "energy": 2.6486,
+   "mass": 22.0,
+   "nbox": 2
   },
   {
    "fid": 22,
    "model": "C",
    "route": [
-    [
-     "S005",
-     [
-      "S005-WAT-01"
-     ]
-    ],
     [
      "S004",
      [
@@ -256,66 +373,30 @@
      ]
     ]
    ],
-   "energy": 5.9554,
-   "mass": 56.0,
-   "nbox": 5
+   "energy": 5.5088,
+   "mass": 42.0,
+   "nbox": 4
   },
   {
    "fid": 23,
    "model": "C",
    "route": [
     [
-     "S011",
-     [
-      "S011-MED-01",
-      "S011-WAT-01"
-     ]
-    ],
-    [
      "S005",
      [
       "S005-WAT-02",
       "S005-WAT-03",
       "S005-FOD-01",
-      "S005-HYG-01",
-      "S005-MED-01"
-     ]
-    ],
-    [
-     "S009",
-     [
-      "S009-MED-01",
-      "S009-WAT-01"
+      "S005-HYG-01"
      ]
     ]
    ],
-   "energy": 6.0336,
-   "mass": 79.0,
-   "nbox": 9
+   "energy": 3.7795,
+   "mass": 42.0,
+   "nbox": 4
   },
   {
    "fid": 24,
-   "model": "B",
-   "route": [
-    [
-     "S006",
-     [
-      "S006-HYG-01"
-     ]
-    ],
-    [
-     "S015",
-     [
-      "S015-FOD-01"
-     ]
-    ]
-   ],
-   "energy": 2.2811,
-   "mass": 14.0,
-   "nbox": 2
-  },
-  {
-   "fid": 25,
    "model": "C",
    "route": [
     [
@@ -323,9 +404,19 @@
      [
       "S006-WAT-02",
       "S006-WAT-03",
-      "S006-FOD-01"
+      "S006-FOD-01",
+      "S006-HYG-01"
      ]
-    ],
+    ]
+   ],
+   "energy": 2.3253,
+   "mass": 42.0,
+   "nbox": 4
+  },
+  {
+   "fid": 25,
+   "model": "C",
+   "route": [
     [
      "S007",
      [
@@ -335,9 +426,9 @@
      ]
     ]
    ],
-   "energy": 4.1148,
-   "mass": 64.0,
-   "nbox": 6
+   "energy": 3.1424,
+   "mass": 28.0,
+   "nbox": 3
   },
   {
    "fid": 26,
@@ -350,17 +441,11 @@
       "S008-FOD-01",
       "S008-HYG-01"
      ]
-    ],
-    [
-     "S011",
-     [
-      "S011-FOD-01"
-     ]
     ]
    ],
-   "energy": 5.6486,
-   "mass": 36.0,
-   "nbox": 4
+   "energy": 5.3885,
+   "mass": 28.0,
+   "nbox": 3
   },
   {
    "fid": 27,
@@ -371,18 +456,41 @@
      [
       "S009-FOD-01"
      ]
-    ],
+    ]
+   ],
+   "energy": 1.7394,
+   "mass": 8.0,
+   "nbox": 1
+  },
+  {
+   "fid": 28,
+   "model": "B",
+   "route": [
     [
-     "S004",
+     "S010",
      [
-      "S004-MED-01",
-      "S004-WAT-01"
+      "S010-FOD-01"
      ]
     ]
    ],
-   "energy": 2.9561,
-   "mass": 25.0,
-   "nbox": 3
+   "energy": 1.5128,
+   "mass": 8.0,
+   "nbox": 1
+  },
+  {
+   "fid": 29,
+   "model": "B",
+   "route": [
+    [
+     "S011",
+     [
+      "S011-FOD-01"
+     ]
+    ]
+   ],
+   "energy": 0.8908,
+   "mass": 8.0,
+   "nbox": 1
   },
   {
    "fid": 30,
@@ -391,15 +499,13 @@
     [
      "S012",
      [
-      "S012-FOD-01",
-      "S012-MED-01",
-      "S012-WAT-01"
+      "S012-FOD-01"
      ]
     ]
    ],
-   "energy": 2.7496,
-   "mass": 25.0,
-   "nbox": 3
+   "energy": 2.2872,
+   "mass": 8.0,
+   "nbox": 1
   },
   {
    "fid": 31,
@@ -408,49 +514,43 @@
     [
      "S013",
      [
-      "S013-FOD-01",
-      "S013-MED-01",
-      "S013-WAT-01"
+      "S013-FOD-01"
      ]
     ]
    ],
-   "energy": 1.8212,
-   "mass": 25.0,
-   "nbox": 3
+   "energy": 1.5125,
+   "mass": 8.0,
+   "nbox": 1
   },
   {
    "fid": 32,
-   "model": "A",
+   "model": "B",
    "route": [
     [
      "S014",
      [
-      "S014-FOD-01",
-      "S014-MED-01"
+      "S014-FOD-01"
      ]
     ]
    ],
-   "energy": 2.2133,
-   "mass": 11.0,
-   "nbox": 2
+   "energy": 1.7807,
+   "mass": 8.0,
+   "nbox": 1
   },
   {
-   "fid": 34,
-   "model": "C",
+   "fid": 33,
+   "model": "B",
    "route": [
     [
-     "S001",
+     "S015",
      [
-      "S001-WAT-05",
-      "S001-WAT-07",
-      "S001-WAT-08",
-      "S001-FOD-02"
+      "S015-FOD-01"
      ]
     ]
    ],
-   "energy": 2.3057,
-   "mass": 50.0,
-   "nbox": 4
+   "energy": 1.9136,
+   "mass": 8.0,
+   "nbox": 1
   }
  ]
 }
