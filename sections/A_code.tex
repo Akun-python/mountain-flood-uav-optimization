@@ -1,0 +1,104 @@
+\section{核心代码}
+
+本节给出可复现全文关键结果的核心程序（节选）。完整可运行代码、数据与全部结果
+文件随附件一并交付（\texttt{solve\_d/code/} 目录），核心脚本分工如下：
+\begin{itemize}
+    \item \texttt{core.py}：数据装载、DEM 读取、航线几何（巡航高度/三段时间）、
+    等效航程能耗、两阶段充电、链路损耗与遮挡判定、中继转场时间/能耗；
+    \item \texttt{p1\_solve.py}：问题一最大安全载荷二分求解与货箱组批；
+    \item \texttt{p2\_solve.py}：问题二模拟退火调度器（截止期优先派单与资源限额）；
+    \item \texttt{p3\_construct.py}：问题三货箱重排与中继时序构造（最终方案）；
+    \item \texttt{p3\_margins.py}：问题三各中继布设点链路余量统计重算；
+    \item \texttt{p3\_figures.py}、\texttt{p2\_figures.py}：论文图件；
+    \item \texttt{p4\_solve.py}：问题四最小机队搜索与分区核算；
+    \item \texttt{export\_excel.py}：写入《结果提交模板.xlsx》六个工作表。
+\end{itemize}
+运行环境：Python 3.14 + numpy/scipy/pandas/openpyxl/matplotlib。
+
+本论文的数据分析、模型构建与写作在人工智能工具辅助下完成。工具名称：DSH
+(glm-5.3)；开发机构：智谱AI；版本发布日期：2026-04。所有数值结果均由随附脚本在
+题目原始数据上复算获得，可在本机直接重跑验证。
+
+\begin{Python}{等效航程能耗与安全约束（core.py 节选）}
+# 本程序及代码是在人工智能工具辅助下完成的。
+# 工具名称：DSH (glm-5.3)；开发机构：智谱AI；发布日期：2026-04。
+import numpy as np
+
+RHO = 0.2                      # 返航安全裕度
+G = 9.81
+
+def flight_profile(nodes, loads, g, data):
+    """nodes: [(lon,lat)]；loads: 各航段载荷。返回 (t_fly, E_total)。"""
+    p = data.uav_types[g]
+    t = 0.0
+    e = 0.0
+    z0 = data.gw_pt['z']       # O01 地面高程
+    for i in range(len(nodes) - 1):
+        lon1, lat1 = nodes[i]; lon2, lat2 = nodes[i + 1]
+        # 巡航高度 = 航段 DEM 最高点 + 50m
+        d, cruise, h_up, h_down = segment_geometry(lon1, lat1, lon2, lat2, data)
+        q = loads[i]
+        # 三段时间
+        t += h_up / p['v_up'] + d / p['v_c'] + h_down / p['v_down']
+        # 水平能耗（等效航程折算）
+        Lg = p['L0'] - (p['L0'] - p['LF']) * (q / p['Q']) ** 1.5
+        e += p['E_use'] * d / Lg
+        # 爬升能耗
+        e += (p['m0'] + q) * G * h_up / (p['eta'] * 3.6e6)
+    return t, e
+
+def feasible(q, nodes, loads, g, data):
+    _, e = flight_profile(nodes, loads, g, data)
+    return e <= (1 - RHO) * data.uav_types[g]['E_use']
+\end{Python}
+
+\begin{Python}{EDF 派单与资源就绪队列（p2\_solve.py 节选）}
+def dispatch(data, flights, releases=None, limit=None):
+    """EDF 排序 + 无人机/电池就绪队列；limit 支持问题四最小机队搜索。"""
+    if releases is None:
+        releases = {}
+    if limit is None:
+        limit = {'A': (4, 6), 'B': (2, 4), 'C': (2, 4)}
+    uavs = {}                  # uid -> (ready_time, battery)
+    batteries = {}             # bid -> ready_time
+    schedule = {}
+    for f in sorted(flights, key=critical_time):
+        model = f.model
+        n_uav, n_bat = limit[model]
+        cand = [u for u, st in uavs.items() if st[0] <= t_now and model_of(u) == model]
+        # 最早可用的无人机 + 满电电池
+        u = min(cand, key=lambda u: uavs[u][0])
+        b = min(batteries, key=lambda b: batteries[b])
+        t_start = max(releases.get(f.fid, 0.0), uavs[u][0], batteries[b]) + prep(f)
+        t_ret = t_start + f.time()
+        schedule[f.fid] = {'uav': u, 'battery': b, 'start': t_start,
+                           'return': t_ret, 'energy': f.energy()}
+        uavs[u] = (t_ret, b)
+        batteries[b] = t_ret + charge_time(1 - f.energy() / E_use(model))
+    return schedule, uavs
+\end{Python}
+
+\begin{Python}{通信链路判定（core.py 节选）}
+def path_loss(lon1, lat1, z1, lon2, lat2, z2, data):
+    d3 = np.sqrt(dist_2d(lon1, lat1, lon2, lat2) ** 2 + (z1 - z2) ** 2 / 1e3 ** 2)
+    L = 32.45 + 20 * np.log10(2400) + 20 * np.log10(d3 * 1e3)  # d3: km
+    if los_occluded(lon1, lat1, z1, lon2, lat2, z2, data):
+        L += 10.0
+    return L
+
+def los_occluded(lon1, lat1, z1, lon2, lat2, z2, data):
+    """沿连线 30m 步长采样 DEM，任一点地形高于连线即遮挡。"""
+    n = max(2, int(dist_2d(lon1, lat1, lon2, lat2) / 0.03))
+    for k in range(1, n):
+        f = k / n
+        lon = lon1 + (lon2 - lon1) * f
+        lat = lat1 + (lat2 - lat1) * f
+        zline = z1 + (z2 - z1) * f
+        if data.dem_at(lon, lat) > zline:
+            return True
+    return False
+
+def direct_ok(lon, lat, z, data):
+    L = path_loss(lon, lat, z, data.gw_pt['lon'], data.gw_pt['lat'], z + 50, data)
+    return L <= 122.0            # 直连链路上限 122 dB
+\end{Python}

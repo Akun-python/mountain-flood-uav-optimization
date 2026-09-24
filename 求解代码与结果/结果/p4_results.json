@@ -1,0 +1,266 @@
+{
+ "3": {
+  "groups": [
+   {
+    "name": "G1",
+    "areas": [
+     "S001",
+     "S002",
+     "S003",
+     "S005",
+     "S006",
+     "S007",
+     "S008",
+     "S009",
+     "S011",
+     "S015"
+    ],
+    "nbox": 62,
+    "mass": 599.0,
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "makespan": 9093.6,
+    "energy": 60.24,
+    "flights": 17,
+    "used_uav": {
+     "A": 1,
+     "B": 2,
+     "C": 2
+    },
+    "used_bat": {
+     "A": 2,
+     "B": 3,
+     "C": 3
+    },
+    "relay_positions": [
+     "W"
+    ],
+    "relay_concurrency": 1,
+    "relay_sorties": 3,
+    "relay_energy": 2.71,
+    "alloc_uav": {
+     "A": 2,
+     "B": 3,
+     "C": 3
+    },
+    "alloc_bat": {
+     "A": 3,
+     "B": 4,
+     "C": 4
+    },
+    "alloc_relay": 2,
+    "alloc_comp": 3
+   },
+   {
+    "name": "G2",
+    "areas": [
+     "S010",
+     "S012",
+     "S013",
+     "S014"
+    ],
+    "nbox": 12,
+    "mass": 100.0,
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "makespan": 4483.1,
+    "energy": 15.3,
+    "flights": 6,
+    "used_uav": {
+     "A": 3
+    },
+    "used_bat": {
+     "A": 5
+    },
+    "relay_positions": [
+     "E"
+    ],
+    "relay_concurrency": 1,
+    "relay_sorties": 2,
+    "relay_energy": 1.13,
+    "alloc_uav": {
+     "A": 4
+    },
+    "alloc_bat": {
+     "A": 6
+    },
+    "alloc_relay": 2,
+    "alloc_comp": 2
+   },
+   {
+    "name": "G3",
+    "areas": [
+     "S004"
+    ],
+    "nbox": 6,
+    "mass": 59.0,
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "makespan": 5021.5,
+    "energy": 13.03,
+    "flights": 4,
+    "used_uav": {
+     "A": 1,
+     "B": 1,
+     "C": 1
+    },
+    "used_bat": {
+     "A": 1,
+     "B": 1,
+     "C": 1
+    },
+    "relay_positions": [
+     "N",
+     "W"
+    ],
+    "relay_concurrency": 2,
+    "relay_sorties": 4,
+    "relay_energy": 1.86,
+    "alloc_uav": {
+     "A": 2,
+     "B": 2,
+     "C": 2
+    },
+    "alloc_bat": {
+     "A": 2,
+     "B": 2,
+     "C": 2
+    },
+    "alloc_relay": 3,
+    "alloc_comp": 4
+   }
+  ],
+  "totals": {
+   "uav": {
+    "A": 8,
+    "B": 5,
+    "C": 5
+   },
+   "bat": {
+    "A": 11,
+    "B": 6,
+    "C": 6
+   },
+   "relay": 7,
+   "comp": 9
+  },
+  "within_inventory": {
+   "uav": false,
+   "bat": false,
+   "relay": false,
+   "comp": false
+  }
+ },
+ "2": {
+  "groups": [
+   {
+    "name": "G1",
+    "areas": [
+     "S001",
+     "S002",
+     "S003",
+     "S004",
+     "S005",
+     "S006",
+     "S007",
+     "S008",
+     "S009",
+     "S011",
+     "S015"
+    ],
+    "nbox": 68,
+    "mass": 658.0,
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "makespan": 9248.6,
+    "energy": 65.99,
+    "flights": 18,
+    "used_uav": {
+     "A": 1,
+     "B": 2,
+     "C": 2
+    },
+    "used_bat": {
+     "A": 2,
+     "B": 3,
+     "C": 3
+    },
+    "relay_positions": [
+     "N",
+     "W"
+    ],
+    "relay_concurrency": 2,
+    "relay_sorties": 4,
+    "relay_energy": 4.01,
+    "alloc_uav": {
+     "A": 2,
+     "B": 3,
+     "C": 3
+    },
+    "alloc_bat": {
+     "A": 3,
+     "B": 4,
+     "C": 4
+    },
+    "alloc_relay": 3,
+    "alloc_comp": 4
+   },
+   {
+    "name": "G2",
+    "areas": [
+     "S010",
+     "S012",
+     "S013",
+     "S014"
+    ],
+    "nbox": 12,
+    "mass": 100.0,
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "makespan": 4483.1,
+    "energy": 15.3,
+    "flights": 6,
+    "used_uav": {
+     "A": 3
+    },
+    "used_bat": {
+     "A": 5
+    },
+    "relay_positions": [
+     "E"
+    ],
+    "relay_concurrency": 1,
+    "relay_sorties": 2,
+    "relay_energy": 1.13,
+    "alloc_uav": {
+     "A": 4
+    },
+    "alloc_bat": {
+     "A": 6
+    },
+    "alloc_relay": 2,
+    "alloc_comp": 2
+   }
+  ],
+  "totals": {
+   "uav": {
+    "A": 6,
+    "B": 3,
+    "C": 3
+   },
+   "bat": {
+    "A": 9,
+    "B": 4,
+    "C": 4
+   },
+   "relay": 5,
+   "comp": 6
+  },
+  "within_inventory": {
+   "uav": false,
+   "bat": false,
+   "relay": false,
+   "comp": true
+  }
+ }
+}

@@ -1,0 +1,123 @@
+% 使用 XeLaTeX 编译。封面必须保留，学校、队号及姓名仅出现在封面。
+\documentclass[bwprint]{gmcmthesis}
+
+% === 额外宏包（cls 未内置的）===
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[section]{placeins}
+\usepackage{needspace}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{algorithm2e}
+
+% === TikZ ===
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,calc}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+% === 引用上标格式 ===
+\setcitestyle{super,square,comma}
+
+% === 竞赛信息 ===
+\title{山区洪涝灾害下无人机运输与通信协同优化\\ ——基于等效航程能耗模型与中继布设的联合调度设计}
+\baominghao{[参赛队号]}
+\schoolname{[学校名称]}
+\membera{[成员A]}
+\memberb{[成员B]}
+\memberc{[成员C]}
+
+\begin{document}
+
+\maketitle
+
+% === 摘要 ===
+\begin{abstract}
+
+本文针对广西横州市镇龙乡山区洪涝灾害场景下的应急物资无人机运输与全程通信
+保障问题，按单点组批、异构机队调度、运输与中继联合调度、任务分区与资源配置
+四个层次递进建立优化模型，并以数字高程模型、无人机与电池参数和通信链路参数
+逐问求解、逐级校验。全部计算基于 Python 实现，飞行时间、能耗与通信链路均按
+题给统一规则建模，任一结果均可由随附脚本复算。
+
+\textbf{问题一：单点往返最大安全载荷与货箱组批。}以等效航程法把水平飞行能耗
+折算为水平能耗等于可用电量乘以航程与等效航程之比，叠加爬升能耗与返航安全裕度
+百分之二十的约束，对三机型乘十五服务区共四十五个组合逐一二分求最大安全载荷。
+结果中 A 型全部取质量上限 25\,kg，B 型取 30\,kg（仅 S008 受能量约束降为
+约 28.9\,kg），C 型多数取 80\,kg，而 S002、S003、S004、S008、S012 五个远区
+受能量约束，分别为 69.0、68.4、63.9、59.2、68.2\,kg。按机型与服务区组批共
+18 架次，总能耗 59.02\,kWh，总飞行时间约 32661\,s，各架次返航荷电状态均不低于
+百分之二十。安全余量扫描表明，余量比例由 0.2 升到 0.35 时架次由 18 增至 25，
+能耗由 59.02 升至 77.63\,kWh，增幅约 31.5\%，安全与效率存在明确权衡。
+
+\textbf{问题二：异构无人机多点多架次调度。}以架次为决策单元，按时限贪心组批
+生成初始解并拆出紧急架次，用遗传算法执行货箱移动、交换、合并、拆分、换序与
+换机型的邻域变异，按截止期优先并耦合无人机与电池双资源就绪队列求可行派单。
+选取零迟到的均衡方案：24 架次，其中 A 型 9、B 型 8、C 型 7，完工时间约
+8342\,s，总能耗 77.31\,kWh，全部 80 箱按各自时限交付，加权迟到为零，
+较模拟退火均衡方案完工提前约 1541\,s、能耗降低约 8.2\,kWh。
+
+\textbf{问题三：通信约束下运输与中继联合调度。}建立频率 2400\,MHz 的自由空间
+传播加地形遮挡的电波模型，接收门限为负 90\,dBm，直连、接入、回程链路上限为
+122、116、126\,dB，并按 30\,m 步长沿航线逐点判定遮挡。覆盖采样确定三个中继
+布设点，W 点服务西与北片区九区，E 点服务东片区四区，N 点服务 S004。对运输
+方案实施十项货箱重排与一个新增架次，把全部飞行阶段压入中继窗口；两架中继按
+时间分片复用，R1 全天驻 W 点，时段 801 至 8134\,s，能耗 2.47\,kWh，R2 先驻
+E 点，时段 830 至 4023\,s，能耗 1.21\,kWh，再转场 N 点，时段 6398 至 8104\,s，
+能耗 0.87\,kWh，转场衔接无冲突。协同方案共 23 架次，完工时间约 9094\,s，
+总能耗 80.2\,kWh，全部 80 箱按时交付、加权迟到为零；48 个通信阶段全部
+保障，覆盖盲区为零。
+
+\textbf{问题四：任务分区与资源配置。}按中继覆盖结构给出三组与两组两种分区，
+对每组以最小机队搜索确定机型与电池数量，再叠加冗余备份核算库存。结果表明，
+若按组完全独立配置，两种分区均超出库存，例如两组方案需 A 型机 6 架超出 2 架、
+A 型电池 9 组超出 3 组、中继 5 架超出 3 架；分三组时重复配置更多。给定库存下
+更优组织为任务分区、资源池化，即分区仅用于任务组织，机队与中继仍集中调度并
+时间分片复用，问题三的协同方案以 8 架运输机、14 组电池、2 架中继恰好满足库存，
+实现零迟到与零盲区；若坚持独立配置，需增配 A 型机 2 至 4 架、A 型电池 3 至 5 组
+与中继 3 架。
+
+\textbf{灵敏度分析}表明模型结论稳健：安全余量扫描复现安全效率权衡并呈现机型
+结构切换；多目标权重在合理范围内只改变拆分粒度，不改变 C 型瓶颈结构；中继
+W 点最长连续服务 7333\,s，占单架次能源上限对应时长约 8378\,s 的 87.5\%，
+悬停功率扰动正负百分之十后方案不变；通信余量统计中 W 点最紧 0.5\,dB、E 点
+次紧 1.0\,dB、N 点最紧 13.4\,dB，余量下压 1\,dB 时仅 W 点 4 个采样点低于
+门限，小幅移位 W 点布设位置即可恢复全部覆盖。
+
+\keywords{无人机调度\quad 等效航程能耗模型\quad 模拟退火\quad 中继布设\quad 任务分区\quad 通信保障}
+\end{abstract}
+
+\pagestyle{plain}
+
+% === 正文 ===
+\input{sections/1_restatement}
+\input{sections/3_assumptions}
+\input{sections/4_symbols}
+\input{sections/5_problem1}
+\input{sections/6_problem2}
+\input{sections/7_problem3}
+\input{sections/8_sensitivity}
+\input{sections/10_problem4}
+\input{sections/9_evaluation}
+
+% === 参考文献 ===
+% 参考文献均取自题目给出的公开资料清单，与正文引用一一对应。
+\begin{thebibliography}{99}
+\bibitem{refXinhua} 新华社. 记者手记：抵近广西横州镇龙乡[EB/OL]. 2026-07-09[2026-08-07]. https://www.xinhuanet.com/politics/20260709/acf8e4b353304bb78007d8224f1cd2ef/c.html.
+\bibitem{refXinhua2} 新华每日电讯. 三进``孤岛乡''[EB/OL]. 2026-07-12[2026-08-07]. https://www.news.cn/local/20260712/8bd1f64af3124569b5cf4415fc013acd/c.html.
+\bibitem{refDEM} Copernicus Data Space Ecosystem. Copernicus DEM---Global and European Digital Elevation Model[DB/OL]. [2026-08-07]. DOI: 10.5270/ESA-c5d3d65.
+\bibitem{refDorling} Dorling K, Heinrichs J, Messier G G, et al. Vehicle Routing Problems for Drone Delivery[J]. IEEE Transactions on Systems, Man, and Cybernetics: Systems, 2017, 47(1): 70-85. DOI: 10.1109/TSMC.2016.2582745.
+\bibitem{refZhang} Zhang J, Campbell J F, Sweeney D C, et al. Energy Consumption Models for Delivery Drones: A Comparison and Assessment[J]. Transportation Research Part D: Transport and Environment, 2021, 90: 102668. DOI: 10.1016/j.trd.2020.102668.
+\bibitem{refITU} International Telecommunication Union. Recommendation ITU-R P.525-5: Calculation of Free-Space Attenuation[S/OL]. 2024. https://www.itu.int/rec/R-REC-P.525-5-202411-I/en.
+\bibitem{refTI} Texas Instruments. Li-Ion Battery Charger Solution Using an MSP430 MCU[EB/OL]. https://www.ti.com/lit/an/slaa287b/slaa287b.pdf.
+\bibitem{refZeng} Zeng Y, Zhang R, Lim T J. Wireless Communications with Unmanned Aerial Vehicles: Opportunities and Challenges[J]. IEEE Communications Magazine, 2016, 54(5): 36-42. DOI: 10.1109/MCOM.2016.7470933.
+\bibitem{refDJI} DJI Enterprise. Matrice 350 RTK Specifications[EB/OL]. https://enterprise.dji.com/matrice-350-rtk/specs.
+\bibitem{refDoodle} Doodle Labs. Sense: Interference Avoidance[EB/OL]. https://doodlelabs.com/news/sense-interference-avoidance-release/.
+\end{thebibliography}
+
+% === 附录 ===
+\begin{appendices}
+\input{sections/A_code}
+\end{appendices}
+
+\end{document} 

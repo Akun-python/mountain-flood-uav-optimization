@@ -1,0 +1,102 @@
+% 使用 XeLaTeX 编译。封面必须保留，学校、队号及姓名仅出现在封面。
+\documentclass[bwprint]{gmcmthesis}
+
+% === 额外宏包（cls 未内置的）===
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[section]{placeins}
+\usepackage{needspace}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{algorithm2e}
+
+% === TikZ ===
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,calc}
+\usepackage{longtable}
+
+% === 引用上标格式 ===
+\setcitestyle{super,square,comma}
+
+% === 竞赛信息 ===
+\title{[论文标题]}
+\baominghao{[参赛队号]}
+\schoolname{[学校名称]}
+\membera{[成员A]}
+\memberb{[成员B]}
+\memberc{[成员C]}
+
+\begin{document}
+
+\maketitle
+
+% === 摘要 ===
+\begin{abstract}
+
+% 写作提示：摘要最后写；按子问题说明所用方法/模型、关键处理、实际数值与单位、结论和验证，突出真正创新。
+% 不复述题面、不堆砌模型名、不放复杂公式和表格；2026 年摘要不超过两页，无需英文摘要。
+[中文摘要内容：问题概述 + 每个子问题的方法和数值结果 + 结论]
+
+\keywords{[关键词1]\quad [关键词2]\quad [关键词3]}
+\end{abstract}
+
+\pagestyle{plain}
+
+% === 正文：摘要结束后自动换页，不插入目录 ===
+% 若使用 AI 辅助分析，应在结果前后注明工具名称、版本/型号、开发机构和版本发布日期。
+% 模型、公式应有推导或可核验的引用；不得把无法核验的 AI 输出作为既定事实。
+\input{sections/1_restatement}
+% 问题分析已按题目要求并入各问题求解章节（5_problem1 / 6_problem2 / 7_problem3 的"问题分析"小节），
+% 不再使用集中式 sections/2_analysis.tex。
+\input{sections/3_assumptions}
+\input{sections/4_symbols}
+\input{sections/5_problem1}
+\input{sections/6_problem2}
+\input{sections/7_problem3}
+\input{sections/8_sensitivity}
+\input{sections/9_evaluation}
+
+% === 参考文献 ===
+% 参考文献必须真实：一律用 paper-search Skill 先 search 检索，再 verify 按 DOI 核对元数据。
+% 仅将核验通过的文献整理为下方 \bibitem；禁止凭记忆编造题名、作者、期刊、卷期页。
+% paper-search 未启用或网络不可用时，只保留能人工核验的真实文献，宁缺毋滥。
+% 按正文首次引用顺序编号；书籍注明引用页码，网络资源注明网址和访问日期，引用程序注明来源。
+\begin{thebibliography}{99}
+\bibitem{refGlomb} Glomb K, Cabral J, Cattani A, et al. Computational models in electroencephalography[J]. Brain Topography, 2022, 35: 142-161.
+\bibitem{refByrne} Byrne \'A, O'Dea R D, Forrester M, et al. Next generation neural mass and field modelling[J]. Journal of Neurophysiology, 2019, 123(4): 1467-1480.
+\bibitem{refCoronel} Coronel-Oliveros C, Lehue F, Herzog R, et al. A multi-frequency whole-brain neural mass model with homeostatic feedback inhibition[J]. PLoS Computational Biology, 2026, 22(1): e1013463.
+\bibitem{refDavid} David O, Friston K J. A neural mass model for MEG/EEG: coupling and neuronal dynamics[J]. NeuroImage, 2003, 20(3): 1743-1755.
+\bibitem{refKuramoto} Acebr\'on J A, Bonilla L L, P\'erez Vicente C J, et al. The Kuramoto model: a simple paradigm for synchronization phenomena[J]. Reviews of Modern Physics, 2005, 77(1): 137-185.
+\bibitem{refFinger} Finger H, B\"onstrup M, Cheng B, et al. Modeling of large-scale functional brain networks based on structural connectivity from DTI: Comparison with EEG derived phase coupling networks[J]. PLoS Computational Biology, 2016, 12(8): e1005025.
+\bibitem{refMosher} Mosher J C, Leahy R M, Lewis P S. EEG and MEG: forward solutions for inverse methods[J]. IEEE Transactions on Biomedical Engineering, 1999, 46(3): 245-259.
+\bibitem{refHirata} Hirata A, Niitsu M, Phang C, et al. High-resolution EEG source localization in personalized segmentation-free head model with multi-dipole fitting[J]. Physics in Medicine and Biology, 2024, 69(7): 075009.
+\bibitem{refKiebel} Kiebel S J, David O, Friston K J. Dynamic causal modelling of evoked responses in EEG/MEG with lead field parameterization[J]. NeuroImage, 2006, 30(4): 1273-1284.
+\bibitem{refMoran} Moran R, Pinotsis D A, Friston K. Neural masses and fields in dynamic causal modeling[J]. Frontiers in Computational Neuroscience, 2013, 7: 57.
+\bibitem{refLi} Li T, Yan Y, Dou F, et al. Cross-subject generalization for EEG decoding: a survey of deep learning methods[J]. Journal of Neural Engineering, 2026, 23(1): 011002.
+\bibitem{refCOSFIRE} Azzopardi G, Petkov N. Ventral-stream-like shape representation: from pixel intensity values to trainable object-selective COSFIRE models[J]. Frontiers in Computational Neuroscience, 2014, 8: 80.
+\bibitem{refContini} Contini E W, Wardle S G, Carlson T A. Decoding the time-course of object recognition in the human brain: from visual features to categorical decisions[J]. Neuropsychologia, 2017, 105: 15-30.
+\bibitem{refDaume} Daume J, Kaminski J, Schjetnan A G P, et al. Control of working memory by phase-amplitude coupling of human hippocampal neurons[J]. Nature, 2024, 629: 393-401.
+\bibitem{refSteeghs} Steeghs-Turchina M, Srinivasan R, Nunez P L, et al. Slow wave dynamics of scalp EEG can be explained by simple statistical models of long-range connections[J]. NeuroImage, 2025, 321: 121418.
+\bibitem{refJurkiewicz} Jurkiewicz M T, Gaetz W C, Bostan A C, et al. Post-movement beta rebound is generated in motor cortex: evidence from neuromagnetic recordings[J]. NeuroImage, 2006, 32(3): 1281-1289.
+\bibitem{refHunt} Hunt B A E, Liddle E B, Gascoyne L E, et al. Attenuated post-movement beta rebound associated with schizotypal features in healthy people[J]. Schizophrenia Bulletin, 2018, 45(4): 883-891.
+\bibitem{refBledowski} Bledowski C, Prvulovic D, Hoechstetter K, et al. Localizing P300 generators in visual target and distractor processing: a combined event-related potential and functional magnetic resonance imaging study[J]. Journal of Neuroscience, 2004, 24(42): 9353-9360.
+\bibitem{refBachiller} Bachiller A, Romero S, Molina V, et al. Auditory P3a and P3b neural generators in schizophrenia: an adaptive sLORETA P300 localization approach[J]. Schizophrenia Research, 2015, 169(1-3): 285-293.
+\bibitem{refBenard} B\'enard A, Maliia D, Yochum M, et al. Realistic subject-specific simulation of resting state scalp EEG based on physiological model[J]. Brain Topography, 2025, 38: 48.
+\bibitem{refGriffiths} Griffiths J D, Mcintosh A R, Lefebvre J. A connectome-based, corticothalamic model of state- and stimulation-dependent modulation of rhythmic neural activity and connectivity[J]. Frontiers in Computational Neuroscience, 2020, 14: 575143.
+\bibitem{refCastaldo} Castaldo F, P\'ascoa dos Santos F, Timms R, et al. Multi-modal and multi-model interrogation of large-scale functional brain networks[J]. NeuroImage, 2023, 277: 120236.
+\bibitem{refPerdikis} Perdikis D, Sleimen-Malkoun R, M\"uller V, et al. Developmental and aging changes in brain network switching dynamics revealed by EEG phase synchronization[J]. PLoS Computational Biology, 2025, 21(6): e1013290.
+\bibitem{refLiang} Liang Z, Wang D, Jin X, et al. Tracking the effects of propofol, sevoflurane and (S)-ketamine anesthesia using an unscented Kalman filter-based neural mass model[J]. Journal of Neural Engineering, 2023, 20(2): 026013.
+\bibitem{refYokoyama} Yokoyama H, Noda Y, Wada M, et al. Validation of an electroencephalography data assimilation-based computational approach for estimating cortical excitation-inhibition balance[J]. Communications Engineering, 2025, 4: 47.
+\bibitem{refJung} Jung T-P, Makeig S, Westerfield M, et al. Removal of eye activity artifacts from visual event-related potentials in normal and clinical subjects[J]. Clinical Neurophysiology, 2000, 111(10): 1745-1758.
+\bibitem{refGuarnieri} Guarnieri R, Marino M, Barban F, et al. Online EEG artifact removal for BCI applications by adaptive spatial filtering[J]. Journal of Neural Engineering, 2018, 15(5): 056009.
+\bibitem{refMathe} Mathe M, Mididoddi P, Battula T K. Artifact removal methods in EEG recordings: a review[J]. International Journal of Precision Engineering and Technology, 2021, 2(2): 55-66.
+\bibitem{refSherbieny} Sherbieny Z M, Shalaby W A, Rihan M, et al. A comprehensive survey and deep learning based framework for denoising EEG signals[C]. 2025 International Conference on Electronic Engineering (ICEEM), 2025.
+\bibitem{refMoran07} Moran R J, Kiebel S J, Stephan K E, et al. A neural mass model of spectral responses in electrophysiology[J]. NeuroImage, 2007, 37(3): 706-720.
+\bibitem{refVirtue} Virtue-Griffiths S, Fornito A, Thompson S, et al. Task-related changes in aperiodic activity are related to visual working memory capacity independent of event-related potentials and alpha oscillations[J]. Imaging Neuroscience, 2022, 1(1): 1-19.
+\end{thebibliography}
+
+% === 附录 ===
+\begin{appendices}
+\input{sections/A_code}
+\end{appendices}
+
+\end{document}

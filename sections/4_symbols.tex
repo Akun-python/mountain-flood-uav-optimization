@@ -1,0 +1,30 @@
+% 符号说明
+\section{符号说明}
+\label{sec:symbol}
+
+主要符号及其含义如表 \ref{tab:symbols} 所示，其余符号在文中首次出现处说明。
+
+\begin{table}[htbp]
+\centering
+\caption{主要符号说明}
+\label{tab:symbols}
+\begin{tabular}{clcl}
+\toprule
+符号 & 含义 & 符号 & 含义 \\
+\midrule
+$O01$ & 调度中心 & $S_i$ & 第 $i$ 个服务区（$i=1,\dots,15$）\\
+$q$ & 架次载荷（kg） & $Q_m$ & 机型 $m$ 最大载荷 \\
+$m_0$ & 无人机空机质量 & $g$ & 重力加速度 \\
+$v_c,\,v_{\mathrm{up}},\,v_{\mathrm{down}}$ & 巡航/爬升/下降速度 & $d$ & 水平航线距离 \\
+$h^+,\,h^-$ & 爬升/下降高度 & $\eta$ & 电机效率 \\
+$E_{\mathrm{use}}$ & 满载标称可用电量 & $E_{\mathrm{hor}},\,E_{\mathrm{up}}$ & 水平/爬升能耗 \\
+$L_g(q)$ & 载荷 $q$ 下等效航程 & $L_0,\,L_F$ & 空载/满载等效航程 \\
+$\rho$ & 返航安全裕度（$20\%$） & $SOC$ & 电池荷电状态 \\
+$T$ & 电池满充时长 & $d_1,\,d_e$ & 首飞批/普通批时限 \\
+$f$ & 工作频率（$2400$\,MHz） & $L_{\mathrm{FSPL}}$ & 自由空间损耗 \\
+$L_{\mathrm{sys}},\,L_{\mathrm{obs}}$ & 系统/遮挡损耗 & $P_{\mathrm{sens}},\,P_{\mathrm{th}}$ & 接收灵敏度/门限 \\
+$M$ & 解调余量 & $D$ & 收发间三维距离 \\
+$t_{\mathrm{link}},\,t_{\mathrm{prep}}$ & 建链/准备时间 & $P_W,P_E,P_N$ & 三个中继布设点 \\
+\bottomrule
+\end{tabular}
+\end{table}
