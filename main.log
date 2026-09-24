@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  25 SEP 2026 01:02
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  25 SEP 2026 01:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1606,25 +1606,27 @@ File: figures/p1_dem_map.png Graphic file (type bmp)
 <figures/p1_dem_map.png>
 File: figures/p1_alt_profiles.png Graphic file (type bmp)
 <figures/p1_alt_profiles.png>
- [5]
+ [5] [6]
 File: figures/p1_lg_curve.png Graphic file (type bmp)
 <figures/p1_lg_curve.png>
- [6] [7]
+ [7]
 File: figures/p1_qstar.png Graphic file (type bmp)
 <figures/p1_qstar.png>
+ [8]
 File: figures/p1_soc.png Graphic file (type bmp)
 <figures/p1_soc.png>
- [8])
+)
 (./sections/6_problem2.tex [9] [10]
 File: figures/p2_pareto2d.png Graphic file (type bmp)
 <figures/p2_pareto2d.png>
+ [11]
 File: figures/p2_network.png Graphic file (type bmp)
 <figures/p2_network.png>
 File: figures/p2_gantt.png Graphic file (type bmp)
 <figures/p2_gantt.png>
+ [12] [13]
 File: figures/p2_energy_decomp.png Graphic file (type bmp)
 <figures/p2_energy_decomp.png>
- [11] [12] [13]
 File: figures/p2_battery.png Graphic file (type bmp)
 <figures/p2_battery.png>
 File: figures/p2_soc_curves.png Graphic file (type bmp)
