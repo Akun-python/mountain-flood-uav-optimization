@@ -1,0 +1,139 @@
+{
+ "seconds": 60.0,
+ "seeds": [
+  7,
+  11
+ ],
+ "rows": [
+  {
+   "config": "balanced",
+   "seed": 7,
+   "tardy": 5.0,
+   "makespan": 7661.54,
+   "energy": 73.73,
+   "flights": 25,
+   "hard_ok": true,
+   "tardy_w": 0.0,
+   "tardy_max": 0.0,
+   "time_s": 60.0,
+   "evals": 73319
+  },
+  {
+   "config": "energy_strong",
+   "seed": 7,
+   "tardy": 1.0,
+   "makespan": 7983.2,
+   "energy": 72.98,
+   "flights": 24,
+   "hard_ok": true,
+   "tardy_w": 0.0,
+   "tardy_max": 0.0,
+   "time_s": 60.0,
+   "evals": 70154
+  },
+  {
+   "config": "baseline",
+   "seed": 7,
+   "tardy": 1.0,
+   "makespan": 8337.0,
+   "energy": 68.06,
+   "flights": 21,
+   "hard_ok": true,
+   "tardy_w": 0.0,
+   "tardy_max": 0.0,
+   "time_s": 60.0,
+   "evals": 74338
+  },
+  {
+   "config": "energy_strong",
+   "seed": 11,
+   "tardy": 1.0,
+   "makespan": 8624.3,
+   "energy": 71.08,
+   "flights": 22,
+   "hard_ok": true,
+   "tardy_w": 0.0,
+   "tardy_max": 0.0,
+   "time_s": 60.0,
+   "evals": 71514
+  },
+  {
+   "config": "flights_strong",
+   "seed": 7,
+   "tardy": 10.0,
+   "makespan": 9873.11,
+   "energy": 74.37,
+   "flights": 24,
+   "hard_ok": true,
+   "tardy_w": 1.65,
+   "tardy_max": 1.98,
+   "time_s": 60.0,
+   "evals": 68457
+  },
+  {
+   "config": "makespan_strong",
+   "seed": 11,
+   "tardy": 10.0,
+   "makespan": 8376.39,
+   "energy": 83.22,
+   "flights": 31,
+   "hard_ok": true,
+   "tardy_w": 163.59,
+   "tardy_max": 327.19,
+   "time_s": 60.0,
+   "evals": 67779
+  },
+  {
+   "config": "flights_strong",
+   "seed": 11,
+   "tardy": 10.0,
+   "makespan": 10287.02,
+   "energy": 80.12,
+   "flights": 28,
+   "hard_ok": true,
+   "tardy_w": 196.59,
+   "tardy_max": 393.19,
+   "time_s": 60.0,
+   "evals": 71945
+  },
+  {
+   "config": "balanced",
+   "seed": 11,
+   "tardy": 5.0,
+   "makespan": 7892.53,
+   "energy": 75.92,
+   "flights": 29,
+   "hard_ok": true,
+   "tardy_w": 262.59,
+   "tardy_max": 525.19,
+   "time_s": 60.0,
+   "evals": 75175
+  },
+  {
+   "config": "baseline",
+   "seed": 11,
+   "tardy": 1.0,
+   "makespan": 8192.15,
+   "energy": 71.36,
+   "flights": 25,
+   "hard_ok": true,
+   "tardy_w": 263.15,
+   "tardy_max": 526.3,
+   "time_s": 60.0,
+   "evals": 72188
+  },
+  {
+   "config": "makespan_strong",
+   "seed": 7,
+   "tardy": 10.0,
+   "makespan": 8651.38,
+   "energy": 79.35,
+   "flights": 29,
+   "hard_ok": true,
+   "tardy_w": 295.59,
+   "tardy_max": 591.19,
+   "time_s": 60.0,
+   "evals": 69593
+  }
+ ]
+}
