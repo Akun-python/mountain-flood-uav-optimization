@@ -78,6 +78,10 @@ python -X utf8 -c "import advanced_figures as af; af.fig3_relay_tl(); af.fig3_co
 | v0 | f5e9429 | 修复 core.py 数据路径可移植性（原硬编码模板目录） |
 | v1 | 26f04fc | 实验框架 + 五大家族求解器；Tabu 首胜论文基线 |
 | v2 | 4c786ed | 60s×3 种子全量对比 → 冠军 **Tabu**：21 架次、makespan **8337.0 s**、能耗 **68.06 kWh**、零迟到、硬约束全过（论文基线 24 架次 / 8342.1 s / 77.31 kWh，能耗降 ~12%） |
+| v3 | dcfb034 | Tabu 冠军接入问题三联合调度（21 架次 / 8337 s / 68.06 kWh，惟留 1 个中继覆盖缺口） |
+| v4a | 2d75abf | ALNS 修复诊断（修复算子能耗贪婪/时限盲）；增加目标权重可调钩子 |
+| v4b | 1cc2521 | Tabu 权重扫描 → 零迟到 Pareto 前沿：**balanced 7661.5 s / 73.73 kWh**、energy_strong 7983 s / 72.98 kWh、baseline 8337 s / 68.06 kWh（前端全面胜论文基线） |
+| v5 | 本轮 | 归档 Pareto 前沿 + balanced 接入问题三（详见 `结果/进化_v5/`） |
 
 复现冠军方案并输入问题三联合调度管线：
 
