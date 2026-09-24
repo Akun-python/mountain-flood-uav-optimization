@@ -1,6 +1,7 @@
 # 求解代码与结果说明（D题 山区洪涝灾害下无人机运输与通信协同优化）
 
-本目录为论文所用确定性求解程序的完整副本与最终结果文件。
+本目录为论文最终方案（进化 v10：完工冠军口径）的完整求解程序与结果文件，
+同时保留论文原始遗传算法基线方案的历史脚本用于对照复现。
 
 ## 问题描述
 
@@ -17,55 +18,64 @@
 
 ```
 求解代码与结果/
-├── 代码/          求解程序（solve_d/code 全量：物理核心、调度器、图件脚本等）
-├── 方案脚本/      最终方案复现脚本
-│   ├── v9w_q3_final.py   问题三最终协同方案（24 架次 + 3 中继时段）
-│   ├── verify_result.py  独立实证校验器（重算调度、核对时限/资源/货箱）
-│   ├── v9v_dbg.py        排程核查辅助脚本
-│   └── extract_problem_imgs.py  题目附图提取脚本
-├── 结果/          最终结果 JSON
+├── 代码/          求解程序（物理核心 core.py、调度器 p2_solve.py、
+│                  联合调度 p3_co2.py、图件脚本 advanced_figures.py 等）
+├── 实验/          进化实验（五族对比 benchmark.py、强化冠军搜索 champion_search.py、
+│                  中继覆盖-能耗联合优化 p3_relay_opt.py、P4 分区实验、
+│                  余量统计 margin_stats.py 等）
+├── 方案脚本/      论文原始遗传算法基线方案复现脚本（v9w 等，历史对照）
+├── 结果/          当前冠军结果 JSON 与进化归档（进化_v3 … 进化_v10）
 │   ├── p1_results.json   问题一：单点组批（18 班次）
-│   ├── p2_results.json   问题二：均衡运输（24 架次，makespan 8342.1 s）
-│   ├── p2_pareto.json    问题二 Pareto 前沿（均衡方案细节）
-│   ├── p3_final.json     问题三：运输+中继联合调度（24 架次 + R1/R2 三时段）
-│   └── p4_results.json   问题四：分区配置（K=3 / K=2）
-└── README.md
+│   ├── p2_results.json   问题二：完工冠军（26 架次，makespan 6959.8 s，能耗 70.71 kWh）
+│   ├── p2_pareto.json    问题二 Pareto 前沿（完工冠军 + 节能/最低能耗备选）
+│   ├── p3_co2.json       问题三：运输+中继联合调度（26 架次 + R1/R2 三时段，
+│   │                     初始布设即全覆盖，中继合计 3.55 kWh）
+│   ├── p3_margins.json   问题三：三个布设点接入链路余量统计
+│   ├── p4_results.json   问题四：分区资源配置（K=3 / K=2，26 架次口径）
+│   └── README.md
 ```
 
-## 运行方式
+## 运行方式（最新冠军管线）
 
 程序的数据路径为相对路径，需在原始工作区
 `华为杯latex模板/` 下运行（该目录下含
 `第二十三届中国研究生数学建模竞赛 - 中文题目/中文题目/D题/数据`）：
 
 ```bash
-# 1. 复现问题三最终方案并生成 p3_final.json
-python -X utf8 solve_d/versions/v9w_q3_final.py
+# 1. 五族算法公平对比基准（SA/GA/ALNS/Tabu/GRASP，墙钟预算公平对比）
+python -X utf8 求解代码与结果/实验/benchmark.py --seconds 60 --seeds 7,11,13
 
-# 2. 独立实证校验
-python -X utf8 solve_d/versions/verify_result.py check_p3
+# 2. 强化冠军搜索并导出冠军配置到 p2_results.json
+python -X utf8 求解代码与结果/实验/champion_search.py --seconds 600 --seeds 7,11,13 --restarts 2 --export
 
-# 3. 重绘论文图件（甘特图、中继时间线、通信保障时间线等）
-python -X utf8 solve_d/code/p3_figures.py
-python -X utf8 -c "import advanced_figures as af; af.fig3_relay_tl(); af.fig3_comm_tl()"
+# 3. 运输-中继联合调度（读取 p2_results.json）
+python -X utf8 求解代码与结果/代码/p3_co2.py
 
-# 4. 填写《结果提交模板.xlsx》
-python -X utf8 solve_d/code/export_excel.py
+# 4. 中继覆盖核验与接入链路余量统计
+python -X utf8 求解代码与结果/实验/p3_coverfix.py
+python -X utf8 求解代码与结果/实验/margin_stats.py
+
+# 5. 导出结果提交模板
+python -X utf8 求解代码与结果/代码/export_excel.py
 ```
 
-## 问题三最终结果（p3_final.json）
+## 当前冠军结果（进化 v10，论文口径）
 
-- 运输：24 架次（A×11、B×6、C×7），8 架无人机，14 组能源组件；
-  makespan 8356.3 s，总能耗 74.95 kWh，三档时限零违反，加权迟到为零。
-- 通信：38 个需中继任务段全部覆盖（西点 28、东点 7、北点 3），盲区为零；
-  中继 1 全天驻西点 [715, 7941] s（2.44 kWh，返航荷电 23.8%）；
-  中继 2 先东点 [760, 4049] s（1.24 kWh）后北点 [6520, 7126] s（0.54 kWh），
-  转场衔接无冲突（时间线惩罚为零）。
-- 独立校验：80 箱无重复无缺失；无不可行架次；硬时限零违反。
+- 问题二（p2_results.json）：26 架次（A×12、B×7、C×7），8 架无人机，14 组能源组件；
+  makespan 6959.8 s，总能耗 70.71 kWh，三档时限零违反，加权迟到为零。
+  较论文原始 GA 均衡方案（24 架次 / 8342.1 s / 77.31 kWh）完工提前约 16.6%、
+  能耗降低约 6.6 kWh。
+- 问题三（p3_co2.json）：1386 个需中继采样点全部覆盖（西点 982、东点 294、北点 110），
+  初始布设即实现全覆盖，无需人工调整；中继 1 全天驻西点 [1078, 6802] s
+  （1.979 kWh，返航荷电 38.2%）；中继 2 先东点 [1406, 4074] s（1.046 kWh）
+  后北点 [5894, 6446] s（0.521 kWh），中继合计 3.55 kWh，转场衔接无冲突；
+  联合完工时间约 7260 s，零迟到、零盲区。
+- 独立校验：80 箱无重复无缺失；无不可行架次；硬时限零违反；通信盲区为零。
 
 ## 关键版本说明
 
-问题三方案经历了 v9p→v9t→v9u→v9v→v9w 多轮迭代，最终采纳 v9w（见
-`v9w_q3_final.py`）：在问题二 24 架次基础上执行 8 项货箱重排、2 项机型调整
-（f14 A→B、f24 B→A）、2 项释放时刻微调（f20 +2485 s、f15 +1857 s），
-取消 f5、f23，新增 f30、f200，总架次保持 24。
+论文最终采用进化 v10 完工冠军口径（26 架次 / 6959.8 s / 70.71 kWh + 初始布设
+即全覆盖的中继方案）。`方案脚本/v9w_q3_final.py` 为论文原始遗传算法基线方案
+（24 架次，makespan 8356.3 s，总能耗 74.95 kWh），保留仅用于对照复现；
+当前冠军由 `实验/champion_search.py` 的多权重-多种子-多次重启强化搜索给出。
+各进化版本（v3 … v10）的完整实验记录与结果归档见 `结果/进化_v*/README.md`。

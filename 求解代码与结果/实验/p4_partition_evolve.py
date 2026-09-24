@@ -18,7 +18,7 @@ from core import Data, relay_link_ok
 from p4_solve import group_plan, redundancy
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUTD = os.path.join(HERE, '..', '结果', '进化_v7')
+OUTD = os.path.join(HERE, '..', '结果', '进化_v10')
 data = Data()
 AREAS = sorted(data.areas.keys())
 P = {'W': (109.2103, 23.047134, 676.5),
@@ -131,6 +131,19 @@ def main():
         # 库存校验：A4 B2 C2
         budget_ok = (tot['uav']['A'] <= 4 and tot['uav']['B'] <= 2 and tot['uav']['C'] <= 2
                      and tot['bat']['A'] <= 12 and tot['bat']['B'] <= 8 and tot['bat']['C'] <= 8)
+        # 逐组明细（含冗余备份后的资源配置），供论文 tab:p4 使用
+        groups_detail = []
+        for gi, (areas_g, p) in enumerate(zip(groups, plans)):
+            gu, gb, gr, gc = p['alloc']
+            groups_detail.append({
+                'name': '%s_g%d' % (name, gi + 1),
+                'areas': [a for a in areas_g],
+                'nbox': p['plan']['nbox'],
+                'makespan': round(p['plan']['makespan'], 1),
+                'energy': round(p['plan']['energy'], 2),
+                'flights': p['plan']['flights'],
+                'uav': gu, 'bat': gb, 'relay': gr, 'comp': gc,
+            })
         reports.append({
             'name': name, 'groups': [g for g in groups],
             'ok': ok, 'budget_ok': budget_ok,
@@ -139,6 +152,7 @@ def main():
             'total_bat_after_redundancy': sum(tot['bat'].values()),
             'uav_by': tot['uav'], 'bat_by': tot['bat'],
             'relay_machines': tot['relay'], 'energy_components': tot['comp'],
+            'groups_detail': groups_detail,
         })
         print('  [%s] TOTAL uav(A%dB%dC%d)/bat(A%dB%dC%d) relay=%d comp=%d ok=%s budget=%s'
               % (name, tot['uav']['A'], tot['uav']['B'], tot['uav']['C'],
@@ -152,9 +166,9 @@ def main():
         print('  %-10s ok=%s budget=%s uav=%d bat=%d relay=%d mk_max=%.0f'
               % (r['name'], r['ok'], r['budget_ok'], r['total_uav_after_redundancy'],
                  r['total_bat_after_redundancy'], r['relay_machines'], r['max_makespan']))
-    with open(os.path.join(OUTD, 'p4_partition_evolve.json'), 'w', encoding='utf-8') as fh:
+    with open(os.path.join(OUTD, 'p4_partition_evolve_v10.json'), 'w', encoding='utf-8') as fh:
         json.dump({'ranking': reports}, fh, ensure_ascii=False, indent=1)
-    print('saved', os.path.join(OUTD, 'p4_partition_evolve.json'))
+    print('saved', os.path.join(OUTD, 'p4_partition_evolve_v10.json'))
 
 
 if __name__ == '__main__':
