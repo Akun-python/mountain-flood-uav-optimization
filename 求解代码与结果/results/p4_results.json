@@ -1,0 +1,150 @@
+{
+ "inventory": {
+  "A": 4,
+  "B": 2,
+  "C": 2,
+  "A_bat": 6,
+  "B_bat": 4,
+  "C_bat": 4,
+  "relay": 2,
+  "comp": 6
+ },
+ "3": {
+  "groups": [
+   {
+    "name": "G1",
+    "areas": [
+     "S001",
+     "S002",
+     "S003",
+     "S005",
+     "S006",
+     "S007",
+     "S008",
+     "S009",
+     "S011",
+     "S015"
+    ],
+    "nbox": 62,
+    "mass": 599.0,
+    "alloc_uav": {
+     "A": 3,
+     "B": 3,
+     "C": 3
+    },
+    "alloc_bat": {
+     "A": 4,
+     "B": 4,
+     "C": 4
+    },
+    "alloc_relay": 3,
+    "alloc_comp": 5,
+    "makespan": 8006
+   },
+   {
+    "name": "G2",
+    "areas": [
+     "S010",
+     "S012",
+     "S013",
+     "S014"
+    ],
+    "nbox": 12,
+    "mass": 100.0,
+    "alloc_uav": {
+     "A": 3,
+     "B": 2,
+     "C": 2
+    },
+    "alloc_bat": {
+     "A": 4,
+     "B": 3,
+     "C": 3
+    },
+    "alloc_relay": 3,
+    "alloc_comp": 5,
+    "makespan": 5182
+   },
+   {
+    "name": "G3",
+    "areas": [
+     "S004"
+    ],
+    "nbox": 6,
+    "mass": 59.0,
+    "alloc_uav": {
+     "A": 2,
+     "B": 2,
+     "C": 2
+    },
+    "alloc_bat": {
+     "A": 2,
+     "B": 2,
+     "C": 2
+    },
+    "alloc_relay": 3,
+    "alloc_comp": 3,
+    "makespan": 4007
+   }
+  ]
+ },
+ "2": {
+  "groups": [
+   {
+    "name": "G1",
+    "areas": [
+     "S001",
+     "S002",
+     "S003",
+     "S004",
+     "S005",
+     "S006",
+     "S007",
+     "S008",
+     "S009",
+     "S011",
+     "S015"
+    ],
+    "nbox": 68,
+    "mass": 658.0,
+    "alloc_uav": {
+     "A": 3,
+     "B": 3,
+     "C": 3
+    },
+    "alloc_bat": {
+     "A": 4,
+     "B": 4,
+     "C": 4
+    },
+    "alloc_relay": 3,
+    "alloc_comp": 6,
+    "makespan": 9258
+   },
+   {
+    "name": "G2",
+    "areas": [
+     "S010",
+     "S012",
+     "S013",
+     "S014"
+    ],
+    "nbox": 12,
+    "mass": 100.0,
+    "alloc_uav": {
+     "A": 3,
+     "B": 2,
+     "C": 2
+    },
+    "alloc_bat": {
+     "A": 4,
+     "B": 3,
+     "C": 3
+    },
+    "alloc_relay": 3,
+    "alloc_comp": 5,
+    "makespan": 5182
+   }
+  ]
+ }
+}

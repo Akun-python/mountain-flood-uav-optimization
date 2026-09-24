@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  24 SEP 2026 19:04
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  24 SEP 2026 19:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1712,10 +1712,6 @@ File: lstlang1.sty 2024/02/21 1.10 listings language file
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2022/08/05>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 8F2E7BF4ABDB26448F87A6F8C5F33EAF;7305.
  ) 
