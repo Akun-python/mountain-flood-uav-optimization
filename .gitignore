@@ -9,3 +9,6 @@ Desktop.ini
 # Python cache
 __pycache__/
 *.py[cod]
+
+# scratch solver output (canonical results live in 结果/)
+求解代码与结果/results/
