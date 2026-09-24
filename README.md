@@ -63,3 +63,26 @@ python -X utf8 solve_d/code/export_excel.py
 python -X utf8 solve_d/code/p3_figures.py
 python -X utf8 -c "import advanced_figures as af; af.fig3_relay_tl(); af.fig3_comm_tl()"
 ```
+
+> 注：核心物理模块 `求解代码与结果/代码/core.py` 已改为**可移植数据路径**（自动回退到
+> 仓库内 `数据/`），上述命令可在本目录直接运行，不再依赖原始模板目录。
+
+## 算法进化实验台账（v0 → v2）
+
+在 `求解代码与结果/实验/` 下对**问题二**建立了多算法家族横向对比基准（墙钟预算，公平
+对比 SA / GA / ALNS / Tabu / GRASP 五种元启发式），每次实验写入 `samples/bench_p2_results.json`
+与 `samples/bench_p2_report.md`，关键版本均以 git commit 存档：
+
+| 版本 | 提交 | 内容与结果 |
+|---|---|---|
+| v0 | f5e9429 | 修复 core.py 数据路径可移植性（原硬编码模板目录） |
+| v1 | 26f04fc | 实验框架 + 五大家族求解器；Tabu 首胜论文基线 |
+| v2 | 4c786ed | 60s×3 种子全量对比 → 冠军 **Tabu**：21 架次、makespan **8337.0 s**、能耗 **68.06 kWh**、零迟到、硬约束全过（论文基线 24 架次 / 8342.1 s / 77.31 kWh，能耗降 ~12%） |
+
+复现冠军方案并输入问题三联合调度管线：
+
+```bash
+python -X utf8 求解代码与结果/实验/benchmark.py --seconds 60 --seeds 7,11,13
+python -X utf8 求解代码与结果/实验/export_p2.py --solver tabu --seconds 120
+python -X utf8 求解代码与结果/代码/p3_co2.py   # 读取 p2_results.json 做运输-中继联合调度
+```
