@@ -27,6 +27,7 @@ off = {int(k): float(v) for k, v in r3.get('offsets', {}).items()}
 base = {fj['fid']: float(fj['start']) for fj in r['flights']}
 
 stats = {g: [] for g in POS}
+seg_count = {'W': 0, 'E': 0, 'N': 0}
 n_relay = 0
 for fj in r['flights']:
     f = Flight(fj['fid'], [(s, list(b)) for s, b in fj['route']], fj['model'], data)
@@ -42,6 +43,7 @@ for fj in r['flights']:
         g = AREA_POS.get(sid)
         if g is None:
             continue
+        seg_count[g] += 1
         lo, la, zz = POS[g]
         for pt in sgs:
             stats[g].append(116.0 - path_loss(pt['lon'], pt['lat'], pt['z'], lo, la, zz, data))
@@ -54,6 +56,7 @@ for g in 'WEN':
               'avg': round(sum(ms) / len(ms), 2) if ms else None,
               'below1': sum(1 for m in ms if m < 1.0) if ms else 0,
               'below2': sum(1 for m in ms if m < 2.0) if ms else 0,
+              'segments': seg_count[g],
               'samples': [round(m, 2) for m in ms]}
 for g in 'WEN':
     s = res[g]

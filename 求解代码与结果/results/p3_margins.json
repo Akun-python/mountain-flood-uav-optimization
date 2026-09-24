@@ -5,6 +5,7 @@
   "avg": 5.96,
   "below1": 0,
   "below2": 94,
+  "segments": 26,
   "samples": [
    4.58,
    4.49,
@@ -996,6 +997,7 @@
   "avg": 10.53,
   "below1": 0,
   "below2": 57,
+  "segments": 6,
   "samples": [
    18.73,
    20.27,
@@ -1299,6 +1301,7 @@
   "avg": 25.78,
   "below1": 0,
   "below2": 0,
+  "segments": 2,
   "samples": [
    13.62,
    14.44,

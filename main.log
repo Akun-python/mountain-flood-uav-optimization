@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  24 SEP 2026 20:19
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  24 SEP 2026 20:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1650,7 +1650,7 @@ File: figures/p3_gantt.png Graphic file (type bmp)
 File: figures/p1_sensitivity.png Graphic file (type bmp)
 <figures/p1_sensitivity.png>
 
-Overfull \hbox (12.23001pt too wide) in paragraph at lines 42--48
+Overfull \hbox (12.23001pt too wide) in paragraph at lines 41--47
 \TU/SimSun(1)/m/n/12.045 次\TU/TimesNewRoman(0)/m/n/12.045 /6960s/70.71kWh\TU/Si
 mSun(1)/m/n/12.045 、|  节 能 均 衡 \TU/TimesNewRoman(0)/m/n/12.045 21 \TU/SimSun(1)
 /m/n/12.045 架 次\TU/TimesNewRoman(0)/m/n/12.045 /7837s/62.46kWh \TU/SimSun(1)/m/
