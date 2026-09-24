@@ -23,16 +23,20 @@ CONFIGS = {
 
 
 def run(total_seconds=600.0, seeds=(7, 11, 13), n_restarts=2, solver='tabu',
-        export=False):
+        export=False, out_sample=None, extra_configs=None):
     with open(os.path.join(HERE, '..', '结果', 'p1_results.json'), encoding='utf-8') as fh:
         p1 = json.load(fh)
     data = Data()
     flights0 = make_initial(data, p1['grouping'])
     fn = tabu_optimize
+    configs = dict(CONFIGS)
+    if extra_configs:
+        for name, w in extra_configs.items():
+            configs[name] = tuple(float(x) for x in w)
     rows = []
-    for cfg_name, w in CONFIGS.items():
+    for cfg_name, w in configs.items():
         set_weights(*w)
-        per = total_seconds / (len(CONFIGS) * len(seeds) * n_restarts)
+        per = total_seconds / (len(configs) * len(seeds) * n_restarts)
         for seed in seeds:
             for k in range(n_restarts):
                 budget = TimeBudget(per)
@@ -62,7 +66,7 @@ def run(total_seconds=600.0, seeds=(7, 11, 13), n_restarts=2, solver='tabu',
     # 保存（不含 Flight 对象，仅指标）
     slim = [{k: v for k, v in r.items() if k != 'fl'}
             for r in sorted(rows, key=lambda r: (not r['hard_ok'], r['tardy_w']))]
-    with open(SAMPLE, 'w', encoding='utf-8') as fh:
+    with open((out_sample or SAMPLE), 'w', encoding='utf-8') as fh:
         json.dump({'rows': slim}, fh, ensure_ascii=False, indent=1)
     # 导出：makespan 口径冠军
     if export and by_mk:
@@ -94,6 +98,18 @@ if __name__ == '__main__':
     ap.add_argument('--seeds', type=str, default='7,11,13')
     ap.add_argument('--restarts', type=int, default=2)
     ap.add_argument('--export', action='store_true')
+    ap.add_argument('--out', type=str, default='',
+                    help='采样记录输出路径（默认 samples/champion_search.json）')
+    ap.add_argument('--extras', type=str, default='',
+                    help='额外权重配置，如 "deadline:3,0.3,1.0,20;mk2:20,0.5,0.8,10"')
     args = ap.parse_args()
+    extras = None
+    if args.extras:
+        extras = {}
+        for seg in args.extras.split(';'):
+            name, w = seg.split(':')
+            extras[name] = tuple(float(x) for x in w.split(','))
     run(args.seconds, tuple(int(s) for s in args.seeds.split(',')),
-        args.restarts, export=args.export)
+        args.restarts, export=args.export,
+        out_sample=os.path.join(HERE, args.out) if args.out else None,
+        extra_configs=extras)

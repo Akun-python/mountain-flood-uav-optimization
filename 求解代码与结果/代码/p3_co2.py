@@ -274,12 +274,17 @@ class Solver:
             ch = charge_time(soc, T_FULL)
             ready2 = s['t1'] + t_back + ch
         pen += pen2
+        energy_sum = sum(
+            relay_mission_energy(POS_OF[g][0], POS_OF[g][1], POS_OF[g][2], data,
+                                 s['t1'] - s['t0'])
+            for g, ss in [('W', w_sorties), ('E', e_sorties), ('N', n_sorties)]
+            for s in ss)
         info = {'W': [(round(s['t0']), round(s['t1'])) for s in w_sorties],
                 'E': [(round(s['t0']), round(s['t1'])) for s in e_sorties],
                 'N': [(round(s['t0']), round(s['t1'])) for s in n_sorties]}
-        return pen, info
+        return pen, info, energy_sum
 
-    def evaluate(self, offsets):
+    def evaluate(self, offsets, w_relay=0.0):
         releases = {fid: self.base[fid] + offsets.get(fid, 0.0) for fid in self.base}
         schedule, _ = dispatch(data, self.flights, releases)
         met = evaluate(data, self.flights, schedule)
@@ -288,16 +293,16 @@ class Solver:
         starts = {fid: schedule[fid]['start'] for fid in schedule}
         missions = self.build_missions(starts)
         cov_bad, overlap, seg, by = self.relay_load(missions)
-        mpen, _ = self.machine_penalty(missions)
+        mpen, _, relay_energy = self.machine_penalty(missions)
         pen = 1e5 * cov_bad + 5e4 * overlap + 1e4 * mpen
         obj = met['tardy_w'] + 0.05 * met['makespan'] + 0.8 * met['energy'] \
-            + 30 * met['flights'] + pen
+            + 30 * met['flights'] + pen + w_relay * relay_energy
         return obj, met
 
-    def sa(self, iters=6000, seed=7):
+    def sa(self, iters=6000, seed=7, w_relay=0.0):
         rng = random.Random(seed)
         cur = {k: 0.0 for k in self.base}
-        cur_obj, _ = self.evaluate(cur)
+        cur_obj, _ = self.evaluate(cur, w_relay)
         best, best_obj = copy.deepcopy(cur), cur_obj
         T = 400.0
         accept = 0
@@ -335,7 +340,7 @@ class Solver:
                         nxt[fid] = min(MAXDELAY, max(-MAXEARLY, nxt[fid]))
                         if self.base[fid] + nxt[fid] < 300:
                             nxt[fid] = 300 - self.base[fid]
-            obj, _ = self.evaluate(nxt)
+            obj, _ = self.evaluate(nxt, w_relay)
             if obj < cur_obj or rng.random() < math.exp((cur_obj - obj) / T):
                 cur, cur_obj = nxt, obj
                 accept += 1
@@ -352,7 +357,7 @@ class Solver:
         starts = {fid: schedule[fid]['start'] for fid in schedule}
         missions = self.build_missions(starts)
         cov_bad, overlap, seg, by = self.relay_load(missions)
-        mpen, minfo = self.machine_penalty(missions)
+        mpen, minfo, _ = self.machine_penalty(missions)
         print('final: hard_ok=%s tardy=%.1f makespan=%.0f energy=%.2f flights=%d'
               % (met['hard_ok'], met['tardy_w'], met['makespan'], met['energy'], met['flights']))
         print('cover_bad=%d R2_overlap=%.0fs machine_pen=%.0fs' % (cov_bad, overlap, mpen))
@@ -367,15 +372,23 @@ class Solver:
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--iters', type=int, default=3000)
+    ap.add_argument('--seed', type=int, default=7)
+    ap.add_argument('--w-relay', type=float, default=0.0,
+                    help='目标函数中继能耗权重（>0 压缩中继窗口）')
+    ap.add_argument('--out', type=str, default='p3_co2.json')
+    args = ap.parse_args()
     sv = Solver()
-    best, best_obj = sv.sa(iters=3000, seed=7)
+    best, best_obj = sv.sa(iters=args.iters, seed=args.seed, w_relay=args.w_relay)
     res = sv.finalize(best)
-    with open(os.path.join(OUT, 'p3_co2.json'), 'w', encoding='utf-8') as fh:
+    with open(os.path.join(OUT, args.out), 'w', encoding='utf-8') as fh:
         json.dump({'offsets': best, 'obj': best_obj,
                    'met': {k: (round(v, 2) if isinstance(v, float) else v)
                            for k, v in res['met'].items() if k != 'box_time'}},
                   fh, ensure_ascii=False, indent=1)
-    print('saved p3_co2.json')
+    print('saved %s' % args.out)
 
 
 if __name__ == '__main__':
