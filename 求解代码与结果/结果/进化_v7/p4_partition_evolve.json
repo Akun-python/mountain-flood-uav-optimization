@@ -1,0 +1,222 @@
+{
+ "ranking": [
+  {
+   "name": "K2_base",
+   "groups": [
+    [
+     "S001",
+     "S002",
+     "S003",
+     "S004",
+     "S005",
+     "S006",
+     "S007",
+     "S008",
+     "S009",
+     "S011",
+     "S015"
+    ],
+    [
+     "S010",
+     "S012",
+     "S013",
+     "S014"
+    ]
+   ],
+   "ok": true,
+   "budget_ok": false,
+   "max_tardy": 0.0,
+   "max_makespan": 8423.2,
+   "total_uav_after_redundancy": 16,
+   "total_bat_after_redundancy": 25,
+   "uav_by": {
+    "A": 6,
+    "B": 5,
+    "C": 5
+   },
+   "bat_by": {
+    "A": 9,
+    "B": 8,
+    "C": 8
+   },
+   "relay_machines": 6,
+   "energy_components": 17
+  },
+  {
+   "name": "K3_comm",
+   "groups": [
+    [
+     "S001",
+     "S002",
+     "S003",
+     "S004",
+     "S005",
+     "S006",
+     "S007",
+     "S008",
+     "S009",
+     "S011",
+     "S015"
+    ],
+    [
+     "S010",
+     "S012",
+     "S013",
+     "S014"
+    ]
+   ],
+   "ok": true,
+   "budget_ok": false,
+   "max_tardy": 0.0,
+   "max_makespan": 8423.2,
+   "total_uav_after_redundancy": 16,
+   "total_bat_after_redundancy": 25,
+   "uav_by": {
+    "A": 6,
+    "B": 5,
+    "C": 5
+   },
+   "bat_by": {
+    "A": 9,
+    "B": 8,
+    "C": 8
+   },
+   "relay_machines": 6,
+   "energy_components": 17
+  },
+  {
+   "name": "K3_base",
+   "groups": [
+    [
+     "S001",
+     "S002",
+     "S003",
+     "S005",
+     "S006",
+     "S007",
+     "S008",
+     "S009",
+     "S011",
+     "S015"
+    ],
+    [
+     "S010",
+     "S012",
+     "S013",
+     "S014"
+    ],
+    [
+     "S004"
+    ]
+   ],
+   "ok": true,
+   "budget_ok": false,
+   "max_tardy": 0.0,
+   "max_makespan": 10468.2,
+   "total_uav_after_redundancy": 19,
+   "total_bat_after_redundancy": 28,
+   "uav_by": {
+    "A": 6,
+    "B": 6,
+    "C": 7
+   },
+   "bat_by": {
+    "A": 9,
+    "B": 9,
+    "C": 10
+   },
+   "relay_machines": 9,
+   "energy_components": 23
+  },
+  {
+   "name": "K3_km",
+   "groups": [
+    [
+     "S001",
+     "S010",
+     "S012",
+     "S013",
+     "S014"
+    ],
+    [
+     "S002",
+     "S004",
+     "S005",
+     "S008",
+     "S009"
+    ],
+    [
+     "S003",
+     "S006",
+     "S007",
+     "S011",
+     "S015"
+    ]
+   ],
+   "ok": true,
+   "budget_ok": false,
+   "max_tardy": 0.0,
+   "max_makespan": 11273.4,
+   "total_uav_after_redundancy": 22,
+   "total_bat_after_redundancy": 28,
+   "uav_by": {
+    "A": 8,
+    "B": 7,
+    "C": 7
+   },
+   "bat_by": {
+    "A": 10,
+    "B": 9,
+    "C": 9
+   },
+   "relay_machines": 9,
+   "energy_components": 22
+  },
+  {
+   "name": "K4_km",
+   "groups": [
+    [
+     "S001",
+     "S009",
+     "S011"
+    ],
+    [
+     "S002",
+     "S004",
+     "S005",
+     "S008"
+    ],
+    [
+     "S003",
+     "S006",
+     "S007",
+     "S015"
+    ],
+    [
+     "S010",
+     "S012",
+     "S013",
+     "S014"
+    ]
+   ],
+   "ok": true,
+   "budget_ok": false,
+   "max_tardy": 0.0,
+   "max_makespan": 11273.4,
+   "total_uav_after_redundancy": 25,
+   "total_bat_after_redundancy": 34,
+   "uav_by": {
+    "A": 9,
+    "B": 8,
+    "C": 8
+   },
+   "bat_by": {
+    "A": 12,
+    "B": 11,
+    "C": 11
+   },
+   "relay_machines": 11,
+   "energy_components": 24
+  }
+ ]
+}
