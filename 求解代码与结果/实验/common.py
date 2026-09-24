@@ -150,6 +150,11 @@ def all_feasible(flights):
     return all(f.box_ids and f.is_feasible() for f in flights) if flights else False
 
 
+def _is_urgent(data, bid):
+    bx = data.boxes[bid]
+    return bx['first_batch'] or bx['type'] == '医疗物资'
+
+
 def tighten(data, flights, rng=None):
     """轻量收紧：一轮合并扫描 + 逐架次机型重选（不循环到收敛，控制开销）。"""
     flights = rebuild(flights)
@@ -157,14 +162,18 @@ def tighten(data, flights, rng=None):
     for i in range(n):
         for j in range(i + 1, n):
             m = try_merge(data, flights[i], flights[j])
-            if m is not None:
-                save = (flights[i].duration() + flights[j].duration()) - m.duration()
-                if save > 1e-3:
-                    m.fid = flights[i].fid
-                    flights[i] = m
-                    flights.pop(j)
-                    n -= 1
-                    break
+            if m is None:
+                continue
+            # 保护紧急箱：不把含紧急箱的架次跨区合并（避免拖长交付）
+            if len(m.route) > 1 and any(_is_urgent(data, b) for b in m.box_ids):
+                continue
+            save = (flights[i].duration() + flights[j].duration()) - m.duration()
+            if save > 1e-3:
+                m.fid = flights[i].fid
+                flights[i] = m
+                flights.pop(j)
+                n -= 1
+                break
     # 机型重选（当前路线下能耗最优的可行机型）
     out = []
     for f in flights:

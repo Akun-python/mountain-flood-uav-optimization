@@ -24,7 +24,11 @@ SOLVERS = {
 }
 
 
-def main(solver='tabu', seconds=180.0, seed=7, n_restarts=3):
+def main(solver='tabu', seconds=180.0, seed=7, n_restarts=3,
+         weights=None):
+    if weights:
+        from common import set_weights
+        set_weights(**weights)
     with open(os.path.join(HERE, '..', '结果', 'p1_results.json'), encoding='utf-8') as fh:
         p1 = json.load(fh)
     data = Data()
@@ -84,5 +88,11 @@ if __name__ == '__main__':
     ap.add_argument('--seconds', type=float, default=180.0)
     ap.add_argument('--seed', type=int, default=7)
     ap.add_argument('--restarts', type=int, default=3)
+    ap.add_argument('--weights', type=str, default='',
+                    help='tardy,makespan,energy,flights (e.g. 5,0.3,1,20)')
     args = ap.parse_args()
-    sys.exit(main(args.solver, args.seconds, args.seed, args.restarts))
+    weights = None
+    if args.weights:
+        w = [float(x) for x in args.weights.split(',')]
+        weights = dict(zip(('tardy', 'makespan', 'energy', 'flights'), w))
+    sys.exit(main(args.solver, args.seconds, args.seed, args.restarts, weights))
