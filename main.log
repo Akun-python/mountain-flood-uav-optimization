@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  24 SEP 2026 19:26
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  24 SEP 2026 20:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1601,41 +1601,52 @@ Package fontspec Info: Font family 'SimSun(1)' created for font 'SimSun' with
  [3
 
 ]) (./sections/3_assumptions.tex)
-(./sections/4_symbols.tex) (./sections/5_problem1.tex [4] [5]
+(./sections/4_symbols.tex) (./sections/5_problem1.tex [4]
+File: figures/p1_dem_map.png Graphic file (type bmp)
+<figures/p1_dem_map.png>
+File: figures/p1_alt_profiles.png Graphic file (type bmp)
+<figures/p1_alt_profiles.png>
+ [5]
 File: figures/p1_lg_curve.png Graphic file (type bmp)
 <figures/p1_lg_curve.png>
- [6]
+ [6] [7]
 File: figures/p1_qstar.png Graphic file (type bmp)
 <figures/p1_qstar.png>
 File: figures/p1_soc.png Graphic file (type bmp)
 <figures/p1_soc.png>
- [7])
-(./sections/6_problem2.tex [8] [9]
+ [8])
+(./sections/6_problem2.tex [9] [10]
 File: figures/p2_pareto2d.png Graphic file (type bmp)
 <figures/p2_pareto2d.png>
 File: figures/p2_network.png Graphic file (type bmp)
 <figures/p2_network.png>
- [10]
 File: figures/p2_gantt.png Graphic file (type bmp)
 <figures/p2_gantt.png>
- [11]
+File: figures/p2_energy_decomp.png Graphic file (type bmp)
+<figures/p2_energy_decomp.png>
 File: figures/p2_battery.png Graphic file (type bmp)
 <figures/p2_battery.png>
+ [11] [12] [13] [14]
+File: figures/p2_soc_curves.png Graphic file (type bmp)
+<figures/p2_soc_curves.png>
 File: figures/p2_delivery.png Graphic file (type bmp)
 <figures/p2_delivery.png>
-) (./sections/7_problem3.tex
-[12] [13]
+)
+(./sections/7_problem3.tex [15]
 File: figures/p3_coverage.png Graphic file (type bmp)
 <figures/p3_coverage.png>
- [14]
+ [16]
+File: figures/p3_relay_coverage.png Graphic file (type bmp)
+<figures/p3_relay_coverage.png>
 File: figures/p3_relay_tl.png Graphic file (type bmp)
 <figures/p3_relay_tl.png>
- [15]
+ [17] [18]
 File: figures/p3_comm_tl.png Graphic file (type bmp)
 <figures/p3_comm_tl.png>
 File: figures/p3_gantt.png Graphic file (type bmp)
 <figures/p3_gantt.png>
- [16]) (./sections/8_sensitivity.tex [17]
+ [19])
+(./sections/8_sensitivity.tex [20]
 File: figures/p1_sensitivity.png Graphic file (type bmp)
 <figures/p1_sensitivity.png>
 
@@ -1647,19 +1658,19 @@ n/12.045 与 最 低 能 耗 \TU/TimesNewRoman(0)/m/n/12.045 19 \TU/SimSun(1)/m/
 架 次\TU/TimesNewRoman(0)/m/n/12.045 /7920s/60.40kWh\TU/SimSun(1)/m/n/12.045 ，|
  []
 
-[18]
+[21]
 File: figures/p3_margin_hist.png Graphic file (type bmp)
 <figures/p3_margin_hist.png>
-) (./sections/10_problem4.tex [19]
+) (./sections/10_problem4.tex [22]
 File: figures/p4_partition.png Graphic file (type bmp)
 <figures/p4_partition.png>
 File: figures/p4_load.png Graphic file (type bmp)
 <figures/p4_load.png>
- [20] [21]
+ [23] [24]
 File: figures/p4_gap.png Graphic file (type bmp)
 <figures/p4_gap.png>
 ) (./sections/9_evaluation.tex
-[22])
+[25])
 Underfull \hbox (badness 7203) in paragraph at lines 107--108
 []\TU/SimSun(1)/m/n/12.045 新 华 社\TU/TimesNewRoman(0)/m/n/12.045 . \TU/SimSun(1)
 /m/n/12.045 记 者 手 记：|  抵 近 广 西 横 州 镇 龙 乡 \TU/TimesNewRoman(0)/m/n/12.045 [EB/OL
@@ -1679,7 +1690,7 @@ Sun(1)/m/n/12.045 三 进 \TU/TimesNewRoman(0)/m/n/12.045 “\TU/SimSun(1)/m/n/1
  孤 岛 乡\TU/TimesNewRoman(0)/m/n/12.045 ”[EB/OL]. 2026-07-12[2026-08-07].
  []
 
-[23] (./sections/A_code.tex
+[26] (./sections/A_code.tex
 
 Package fontspec Info: Could not resolve font "FangSong/BI" (it probably
 (fontspec)             doesn't exist).
@@ -1706,22 +1717,22 @@ Package fontspec Info: Font family 'FangSong(0)' created for font 'FangSong'
 
 (c:/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/02/21 1.10 listings language file
-) [24] [25])
-[26] (./main.aux)
+) [27] [28])
+[29] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2022/08/05>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 8F2E7BF4ABDB26448F87A6F8C5F33EAF;7305.
+(rerunfilecheck)             Checksum: 87DE8F9252B5FA910DD45BC86162D921;7305.
  ) 
 Here is how much of TeX's memory you used:
- 35834 strings out of 476720
- 758867 string characters out of 5801445
+ 35893 strings out of 476720
+ 760919 string characters out of 5801445
  2412842 words of memory out of 5000000
- 57099 multiletter control sequences out of 15000+600000
+ 57153 multiletter control sequences out of 15000+600000
  573902 words of font info for 178 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 108i,11n,114p,476b,2125s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,11n,114p,476b,2127s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (27 pages).
+Output written on main.pdf (30 pages).

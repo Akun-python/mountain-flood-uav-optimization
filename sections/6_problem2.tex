@@ -195,6 +195,17 @@ f11 & A & U02 & 4291 & 5507 & 1.15 & S011 \\
 
 \subsection{结果分析}
 
+图 \ref{fig:energydecomp} 给出 26 架次的能耗构成：C 型 7 架次能耗占总量过半，
+单架次能耗普遍高于 A、B 型，其中 f18、f24 等高能耗架次集中于重载远区，再次
+印证 C 型是资源瓶颈；A 型架次数量最多但单架次能耗低，承担任务细碎化。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/p2_energy_decomp.png}
+\caption{26 架次能耗构成（按机型着色，总量 70.71\,kWh）}
+\label{fig:energydecomp}
+\end{figure}
+
 \begin{enumerate}
 \item \textbf{C 型瓶颈}：7 个 C 架次承载了主要重载区任务，U07 与 U08 两架
 C 型无人机几乎连续出勤至约 6960\,s，是完工时间的主要决定因素；A、B 型负责
@@ -209,6 +220,17 @@ C 型无人机几乎连续出勤至约 6960\,s，是完工时间的主要决定�
 \includegraphics[width=0.98\textwidth]{figures/p2_battery.png}
 \caption{14 组共享电池的任务与充电时间线（斜纹为充电段）}
 \label{fig:battery}
+\end{figure}
+
+8 架无人机的荷电状态轨迹见图 \ref{fig:soccurves}：每个架次内荷电线性下降至
+返航值，随后按两阶段充电曲线回升至满电，下一架次从满电出发；全部飞行段的
+最低荷电均高于 20\% 安全下限，充电在架次间隙完成，未产生电池等待。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/p2_soc_curves.png}
+\caption{8 架无人机的荷电状态轨迹（实线为飞行段，虚线为充电段）}
+\label{fig:soccurves}
 \end{figure}
 
 \item \textbf{时限全部满足}：首飞批货箱由首波架次优先送达，医疗货箱全部按
