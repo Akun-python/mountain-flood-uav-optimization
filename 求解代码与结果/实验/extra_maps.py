@@ -111,7 +111,7 @@ def fig_alt_profiles():
         ax.axhline(a['alt'] + 30, color=ps.C_ORANGE, ls=':', lw=1.0, zorder=4)
         ax.annotate('巡航高度 %d m' % (zmax + 50), (0.5, zmax + 50),
                     xytext=(0.04, 0.86), textcoords='axes fraction',
-                    fontsize=8.4, color=ps.C_BLUE)
+                    fontsize=8.4, color='black')
         ax.set_title('', fontsize=0)
         ax.text(0.02, 0.12, '%s（地面 %d m，装载 %d kg）' % (sid, a['alt'], _m),
                 transform=ax.transAxes, fontsize=8.6)

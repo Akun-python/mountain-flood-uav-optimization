@@ -44,15 +44,16 @@ plt.rcParams.update({
     'grid.linewidth': 0.6,
 })
 
-# Okabe-Ito 色盲友好色板
-C_BLUE = '#0072B2'      # 蓝
-C_ORANGE = '#E69F00'    # 橙
-C_SKY = '#56B4E9'       # 天蓝
-C_GREEN = '#009E73'     # 绿
-C_RED = '#D55E00'       # 红（朱红）
-C_VIOLET = '#CC79A7'    # 紫
-C_YELLOW = '#F0E442'    # 黄
-C_BLACK = '#222222'     # 深灰
+# 暖橙色系（萱草色系）色板：萱草 #F8B862 / 柑子 #F6AD49 / 金茶 #F39800 /
+# 蜜柑 #F08300 / 鉛丹 #EC6D51 / 黄丹 #EE7948；图内文字一律黑色。
+C_BLUE = '#F39800'      # 金茶（A 型）
+C_ORANGE = '#F6AD49'    # 柑子色（B 型）
+C_RED = '#EC6D51'       # 鉛丹色（C 型 / 强调）
+C_SKY = '#F8B862'       # 萱草色（W 中继）
+C_VIOLET = '#F08300'    # 蜜柑色（E 中继）
+C_GREEN = '#EE7948'     # 黄丹（N 中继 / 冠军）
+C_YELLOW = '#F8B862'    # 萱草
+C_BLACK = '#222222'     # 深灰（文字/元素）
 
 MODEL_COLORS = {'A': C_BLUE, 'B': C_ORANGE, 'C': C_RED}
 AREA_COLORS = {'W': C_SKY, 'E': C_VIOLET, 'N': C_GREEN}
