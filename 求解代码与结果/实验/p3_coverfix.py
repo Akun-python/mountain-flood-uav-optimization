@@ -107,9 +107,9 @@ def main():
         coslat = math.cos(math.radians(by_))
         fixed = cov_bad_with(AREA_POS, POS, samples)[0] - (1 if gap_s else 0)
         best = None
-        dlon_set = [-0.003, -0.002, -0.001, -0.0005, 0, 0.0005, 0.001, 0.002, 0.003]
+        dlon_set = [-0.01, -0.008, -0.006, -0.004, -0.002, 0, 0.002, 0.004, 0.006, 0.008, 0.01]
         dlat_set = dlon_set[:]
-        dz_set = [0, 30, -30, 60, -60, 90, -90, 120, -120]
+        dz_set = [0, 60, -60, 120, -120, 180, -180, 240, -240, 300, -300]
         for dlon in dlon_set:
             for dlat in dlat_set:
                 for dz in dz_set:
@@ -131,11 +131,12 @@ def main():
     for g in ('W', 'E', 'N'):
         print('  relay %s backhaul_ok=%s' % (g, relay_backhaul_ok(POS[g], data)))
 
-    # 归属重分配：仍未被本组中继覆盖的区，改归可全覆盖的中继
+    # 归属重分配：仅当在全量采样上确实改善才采纳（防止局部误判恶化覆盖）
     reassign = {}
     by_sid = {}
     for s in [x for g in gdef.values() for x in g]:
         by_sid.setdefault(s['sid'], []).append(s)
+    base_score = cov_bad_with(AREA_POS, POS, samples)
     for sid0, slist in by_sid.items():
         g0 = AREA_POS[sid0]
         best_g, best_cov = g0, 0
@@ -145,7 +146,11 @@ def main():
             if cov > best_cov:
                 best_cov, best_g = cov, g
         if best_g != g0 and best_cov == len(slist):
-            reassign[sid0] = best_g
+            # 试切换，仅在全量覆盖统计变好时保留
+            test = dict(AREA_POS)
+            test[sid0] = best_g
+            if cov_bad_with(test, POS, samples) < base_score:
+                reassign[sid0] = best_g
     AP = dict(AREA_POS)
     for sid0, g in reassign.items():
         AP[sid0] = g
