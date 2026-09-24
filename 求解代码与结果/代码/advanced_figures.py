@@ -237,8 +237,8 @@ def fig2_delivery():
 def fig2_pareto():
     r = load('p2_pareto.json')
     fig, ax = plt.subplots(figsize=(9.2, 5.4))
-    names = {'balanced': '均衡（本文）', 'min_flights': '最少架次',
-             'min_makespan': '最短完工', 'min_energy': '最低能耗'}
+    names = {'balanced': '均衡（Tabu 本文）', 'min_flights': '中间权衡',
+             'min_makespan': '最短完工', 'min_energy': '最低能耗重跑'}
     mk = {'balanced': 'o', 'min_flights': '^', 'min_makespan': 'D', 'min_energy': 's'}
     colors = {'balanced': ps.C_GREEN, 'min_flights': ps.C_BLUE,
               'min_makespan': ps.C_ORANGE, 'min_energy': ps.C_VIOLET}
