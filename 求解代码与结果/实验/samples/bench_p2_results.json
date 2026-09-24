@@ -1,252 +1,34 @@
 {
- "seconds": 60.0,
+ "seconds": 30.0,
  "seeds": [
-  7,
-  11,
-  13
+  7
  ],
  "rows": [
   {
-   "solver": "sa_baseline",
-   "seed": 7,
-   "evals": 73719,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 3.3,
-   "tardy_max": 7.92,
-   "makespan": 9169.6,
-   "energy": 71.78,
-   "flights": 23
-  },
-  {
-   "solver": "sa_baseline",
-   "seed": 11,
-   "evals": 75407,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 22.88,
-   "tardy_max": 54.91,
-   "makespan": 8541.24,
-   "energy": 68.58,
-   "flights": 21
-  },
-  {
-   "solver": "sa_baseline",
-   "seed": 13,
-   "evals": 74702,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 262.59,
-   "tardy_max": 525.19,
-   "makespan": 10232.89,
-   "energy": 71.04,
-   "flights": 21
-  },
-  {
-   "solver": "ga",
-   "seed": 7,
-   "evals": 12705,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 262.59,
-   "tardy_max": 525.19,
-   "makespan": 8585.38,
-   "energy": 85.44,
-   "flights": 32
-  },
-  {
-   "solver": "ga",
-   "seed": 11,
-   "evals": 12727,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 295.59,
-   "tardy_max": 591.19,
-   "makespan": 8651.38,
-   "energy": 86.33,
-   "flights": 32
-  },
-  {
-   "solver": "ga",
-   "seed": 13,
-   "evals": 14962,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 295.59,
-   "tardy_max": 591.19,
-   "makespan": 8651.38,
-   "energy": 86.82,
-   "flights": 33
-  },
-  {
    "solver": "alns",
    "seed": 7,
-   "evals": 3572,
-   "time_s": 60.0,
+   "evals": 2744,
+   "time_s": 30.0,
    "hard_ok": true,
    "tardy_w": 295.59,
    "tardy_max": 591.19,
    "makespan": 8651.38,
    "energy": 86.82,
    "flights": 33
-  },
-  {
-   "solver": "alns",
-   "seed": 11,
-   "evals": 3521,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 295.59,
-   "tardy_max": 591.19,
-   "makespan": 8651.38,
-   "energy": 86.82,
-   "flights": 33
-  },
-  {
-   "solver": "alns",
-   "seed": 13,
-   "evals": 3609,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 295.59,
-   "tardy_max": 591.19,
-   "makespan": 8651.38,
-   "energy": 86.82,
-   "flights": 33
-  },
-  {
-   "solver": "tabu",
-   "seed": 7,
-   "evals": 75976,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 0.0,
-   "tardy_max": 0.0,
-   "makespan": 8337.0,
-   "energy": 68.06,
-   "flights": 21
-  },
-  {
-   "solver": "tabu",
-   "seed": 11,
-   "evals": 78634,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 263.15,
-   "tardy_max": 526.3,
-   "makespan": 8192.15,
-   "energy": 71.36,
-   "flights": 25
-  },
-  {
-   "solver": "tabu",
-   "seed": 13,
-   "evals": 73248,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 8.22,
-   "tardy_max": 19.72,
-   "makespan": 9265.95,
-   "energy": 69.49,
-   "flights": 21
-  },
-  {
-   "solver": "grasp",
-   "seed": 7,
-   "evals": 34730,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 295.59,
-   "tardy_max": 591.19,
-   "makespan": 8772.39,
-   "energy": 84.07,
-   "flights": 32
-  },
-  {
-   "solver": "grasp",
-   "seed": 11,
-   "evals": 34729,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 295.59,
-   "tardy_max": 591.19,
-   "makespan": 8651.38,
-   "energy": 85.94,
-   "flights": 32
-  },
-  {
-   "solver": "grasp",
-   "seed": 13,
-   "evals": 34385,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 313.89,
-   "tardy_max": 591.19,
-   "makespan": 8651.38,
-   "energy": 85.04,
-   "flights": 32
   }
  ],
  "best_by_solver": {
-  "sa_baseline": {
-   "solver": "sa_baseline",
-   "seed": 7,
-   "evals": 73719,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 3.3,
-   "tardy_max": 7.92,
-   "makespan": 9169.6,
-   "energy": 71.78,
-   "flights": 23
-  },
-  "ga": {
-   "solver": "ga",
-   "seed": 7,
-   "evals": 12705,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 262.59,
-   "tardy_max": 525.19,
-   "makespan": 8585.38,
-   "energy": 85.44,
-   "flights": 32
-  },
   "alns": {
    "solver": "alns",
    "seed": 7,
-   "evals": 3572,
-   "time_s": 60.0,
+   "evals": 2744,
+   "time_s": 30.0,
    "hard_ok": true,
    "tardy_w": 295.59,
    "tardy_max": 591.19,
    "makespan": 8651.38,
    "energy": 86.82,
    "flights": 33
-  },
-  "tabu": {
-   "solver": "tabu",
-   "seed": 7,
-   "evals": 75976,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 0.0,
-   "tardy_max": 0.0,
-   "makespan": 8337.0,
-   "energy": 68.06,
-   "flights": 21
-  },
-  "grasp": {
-   "solver": "grasp",
-   "seed": 11,
-   "evals": 34729,
-   "time_s": 60.0,
-   "hard_ok": true,
-   "tardy_w": 295.59,
-   "tardy_max": 591.19,
-   "makespan": 8651.38,
-   "energy": 85.94,
-   "flights": 32
   }
  }
 }
