@@ -146,6 +146,14 @@ def repair_greedy(data, flights, pool, rng):
                 if not cand.is_feasible():
                     continue
                 extra = cand.energy() * 0.4 + cand.duration() * 0.15
+                # 交付时限感知：若该箱并入后预计交付超过时限，重罚
+                dl = min(data.boxes[b]['deadline_first'], data.boxes[b]['deadline_exp'])
+                if not math.isinf(dl):
+                    est_delivery = cand.prep + cand.flight_time() + cand.handover_time()
+                    if est_delivery > dl:
+                        extra += 6000.0 * (1.0 + (est_delivery - dl) / 3600.0)
+                if data.boxes[b]['first_batch'] and cand.nbox > 1:
+                    extra += 2000.0  # 首批箱尽量独占紧凑架次
                 if extra < best_cost - 1e-9:
                     best_cost = extra
                     best = (f, cand)
