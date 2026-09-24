@@ -19,8 +19,15 @@ import json
 import numpy as np
 from scipy.io import loadmat
 
-BASE = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..',
-                    '第二十三届中国研究生数学建模竞赛 - 中文题目', '中文题目', 'D题', '数据')
+# --- 数据根目录解析：优先原有模板布局，其次按仓库相对位置回退，保证可移植复现 ---
+_HERE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_CANDIDATES = [
+    os.path.join(_HERE_DIR, '..', '..',
+                 '第二十三届中国研究生数学建模竞赛 - 中文题目', '中文题目', 'D题', '数据'),
+    os.path.join(_HERE_DIR, '..', '..', '数据'),   # D题/求解代码与结果/代码 -> D题/数据
+    os.path.join(_HERE_DIR, '..', '数据'),
+]
+BASE = next((p for p in BASE_CANDIDATES if os.path.isdir(p)), BASE_CANDIDATES[0])
 DATA_CSV = os.path.join(BASE, '无人机应急物资运输基础数据')
 GIS = os.path.join(BASE, '镇龙乡地理空间数据', '镇龙乡及周边地理数据')
 
