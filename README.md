@@ -82,6 +82,7 @@ python -X utf8 -c "import advanced_figures as af; af.fig3_relay_tl(); af.fig3_co
 | v4a | 2d75abf | ALNS 修复诊断（修复算子能耗贪婪/时限盲）；增加目标权重可调钩子 |
 | v4b | 1cc2521 | Tabu 权重扫描 → 零迟到 Pareto 前沿：**balanced 7661.5 s / 73.73 kWh**、energy_strong 7983 s / 72.98 kWh、baseline 8337 s / 68.06 kWh（前端全面胜论文基线） |
 | v5 | 本轮 | 归档 Pareto 前沿 + balanced 接入问题三（详见 `结果/进化_v5/`） |
+| v6 | 本轮 | **中继覆盖修复**：`实验/p3_coverfix.py` 微移 W 点（−205 m/−55 m/+120 m）把 9 个未覆盖采样点清零，中继全覆盖、盲区为零（详见 `结果/进化_v6/`） |
 
 复现冠军方案并输入问题三联合调度管线：
 
