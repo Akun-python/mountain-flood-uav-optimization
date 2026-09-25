@@ -1,0 +1,42 @@
+{
+ "input": "p2v39_mk22.json",
+ "base_flights": 26,
+ "results": [
+  {
+   "seed": 7,
+   "tag": "v39mk",
+   "joint": 7954.3,
+   "joint_min": 132.6,
+   "transport_mk": 7954.3,
+   "transport_min": 132.6,
+   "transport_energy": 70.38,
+   "flights": 26,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "relay_energy": 3.745,
+   "cover_bad": 0,
+   "overlap": 0.0,
+   "mpen": 405.0,
+   "battery_violations": 0,
+   "relay_ret_max": 7894.0
+  },
+  {
+   "seed": 77,
+   "tag": "v39mk",
+   "joint": 7954.3,
+   "joint_min": 132.6,
+   "transport_mk": 7954.3,
+   "transport_min": 132.6,
+   "transport_energy": 70.38,
+   "flights": 26,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "relay_energy": 3.684,
+   "cover_bad": 0,
+   "overlap": 0.0,
+   "mpen": 203.0,
+   "battery_violations": 0,
+   "relay_ret_max": 7894.0
+  }
+ ]
+}
