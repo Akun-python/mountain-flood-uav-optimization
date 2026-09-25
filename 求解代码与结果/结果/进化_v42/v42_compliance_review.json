@@ -1,0 +1,44 @@
+{
+ "verdicts": [
+  {
+   "item": "架次数（29）",
+   "ok": true,
+   "detail": "29"
+  },
+  {
+   "item": "每架质量/体积/返航能量可行",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "返航安全余量 E <= (1-rho)E_use",
+   "ok": true,
+   "detail": "最小余量=0.258 kWh"
+  },
+  {
+   "item": "80箱唯一无缺",
+   "ok": true,
+   "detail": "80"
+  },
+  {
+   "item": "投递位置=箱属区（零跨区）",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "首飞批/医疗时限硬约束",
+   "ok": true,
+   "detail": "tardy_w=0.0"
+  },
+  {
+   "item": "官方口径 makespan/能耗",
+   "ok": true,
+   "detail": "mk=7112.8 en=74.56 flights=29"
+  },
+  {
+   "item": "电池满充（间隔>=充电时长，修复版语义）",
+   "ok": true,
+   "detail": "[]"
+  }
+ ]
+}

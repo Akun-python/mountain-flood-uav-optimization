@@ -17,54 +17,54 @@
      "S001",
      "S002",
      "S003",
+     "S004",
      "S005",
      "S006",
      "S007",
      "S008",
      "S009",
-     "S010",
      "S011",
-     "S013",
-     "S014",
      "S015"
     ],
-    "nbox": 71,
-    "mass": 674.0,
+    "nbox": 68,
+    "mass": 658.0,
     "alloc_uav": {
      "A": 4,
-     "B": 3,
+     "B": 2,
      "C": 3
     },
     "alloc_bat": {
      "A": 6,
-     "B": 5,
+     "B": 4,
      "C": 5
     },
     "alloc_relay": 3,
-    "alloc_comp": 9,
-    "makespan": 8395
+    "alloc_comp": 10,
+    "makespan": 9291
    },
    {
     "name": "G2",
     "areas": [
-     "S004",
-     "S012"
+     "S010",
+     "S012",
+     "S013",
+     "S014"
     ],
-    "nbox": 9,
-    "mass": 84.0,
+    "nbox": 12,
+    "mass": 100.0,
     "alloc_uav": {
      "A": 2,
      "B": 2,
-     "C": 2
+     "C": 0
     },
     "alloc_bat": {
-     "A": 2,
-     "B": 2,
-     "C": 2
+     "A": 3,
+     "B": 3,
+     "C": 0
     },
-    "alloc_relay": 4,
-    "alloc_comp": 3,
-    "makespan": 2177
+    "alloc_relay": 2,
+    "alloc_comp": 4,
+    "makespan": 5414
    }
   ]
  },
@@ -81,48 +81,48 @@
      "S007",
      "S008",
      "S009",
-     "S010",
-     "S014",
+     "S011",
      "S015"
     ],
-    "nbox": 65,
-    "mass": 624.0,
+    "nbox": 62,
+    "mass": 599.0,
     "alloc_uav": {
-     "A": 4,
-     "B": 3,
+     "A": 3,
+     "B": 2,
      "C": 3
     },
     "alloc_bat": {
-     "A": 6,
-     "B": 5,
+     "A": 5,
+     "B": 4,
      "C": 5
     },
-    "alloc_relay": 3,
-    "alloc_comp": 10,
-    "makespan": 7640
+    "alloc_relay": 2,
+    "alloc_comp": 11,
+    "makespan": 10047
    },
    {
     "name": "G2",
     "areas": [
-     "S011",
+     "S010",
      "S012",
-     "S013"
+     "S013",
+     "S014"
     ],
-    "nbox": 9,
-    "mass": 75.0,
+    "nbox": 12,
+    "mass": 100.0,
     "alloc_uav": {
      "A": 2,
      "B": 2,
      "C": 0
     },
     "alloc_bat": {
-     "A": 2,
-     "B": 2,
+     "A": 3,
+     "B": 3,
      "C": 0
     },
     "alloc_relay": 2,
-    "alloc_comp": 2,
-    "makespan": 7768
+    "alloc_comp": 4,
+    "makespan": 5414
    },
    {
     "name": "G3",

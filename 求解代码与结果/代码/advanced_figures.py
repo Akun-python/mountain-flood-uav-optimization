@@ -317,7 +317,7 @@ def fig3_relay_tl():
     # W 点占空比标注（数据驱动）
     ax.axhline(len(rows) - 0.5, color='#6B7280', ls=':', lw=0.7)
     w0 = next(sg for sg in r['sorties'] if sg['relay'] == 'R01' and sg['pos'] == 'W')
-    ax.text(8800, len(rows) - 0.62,
+    ax.text(7200, len(rows) - 0.62,
             'W 点最长服务 %.0f s（%.0f 个任务段）\n能耗 %.2f kWh，返航荷电约 %.1f%%'
             % (w0['t1'] - w0['t0'], len(w0['missions']), w0['energy'],
                100 * (1 - w0['energy'] / 3.2)),
@@ -325,7 +325,7 @@ def fig3_relay_tl():
     ax.set_yticks([len(rows) - 1 - i for i in range(len(rows))])
     ax.set_yticklabels([rid for rid, _, _ in rows], fontsize=9)
     ax.set_xlabel('时间（s）')
-    ax.set_xlim(0, 9800)
+    ax.set_xlim(0, 7400)
     from matplotlib.patches import Patch
     ax.legend(handles=[Patch(color=ps.AREA_COLORS['W'], label='西点服务'),
                        Patch(color=ps.AREA_COLORS['E'], label='东点服务'),
