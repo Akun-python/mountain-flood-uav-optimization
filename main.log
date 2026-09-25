@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  25 SEP 2026 15:08
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  25 SEP 2026 15:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1649,7 +1649,7 @@ File: figures/p3_comm_tl.png Graphic file (type bmp)
 <figures/p3_comm_tl.png>
 File: figures/p3_gantt.png Graphic file (type bmp)
 <figures/p3_gantt.png>
- [20]) (./sections/8_sensitivity.tex [21]
+ [20] [21]) (./sections/8_sensitivity.tex
 File: figures/p1_sensitivity.png Graphic file (type bmp)
 <figures/p1_sensitivity.png>
 
@@ -1731,12 +1731,12 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 87DE8F9252B5FA910DD45BC86162D921;7305.
  ) 
 Here is how much of TeX's memory you used:
- 35893 strings out of 476720
- 760919 string characters out of 5801445
- 2411842 words of memory out of 5000000
- 57153 multiletter control sequences out of 15000+600000
- 573902 words of font info for 178 fonts, out of 8000000 for 9000
+ 35896 strings out of 476720
+ 761010 string characters out of 5801445
+ 2409842 words of memory out of 5000000
+ 57155 multiletter control sequences out of 15000+600000
+ 573910 words of font info for 179 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  108i,11n,114p,476b,2127s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.xdv (31 pages, 487172 bytes).
+Output written on main.xdv (31 pages, 488504 bytes).
