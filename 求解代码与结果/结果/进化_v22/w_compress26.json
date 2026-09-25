@@ -1,0 +1,48 @@
+{
+ "baseline": {
+  "hard_ok": true,
+  "tardy_w": 0.0,
+  "tardy_max": 0.0,
+  "makespan": 6959.808,
+  "energy": 70.705,
+  "flights": 26
+ },
+ "results": [
+  {
+   "name": "f5_S005x2_to_f23",
+   "p2": "infeasible(mass/route)"
+  },
+  {
+   "name": "f5_S005MED_to_f23",
+   "p2": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 6959.808,
+    "energy": 70.787,
+    "flights": 26
+   },
+   "joint": 7259.8,
+   "makespan": 7259.808,
+   "relay_energy": 3.592,
+   "cover_bad": 0,
+   "mpen": 0.0
+  },
+  {
+   "name": "f5_S005WAT_to_f23",
+   "p2": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 6959.808,
+    "energy": 71.272,
+    "flights": 26
+   },
+   "joint": 7259.8,
+   "makespan": 7259.808,
+   "relay_energy": 3.592,
+   "cover_bad": 0,
+   "mpen": 0.0
+  }
+ ]
+}
