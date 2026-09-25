@@ -1,10 +1,10 @@
 # Fdb version 4
-["xdvipdfmx"] 1790302442.6952 "main.xdv" "main.pdf" "main" 1790302460.73947 0
-  "main.xdv" 1790302442 482876 9630c64d5b76f5acb44e9f287b2a96b4 "xelatex"
+["xdvipdfmx"] 1790312748.14771 "main.xdv" "main.pdf" "main" 1790312765.86014 0
+  "main.xdv" 1790312747 484536 d0fed408fd1afaeb09ad5965f86b5f73 "xelatex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["xelatex"] 1790302438.76808 "main.tex" "main.xdv" "main" 1790302460.71494 0
+["xelatex"] 1790312744.37916 "main.tex" "main.xdv" "main" 1790312765.78935 0
   "c:/Windows/Fonts/msyh.ttc" 1744369746 19704352 1e10e74402e59d54499af795caf0b135 ""
   "c:/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1736157014 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1736158798 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
@@ -261,16 +261,16 @@
   "figures/p4_partition.png" 1790252863 138852 f2e3ec83f7998b12a47f98859b36f411 ""
   "gmcmthesis.cls" 1790062496 17817 566b7cd2cbb112e7793fafe5ba30da1d ""
   "logo.pdf" 1790062496 112746 c9b882a3c9346bcf37b62b82e519a0e4 ""
-  "main.aux" 1790302442 19660 da22725b6bbc64f6b1ad862076615de1 "xelatex"
-  "main.out" 1790302442 7305 87de8f9252b5fa910dd45bc86162d921 "xelatex"
+  "main.aux" 1790312747 19660 da22725b6bbc64f6b1ad862076615de1 "xelatex"
+  "main.out" 1790312747 7305 87de8f9252b5fa910dd45bc86162d921 "xelatex"
   "main.tex" 1790302094 7984 be0af4e628cc9ac4567d03712f07ecce ""
   "sections/10_problem4.tex" 1790296283 5418 00a1e27f26273dd66b8bb5ab02d6da6e ""
   "sections/1_restatement.tex" 1790253826 2941 29a28d762939e81feead874aad97335b ""
-  "sections/3_assumptions.tex" 1790272440 3078 d5a5a7d5b3655fb6216ae2f2dde811af ""
+  "sections/3_assumptions.tex" 1790311702 3283 b721dfebb5edbbbe9e305a57e88c4ca4 ""
   "sections/4_symbols.tex" 1790173414 1418 0e3a7cb4003068c3d41651bc2b2d072a ""
   "sections/5_problem1.tex" 1790296283 8735 c5ad83d69c1e35d8ffbdba855b6c8922 ""
   "sections/6_problem2.tex" 1790296331 12407 632faa35491833d9dddddfa9a549c8f8 ""
-  "sections/7_problem3.tex" 1790302066 11630 85f01eb808369045fa2ccaec185fc170 ""
+  "sections/7_problem3.tex" 1790311724 11682 65f9dc80faccf1eed16bc4f42b8dc6e7 ""
   "sections/8_sensitivity.tex" 1790302111 4547 5f36da7e9f234cf7aec74e726055bdf3 ""
   "sections/9_evaluation.tex" 1790296331 2667 15eb183f37eed9558d51e0e79916c764 ""
   "sections/A_code.tex" 1790174266 4954 9e47afb02deed8a67ee51b6f93157ebe ""

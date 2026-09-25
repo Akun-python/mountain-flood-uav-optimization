@@ -19,7 +19,7 @@ import core
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RES = os.path.join(HERE, '..', 'results')
-OUTD = os.path.join(HERE, '..', '结果', '进化_v20')
+OUTD = os.path.join(HERE, '..', '结果', '进化_v21')
 TMP = os.path.join(HERE, '_jointmin_tmp')
 
 

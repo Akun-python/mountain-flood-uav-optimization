@@ -231,74 +231,58 @@ class Solver:
         e_sorties, e_pos = pack('E')
         n_sorties, n_pos = pack('N')
 
-        def charge_from_to(soc_prev, soc_need, T):
-            """把荷电从 soc_prev 充到 soc_need 所需时长（两阶段曲线，f(soc)=充满时长，
-            差分即分段线性充电时长）；soc_need<=soc_prev 时不充电。"""
-            if soc_need <= soc_prev:
-                return 0.0
+        class CompPool:
+            """中继能源组件共享池（n=6，题目附录2：复用前必须充至100%）。
+            每个组件独立充电（不同资源可并行充电）；组件被架次占用后，
+            返场起满充，charge_done = 返场 + 满充时长。选组件取满充完成最早者。"""
 
-            def t_full(soc):
-                if soc <= 0.9:
-                    return T * (0.65 * (0.9 - soc) / 0.9 + 0.35)
-                return T * 0.35 * (1.0 - soc) / 0.1
+            def __init__(self, n):
+                self.comps = [{'charge_done': 0.0} for _ in range(n)]
 
-            return max(0.0, t_full(soc_prev) - t_full(soc_need))
+            def take(self, dispatch, e, ret):
+                """占用一个组件：返回 (组件就绪时刻, 占用后满充完成时刻)。"""
+                self.comps.sort(key=lambda c: c['charge_done'])
+                c = self.comps[0]
+                lim = c['charge_done']
+                soc_end = 1.0 - e / REL['E_use']
+                c['charge_done'] = ret + charge_time(soc_end, T_FULL)
+                return lim
 
-        def seq_penalty(sorties, pos, start_ready=0.0):
-            """单机时间线：相邻架次转场（返航+按需充电+出航+建链）。
-            严格口径：每班含 t_prep=180 s 固定准备，两班之间需 t_turn=300 s 周转；
-            转场前按下一班所需荷电按需补电，返场荷电已满足时不等待。"""
-            t_out, t_back, _ = relay_mission_time(pos[0], pos[1], pos[2], data)
+        def seq_penalty_pool(seqs, pos_of, pool, start_ready=0.0):
+            """单中继无人机时间线 + 共享组件池满充复用（题目附录2合规口径）：
+            相邻架次转场（返航 + t_turn=300 s 周转 + 出航 + 建链）；每班含
+            t_prep=180 s 固定准备；能源组件复用前必须满充（初始 SOC=100%，
+            用后 SOC=1-e/E_use，再投入前充至 100%）。"""
             pen = 0.0
-            soc_prev = 1.0
-            ready = start_ready
-            for k, s in enumerate(sorties):
-                dispatch = s['t0'] - t_out - REL['t_link']
-                e = relay_mission_energy(pos[0], pos[1], pos[2], data, s['t1'] - s['t0'])
+            uav_ready = start_ready
+            for k, s in enumerate(seqs):
+                pos = pos_of[s[2]]
+                t_out, t_back, _ = relay_mission_time(pos[0], pos[1], pos[2], data)
+                dispatch = s[0] - t_out - REL['t_link']
+                e = relay_mission_energy(pos[0], pos[1], pos[2], data, s[1] - s[0])
                 need = REL['rho'] + e / REL['E_use']
-                ch = charge_from_to(soc_prev, need, T_FULL) if k > 0 else 0.0
-                if dispatch < 0:
-                    pen += -dispatch
-                if dispatch < REL['t_prep']:
-                    pen += REL['t_prep'] - dispatch
-                if k > 0 and dispatch < ready + ch + REL['t_turn']:
-                    pen += (ready + ch + REL['t_turn'] - dispatch)
-                soc_prev = 1 - e / REL['E_use']
-                ready = s['t1'] + t_back
-            return pen, ready
+                if need > 1.0 + 1e-9:
+                    pen += (need - 1.0) * 1e5
+                comp_lim = pool.take(dispatch, e, s[1] + t_back)
+                lim = max(REL['t_prep'] if k == 0 else uav_ready + REL['t_turn'],
+                          comp_lim)
+                if dispatch < lim:
+                    pen += lim - dispatch
+                uav_ready = s[1] + t_back
+            return pen
 
+        pool = CompPool(data.relay_energy['n'])
         pen = 0.0
         # R1: W 全部架次
-        p1, ready1 = seq_penalty(w_sorties, w_pos)
-        pen += p1
+        pen += seq_penalty_pool([(s['t0'], s['t1'], 'W') for s in w_sorties],
+                                POS_OF, pool)
         # R2: E 架次 + N 架次 + W 尾段（按开始时刻排序，逐段按各自位置计算转场）
         tail = [s for s in w_sorties[1:]]
-        r2_all = sorted(e_sorties + n_sorties + tail, key=lambda s: s['t0'])
-        pen2 = 0.0
-        ready2 = 0.0
-        soc_prev2 = 1.0
-        for k, s in enumerate(r2_all):
-            if s in e_sorties:
-                g = 'E'
-            elif s in n_sorties:
-                g = 'N'
-            else:
-                g = 'W'
-            pos = POS_OF[g]
-            t_out, t_back, _ = relay_mission_time(pos[0], pos[1], pos[2], data)
-            dispatch = s['t0'] - t_out - REL['t_link']
-            e = relay_mission_energy(pos[0], pos[1], pos[2], data, s['t1'] - s['t0'])
-            need = REL['rho'] + e / REL['E_use']
-            ch = charge_from_to(soc_prev2, need, T_FULL) if k > 0 else 0.0
-            if dispatch < 0:
-                pen2 += -dispatch
-            if dispatch < REL['t_prep']:
-                pen2 += REL['t_prep'] - dispatch
-            if k > 0 and dispatch < ready2 + ch + REL['t_turn']:
-                pen2 += (ready2 + ch + REL['t_turn'] - dispatch)
-            soc_prev2 = 1 - e / REL['E_use']
-            ready2 = s['t1'] + t_back
-        pen += pen2
+        r2_all = sorted([(s['t0'], s['t1'], 'E') for s in e_sorties]
+                        + [(s['t0'], s['t1'], 'N') for s in n_sorties]
+                        + [(s['t0'], s['t1'], 'W') for s in tail],
+                        key=lambda s: s[0])
+        pen += seq_penalty_pool(r2_all, POS_OF, pool)
         energy_sum = sum(
             relay_mission_energy(POS_OF[g][0], POS_OF[g][1], POS_OF[g][2], data,
                                  s['t1'] - s['t0'])
