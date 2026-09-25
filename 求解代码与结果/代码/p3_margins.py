@@ -14,8 +14,8 @@ from p3_gaps import flight_trajectory
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'results')
 POS = {'W': (109.2103, 23.047134, 676.5),
-       'E': (109.276017, 23.019401, 542.3),
-       'N': (109.238171, 23.077841, 496.1)}
+       'E': (109.268918, 23.012732, 650.0),
+       'N': (109.234314, 23.059248, 600.0)}
 AREA_POS = {}
 for s in ['S001', 'S002', 'S003', 'S005', 'S007', 'S008', 'S009', 'S011', 'S015']:
     AREA_POS[s] = 'W'

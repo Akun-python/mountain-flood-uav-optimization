@@ -1,0 +1,34 @@
+{
+ "baseline": {
+  "makespan": 6959.81,
+  "energy": 70.705,
+  "mpen": 0.0,
+  "hard_ok": true,
+  "tardy": 0.0,
+  "flights": 26
+ },
+ "v23offs": {
+  "makespan": 7143.72,
+  "energy": 70.632,
+  "mpen": 0.0,
+  "hard_ok": true,
+  "tardy": 0.0,
+  "flights": 26
+ },
+ "zero": {
+  "makespan": 6896.52,
+  "energy": 70.632,
+  "mpen": 2604.966573799753,
+  "hard_ok": true,
+  "tardy": 0.0,
+  "flights": 26
+ },
+ "sa": {
+  "makespan": 7443.68,
+  "energy": 70.632,
+  "mpen": 0.0,
+  "hard_ok": true,
+  "tardy": 0.0,
+  "flights": 26
+ }
+}

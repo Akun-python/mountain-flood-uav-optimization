@@ -1,0 +1,16 @@
+{
+ "plan": "D: S004-FOD f5->f20",
+ "P2": {
+  "makespan": 6896.5,
+  "energy": 70.861
+ },
+ "joint_v23offs": {
+  "makespan": 6896.5,
+  "energy": 70.861,
+  "mpen": 0.0
+ },
+ "baseline": {
+  "makespan": 6959.81,
+  "energy": 70.705
+ }
+}
