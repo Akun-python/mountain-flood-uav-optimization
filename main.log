@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  25 SEP 2026 01:55
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  25 SEP 2026 08:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1653,12 +1653,13 @@ File: figures/p3_gantt.png Graphic file (type bmp)
 File: figures/p1_sensitivity.png Graphic file (type bmp)
 <figures/p1_sensitivity.png>
 
-Overfull \hbox (12.23001pt too wide) in paragraph at lines 41--47
-\TU/SimSun(1)/m/n/12.045 次\TU/TimesNewRoman(0)/m/n/12.045 /6960s/70.71kWh\TU/Si
-mSun(1)/m/n/12.045 、|  节 能 均 衡 \TU/TimesNewRoman(0)/m/n/12.045 21 \TU/SimSun(1)
-/m/n/12.045 架 次\TU/TimesNewRoman(0)/m/n/12.045 /7837s/62.46kWh \TU/SimSun(1)/m/
-n/12.045 与 最 低 能 耗 \TU/TimesNewRoman(0)/m/n/12.045 19 \TU/SimSun(1)/m/n/12.045 
-架 次\TU/TimesNewRoman(0)/m/n/12.045 /7920s/60.40kWh\TU/SimSun(1)/m/n/12.045 ，|
+Overfull \hbox (35.86716pt too wide) in paragraph at lines 41--47
+\TU/SimSun(1)/m/n/12.045 次\TU/TimesNewRoman(0)/m/n/12.045 /116min/70.71kWh\TU/S
+imSun(1)/m/n/12.045 、|  节 能 均 衡 \TU/TimesNewRoman(0)/m/n/12.045 21 \TU/SimSun(1
+)/m/n/12.045 架 次\TU/TimesNewRoman(0)/m/n/12.045 /131min/62.46kWh \TU/SimSun(1)/
+m/n/12.045 与 最 低 能 耗 \TU/TimesNewRoman(0)/m/n/12.045 19 \TU/SimSun(1)/m/n/12.04
+5 架 次\TU/TimesNewRoman(0)/m/n/12.045 /132min/60.40kWh\TU/SimSun(1)/m/n/12.045 ，
+|
  []
 
 [22]
@@ -1726,10 +1727,6 @@ File: lstlang1.sty 2024/02/21 1.10 listings language file
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2022/08/05>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 87DE8F9252B5FA910DD45BC86162D921;7305.
  ) 
