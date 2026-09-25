@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  25 SEP 2026 13:05
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  25 SEP 2026 15:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1739,4 +1739,4 @@ Here is how much of TeX's memory you used:
  36 hyphenation exceptions out of 8191
  108i,11n,114p,476b,2127s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.xdv (31 pages, 484536 bytes).
+Output written on main.xdv (31 pages, 487172 bytes).
