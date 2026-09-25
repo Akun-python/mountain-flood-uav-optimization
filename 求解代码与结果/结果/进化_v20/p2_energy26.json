@@ -1,0 +1,81 @@
+{
+ "baseline": {
+  "hard_ok": true,
+  "tardy_w": 0.0,
+  "tardy_max": 0.0,
+  "makespan": 6959.808,
+  "energy": 70.705,
+  "flights": 26
+ },
+ "best": {
+  "hard_ok": true,
+  "tardy_w": 0.0,
+  "tardy_max": 0.0,
+  "makespan": 6927.144,
+  "energy": 70.088,
+  "flights": 26
+ },
+ "verdict": "IMPROVED",
+ "mk_cap": 6960.0,
+ "moves_log": [
+  {
+   "round": 1,
+   "op": "transfer",
+   "box": "S005-WAT-02",
+   "from": 23,
+   "to": 5,
+   "area": "S005",
+   "mk": 6959.81,
+   "en": 70.5259
+  },
+  {
+   "round": 1,
+   "op": "transfer",
+   "box": "S008-MED-01",
+   "from": 24,
+   "to": 6,
+   "area": "S006",
+   "mk": 6959.81,
+   "en": 70.4935
+  },
+  {
+   "round": 1,
+   "op": "transfer",
+   "box": "S001-WAT-02",
+   "from": 34,
+   "to": 17,
+   "area": "S001",
+   "mk": 6959.81,
+   "en": 70.3788
+  },
+  {
+   "round": 1,
+   "op": "model",
+   "from": 11,
+   "model": "A->B",
+   "mk": 6959.81,
+   "en": 70.1918
+  },
+  {
+   "round": 2,
+   "op": "transfer",
+   "box": "S011-FOD-01",
+   "from": 5,
+   "to": 11,
+   "area": "S011",
+   "mk": 6927.14,
+   "en": 70.1066
+  },
+  {
+   "round": 2,
+   "op": "transfer",
+   "box": "S005-HYG-01",
+   "from": 23,
+   "to": 5,
+   "area": "S005",
+   "mk": 6927.14,
+   "en": 70.0879
+  }
+ ],
+ "note": "26 架不变；接受=能耗下降 ∧ 完工≤6960 ∧ 零迟到；逐候选完整 dispatch 重排程"
+}
