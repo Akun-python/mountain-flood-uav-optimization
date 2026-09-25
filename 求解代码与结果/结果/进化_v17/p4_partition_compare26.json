@@ -1,0 +1,515 @@
+{
+ "inventory": {
+  "uav": {
+   "A": 4,
+   "B": 2,
+   "C": 2
+  },
+  "bat": {
+   "A": 6,
+   "B": 4,
+   "C": 4
+  },
+  "relay": 2,
+  "comp": 6
+ },
+ "multi_area_pairs": [
+  [
+   "S002",
+   "S009"
+  ],
+  [
+   "S005",
+   "S011"
+  ]
+ ],
+ "ranking": [
+  {
+   "name": "K2_base",
+   "valid": true,
+   "ok": true,
+   "within_inventory": false,
+   "max_makespan": 9257.5,
+   "total_uav": 16,
+   "uav_by": {
+    "A": 6,
+    "B": 5,
+    "C": 5
+   },
+   "total_bat": 22,
+   "bat_by": {
+    "A": 8,
+    "B": 7,
+    "C": 7
+   },
+   "relay_machines": 6,
+   "energy_components": 11,
+   "groups_detail": [
+    {
+     "name": "K2_base_g1",
+     "areas": [
+      "S001",
+      "S002",
+      "S003",
+      "S004",
+      "S005",
+      "S006",
+      "S007",
+      "S008",
+      "S009",
+      "S011",
+      "S015"
+     ],
+     "nbox": 68,
+     "makespan": 9257.5,
+     "energy": 62.68,
+     "flights": 23,
+     "uav": {
+      "A": 3,
+      "B": 3,
+      "C": 3
+     },
+     "bat": {
+      "A": 4,
+      "B": 4,
+      "C": 4
+     },
+     "relay": 3,
+     "comp": 6
+    },
+    {
+     "name": "K2_base_g2",
+     "areas": [
+      "S010",
+      "S012",
+      "S013",
+      "S014"
+     ],
+     "nbox": 12,
+     "makespan": 5182.5,
+     "energy": 23.84,
+     "flights": 9,
+     "uav": {
+      "A": 3,
+      "B": 2,
+      "C": 2
+     },
+     "bat": {
+      "A": 4,
+      "B": 3,
+      "C": 3
+     },
+     "relay": 3,
+     "comp": 5
+    }
+   ]
+  },
+  {
+   "name": "K2_split",
+   "valid": true,
+   "ok": true,
+   "within_inventory": false,
+   "max_makespan": 8148.6,
+   "total_uav": 16,
+   "uav_by": {
+    "A": 6,
+    "B": 5,
+    "C": 5
+   },
+   "total_bat": 22,
+   "bat_by": {
+    "A": 8,
+    "B": 7,
+    "C": 7
+   },
+   "relay_machines": 7,
+   "energy_components": 14,
+   "groups_detail": [
+    {
+     "name": "K2_split_g1",
+     "areas": [
+      "S001",
+      "S002",
+      "S003",
+      "S005",
+      "S006",
+      "S007",
+      "S008",
+      "S009",
+      "S011",
+      "S015"
+     ],
+     "nbox": 62,
+     "makespan": 8006.3,
+     "energy": 56.25,
+     "flights": 21,
+     "uav": {
+      "A": 3,
+      "B": 3,
+      "C": 3
+     },
+     "bat": {
+      "A": 4,
+      "B": 4,
+      "C": 4
+     },
+     "relay": 3,
+     "comp": 5
+    },
+    {
+     "name": "K2_split_g2",
+     "areas": [
+      "S004",
+      "S010",
+      "S012",
+      "S013",
+      "S014"
+     ],
+     "nbox": 18,
+     "makespan": 8148.6,
+     "energy": 36.43,
+     "flights": 13,
+     "uav": {
+      "A": 3,
+      "B": 2,
+      "C": 2
+     },
+     "bat": {
+      "A": 4,
+      "B": 3,
+      "C": 3
+     },
+     "relay": 4,
+     "comp": 9
+    }
+   ]
+  },
+  {
+   "name": "K3_comm",
+   "valid": true,
+   "ok": true,
+   "within_inventory": false,
+   "max_makespan": 10840.2,
+   "total_uav": 20,
+   "uav_by": {
+    "A": 7,
+    "B": 6,
+    "C": 7
+   },
+   "total_bat": 26,
+   "bat_by": {
+    "A": 9,
+    "B": 8,
+    "C": 9
+   },
+   "relay_machines": 8,
+   "energy_components": 22,
+   "groups_detail": [
+    {
+     "name": "K3_comm_g1",
+     "areas": [
+      "S001",
+      "S010",
+      "S012",
+      "S013",
+      "S014"
+     ],
+     "nbox": 27,
+     "makespan": 5783.5,
+     "energy": 30.49,
+     "flights": 12,
+     "uav": {
+      "A": 3,
+      "B": 2,
+      "C": 3
+     },
+     "bat": {
+      "A": 4,
+      "B": 3,
+      "C": 4
+     },
+     "relay": 3,
+     "comp": 8
+    },
+    {
+     "name": "K3_comm_g2",
+     "areas": [
+      "S002",
+      "S004",
+      "S008",
+      "S009"
+     ],
+     "nbox": 22,
+     "makespan": 9098.1,
+     "energy": 39.36,
+     "flights": 14,
+     "uav": {
+      "A": 2,
+      "B": 2,
+      "C": 2
+     },
+     "bat": {
+      "A": 3,
+      "B": 3,
+      "C": 3
+     },
+     "relay": 3,
+     "comp": 9
+    },
+    {
+     "name": "K3_comm_g3",
+     "areas": [
+      "S003",
+      "S005",
+      "S006",
+      "S007",
+      "S011",
+      "S015"
+     ],
+     "nbox": 31,
+     "makespan": 10840.2,
+     "energy": 29.31,
+     "flights": 11,
+     "uav": {
+      "A": 2,
+      "B": 2,
+      "C": 2
+     },
+     "bat": {
+      "A": 2,
+      "B": 2,
+      "C": 2
+     },
+     "relay": 2,
+     "comp": 5
+    }
+   ]
+  },
+  {
+   "name": "K3_base",
+   "valid": true,
+   "ok": true,
+   "within_inventory": false,
+   "max_makespan": 8006.3,
+   "total_uav": 22,
+   "uav_by": {
+    "A": 8,
+    "B": 7,
+    "C": 7
+   },
+   "total_bat": 28,
+   "bat_by": {
+    "A": 10,
+    "B": 9,
+    "C": 9
+   },
+   "relay_machines": 9,
+   "energy_components": 13,
+   "groups_detail": [
+    {
+     "name": "K3_base_g1",
+     "areas": [
+      "S001",
+      "S002",
+      "S003",
+      "S005",
+      "S006",
+      "S007",
+      "S008",
+      "S009",
+      "S011",
+      "S015"
+     ],
+     "nbox": 62,
+     "makespan": 8006.3,
+     "energy": 56.25,
+     "flights": 21,
+     "uav": {
+      "A": 3,
+      "B": 3,
+      "C": 3
+     },
+     "bat": {
+      "A": 4,
+      "B": 4,
+      "C": 4
+     },
+     "relay": 3,
+     "comp": 5
+    },
+    {
+     "name": "K3_base_g2",
+     "areas": [
+      "S010",
+      "S012",
+      "S013",
+      "S014"
+     ],
+     "nbox": 12,
+     "makespan": 5182.5,
+     "energy": 23.84,
+     "flights": 9,
+     "uav": {
+      "A": 3,
+      "B": 2,
+      "C": 2
+     },
+     "bat": {
+      "A": 4,
+      "B": 3,
+      "C": 3
+     },
+     "relay": 3,
+     "comp": 5
+    },
+    {
+     "name": "K3_base_g3",
+     "areas": [
+      "S004"
+     ],
+     "nbox": 6,
+     "makespan": 4006.6,
+     "energy": 12.59,
+     "flights": 4,
+     "uav": {
+      "A": 2,
+      "B": 2,
+      "C": 2
+     },
+     "bat": {
+      "A": 2,
+      "B": 2,
+      "C": 2
+     },
+     "relay": 3,
+     "comp": 3
+    }
+   ]
+  },
+  {
+   "name": "K3_work",
+   "valid": true,
+   "ok": true,
+   "within_inventory": false,
+   "max_makespan": 7705.4,
+   "total_uav": 23,
+   "uav_by": {
+    "A": 9,
+    "B": 6,
+    "C": 8
+   },
+   "total_bat": 29,
+   "bat_by": {
+    "A": 11,
+    "B": 8,
+    "C": 10
+   },
+   "relay_machines": 10,
+   "energy_components": 21,
+   "groups_detail": [
+    {
+     "name": "K3_work_g1",
+     "areas": [
+      "S001",
+      "S008",
+      "S014"
+     ],
+     "nbox": 23,
+     "makespan": 7443.5,
+     "energy": 20.17,
+     "flights": 9,
+     "uav": {
+      "A": 2,
+      "B": 2,
+      "C": 2
+     },
+     "bat": {
+      "A": 2,
+      "B": 2,
+      "C": 2
+     },
+     "relay": 2,
+     "comp": 5
+    },
+    {
+     "name": "K3_work_g2",
+     "areas": [
+      "S002",
+      "S006",
+      "S009",
+      "S010",
+      "S013"
+     ],
+     "nbox": 23,
+     "makespan": 5072.6,
+     "energy": 25.99,
+     "flights": 10,
+     "uav": {
+      "A": 3,
+      "B": 2,
+      "C": 2
+     },
+     "bat": {
+      "A": 4,
+      "B": 3,
+      "C": 3
+     },
+     "relay": 3,
+     "comp": 4
+    },
+    {
+     "name": "K3_work_g3",
+     "areas": [
+      "S004",
+      "S005",
+      "S007",
+      "S011",
+      "S012",
+      "S015"
+     ],
+     "nbox": 26,
+     "makespan": 7705.4,
+     "energy": 34.99,
+     "flights": 12,
+     "uav": {
+      "A": 2,
+      "B": 2,
+      "C": 2
+     },
+     "bat": {
+      "A": 3,
+      "B": 3,
+      "C": 3
+     },
+     "relay": 3,
+     "comp": 10
+    },
+    {
+     "name": "K3_work_g4",
+     "areas": [
+      "S003"
+     ],
+     "nbox": 8,
+     "makespan": 5288.9,
+     "energy": 11.33,
+     "flights": 3,
+     "uav": {
+      "A": 2,
+      "C": 2
+     },
+     "bat": {
+      "A": 2,
+      "C": 2
+     },
+     "relay": 2,
+     "comp": 2
+    }
+   ]
+  },
+  {
+   "name": "K3_km",
+   "valid": false,
+   "violation": "('S005', 'S011')"
+  }
+ ]
+}
