@@ -732,7 +732,7 @@
    "pos": "E",
    "t0": 1406,
    "t1": 4074,
-   "energy": 1.046,
+   "energy": 1.009,
    "missions": [
     "seg_E_0",
     "seg_E_1",
@@ -747,7 +747,7 @@
    "pos": "N",
    "t0": 5894,
    "t1": 6446,
-   "energy": 0.521,
+   "energy": 0.429,
    "missions": [
     "seg_N_0",
     "seg_N_1"
