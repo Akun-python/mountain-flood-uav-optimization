@@ -1,0 +1,42 @@
+{
+ "input": "p2v35_mk.json",
+ "base_flights": 28,
+ "results": [
+  {
+   "seed": 7,
+   "tag": "v35mk",
+   "joint": 7954.3,
+   "joint_min": 132.6,
+   "transport_mk": 7954.3,
+   "transport_min": 132.6,
+   "transport_energy": 74.45,
+   "flights": 28,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "relay_energy": 4.843,
+   "cover_bad": 0,
+   "overlap": 0.0,
+   "mpen": 3698.0,
+   "battery_violations": 0,
+   "relay_ret_max": 7894.0
+  },
+  {
+   "seed": 77,
+   "tag": "v35mk",
+   "joint": 9050.0,
+   "joint_min": 150.8,
+   "transport_mk": 9050.0,
+   "transport_min": 150.8,
+   "transport_energy": 74.45,
+   "flights": 28,
+   "tardy_w": 511.244,
+   "hard_ok": true,
+   "relay_energy": 4.299,
+   "cover_bad": 0,
+   "overlap": 0.0,
+   "mpen": 438.0,
+   "battery_violations": 0,
+   "relay_ret_max": 8962.0
+  }
+ ]
+}
