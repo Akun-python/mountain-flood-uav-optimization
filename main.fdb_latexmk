@@ -1,10 +1,10 @@
 # Fdb version 4
-["xdvipdfmx"] 1790320130.15875 "main.xdv" "main.pdf" "main" 1790320155.51285 0
-  "main.xdv" 1790320129 487172 505e02c769028dc6e5417e2086b63031 "xelatex"
+["xdvipdfmx"] 1790321471.24585 "main.xdv" "main.pdf" "main" 1790321488.94517 0
+  "main.xdv" 1790321470 488504 747213acf0cf98f36d60173b7e7fff4d "xelatex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["xelatex"] 1790320125.43121 "main.tex" "main.xdv" "main" 1790320155.44685 0
+["xelatex"] 1790321467.2127 "main.tex" "main.xdv" "main" 1790321488.91364 0
   "c:/Windows/Fonts/msyh.ttc" 1744369746 19704352 1e10e74402e59d54499af795caf0b135 ""
   "c:/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1736157014 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1736158798 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
@@ -261,19 +261,19 @@
   "figures/p4_partition.png" 1790252863 138852 f2e3ec83f7998b12a47f98859b36f411 ""
   "gmcmthesis.cls" 1790062496 17817 566b7cd2cbb112e7793fafe5ba30da1d ""
   "logo.pdf" 1790062496 112746 c9b882a3c9346bcf37b62b82e519a0e4 ""
-  "main.aux" 1790320129 19660 da22725b6bbc64f6b1ad862076615de1 "xelatex"
-  "main.out" 1790320129 7305 87de8f9252b5fa910dd45bc86162d921 "xelatex"
-  "main.tex" 1790319474 7982 8302f329d92f12b77b3c23d97e109a23 ""
+  "main.aux" 1790321470 19660 892b392f40eb016d3aeed70b3faf51a1 "xelatex"
+  "main.out" 1790321470 7305 87de8f9252b5fa910dd45bc86162d921 "xelatex"
+  "main.tex" 1790321208 7982 c165f970a4563d5ae192febfae23d0cb ""
   "sections/10_problem4.tex" 1790296283 5418 00a1e27f26273dd66b8bb5ab02d6da6e ""
   "sections/1_restatement.tex" 1790253826 2941 29a28d762939e81feead874aad97335b ""
   "sections/3_assumptions.tex" 1790311702 3283 b721dfebb5edbbbe9e305a57e88c4ca4 ""
   "sections/4_symbols.tex" 1790173414 1418 0e3a7cb4003068c3d41651bc2b2d072a ""
   "sections/5_problem1.tex" 1790296283 8735 c5ad83d69c1e35d8ffbdba855b6c8922 ""
   "sections/6_problem2.tex" 1790296331 12407 632faa35491833d9dddddfa9a549c8f8 ""
-  "sections/7_problem3.tex" 1790319404 12096 e307ab5374f07ecddc0d6ef050ef10d2 ""
-  "sections/8_sensitivity.tex" 1790302111 4547 5f36da7e9f234cf7aec74e726055bdf3 ""
-  "sections/9_evaluation.tex" 1790296331 2667 15eb183f37eed9558d51e0e79916c764 ""
-  "sections/A_code.tex" 1790174266 4954 9e47afb02deed8a67ee51b6f93157ebe ""
+  "sections/7_problem3.tex" 1790321129 12162 62bea31a740187fdd63456b17288ce7a ""
+  "sections/8_sensitivity.tex" 1790321228 4545 c31f991a68b38a9593e77efa980d36f7 ""
+  "sections/9_evaluation.tex" 1790320761 2777 e185ce94397124532b8dc6be8789beb4 ""
+  "sections/A_code.tex" 1790321145 4969 ef0642015c73819f49d11485c72c9120 ""
   "title.pdf" 1790062496 123745 4e419cd42d35fb8ed6a3b4c1ca0627af ""
   (generated)
   "main.aux"
