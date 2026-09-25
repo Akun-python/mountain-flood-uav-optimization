@@ -1,0 +1,688 @@
+{
+ "rows": [
+  {
+   "config": "baseline",
+   "seed": 7,
+   "restart": 0,
+   "flights": 21,
+   "makespan": 8337.0,
+   "energy": 68.06,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 8337.0,
+    "energy": 68.06,
+    "flights": 21
+   }
+  },
+  {
+   "config": "baseline",
+   "seed": 11,
+   "restart": 1,
+   "flights": 22,
+   "makespan": 9435.02,
+   "energy": 69.91,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 9435.02,
+    "energy": 69.91,
+    "flights": 22
+   }
+  },
+  {
+   "config": "baseline",
+   "seed": 13,
+   "restart": 1,
+   "flights": 21,
+   "makespan": 7836.99,
+   "energy": 62.46,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7836.99,
+    "energy": 62.46,
+    "flights": 21
+   }
+  },
+  {
+   "config": "balanced",
+   "seed": 7,
+   "restart": 0,
+   "flights": 25,
+   "makespan": 7661.54,
+   "energy": 73.73,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7661.54,
+    "energy": 73.73,
+    "flights": 25
+   }
+  },
+  {
+   "config": "balanced",
+   "seed": 7,
+   "restart": 1,
+   "flights": 27,
+   "makespan": 7901.3,
+   "energy": 75.82,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7901.3,
+    "energy": 75.82,
+    "flights": 27
+   }
+  },
+  {
+   "config": "balanced",
+   "seed": 11,
+   "restart": 1,
+   "flights": 26,
+   "makespan": 6959.81,
+   "energy": 70.71,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 6959.81,
+    "energy": 70.71,
+    "flights": 26
+   }
+  },
+  {
+   "config": "balanced",
+   "seed": 13,
+   "restart": 0,
+   "flights": 25,
+   "makespan": 7638.99,
+   "energy": 72.7,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7638.99,
+    "energy": 72.7,
+    "flights": 25
+   }
+  },
+  {
+   "config": "balanced",
+   "seed": 13,
+   "restart": 1,
+   "flights": 26,
+   "makespan": 7592.88,
+   "energy": 71.66,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7592.88,
+    "energy": 71.66,
+    "flights": 26
+   }
+  },
+  {
+   "config": "energy_strong",
+   "seed": 7,
+   "restart": 0,
+   "flights": 24,
+   "makespan": 7983.2,
+   "energy": 72.98,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7983.2,
+    "energy": 72.98,
+    "flights": 24
+   }
+  },
+  {
+   "config": "energy_strong",
+   "seed": 7,
+   "restart": 1,
+   "flights": 24,
+   "makespan": 9731.52,
+   "energy": 75.89,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 9731.52,
+    "energy": 75.89,
+    "flights": 24
+   }
+  },
+  {
+   "config": "energy_strong",
+   "seed": 11,
+   "restart": 0,
+   "flights": 22,
+   "makespan": 8624.3,
+   "energy": 71.08,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 8624.3,
+    "energy": 71.08,
+    "flights": 22
+   }
+  },
+  {
+   "config": "energy_strong",
+   "seed": 11,
+   "restart": 1,
+   "flights": 21,
+   "makespan": 10459.92,
+   "energy": 69.69,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 10459.92,
+    "energy": 69.69,
+    "flights": 21
+   }
+  },
+  {
+   "config": "energy_strong",
+   "seed": 13,
+   "restart": 0,
+   "flights": 23,
+   "makespan": 9782.82,
+   "energy": 72.27,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 9782.82,
+    "energy": 72.27,
+    "flights": 23
+   }
+  },
+  {
+   "config": "energy_strong",
+   "seed": 13,
+   "restart": 1,
+   "flights": 19,
+   "makespan": 7920.08,
+   "energy": 60.4,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7920.08,
+    "energy": 60.4,
+    "flights": 19
+   }
+  },
+  {
+   "config": "makespan_strong",
+   "seed": 7,
+   "restart": 1,
+   "flights": 30,
+   "makespan": 7397.83,
+   "energy": 80.71,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7397.83,
+    "energy": 80.71,
+    "flights": 30
+   }
+  },
+  {
+   "config": "makespan_strong",
+   "seed": 11,
+   "restart": 1,
+   "flights": 29,
+   "makespan": 7394.88,
+   "energy": 78.33,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7394.88,
+    "energy": 78.33,
+    "flights": 29
+   }
+  },
+  {
+   "config": "makespan_strong",
+   "seed": 13,
+   "restart": 0,
+   "flights": 30,
+   "makespan": 7439.3,
+   "energy": 82.33,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7439.3,
+    "energy": 82.33,
+    "flights": 30
+   }
+  },
+  {
+   "config": "makespan_strong",
+   "seed": 13,
+   "restart": 1,
+   "flights": 29,
+   "makespan": 7394.88,
+   "energy": 77.64,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7394.88,
+    "energy": 77.64,
+    "flights": 29
+   }
+  },
+  {
+   "config": "mk_ultra",
+   "seed": 7,
+   "restart": 0,
+   "flights": 26,
+   "makespan": 7626.31,
+   "energy": 76.01,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7626.31,
+    "energy": 76.01,
+    "flights": 26
+   }
+  },
+  {
+   "config": "mk_ultra",
+   "seed": 7,
+   "restart": 1,
+   "flights": 29,
+   "makespan": 7907.49,
+   "energy": 79.72,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7907.49,
+    "energy": 79.72,
+    "flights": 29
+   }
+  },
+  {
+   "config": "mk_ultra",
+   "seed": 11,
+   "restart": 1,
+   "flights": 27,
+   "makespan": 7439.3,
+   "energy": 73.95,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7439.3,
+    "energy": 73.95,
+    "flights": 27
+   }
+  },
+  {
+   "config": "mk_ultra",
+   "seed": 13,
+   "restart": 0,
+   "flights": 28,
+   "makespan": 7504.19,
+   "energy": 76.74,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7504.19,
+    "energy": 76.74,
+    "flights": 28
+   }
+  },
+  {
+   "config": "mk_ultra",
+   "seed": 13,
+   "restart": 1,
+   "flights": 27,
+   "makespan": 7892.28,
+   "energy": 80.85,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7892.28,
+    "energy": 80.85,
+    "flights": 27
+   }
+  },
+  {
+   "config": "mk_hyper",
+   "seed": 7,
+   "restart": 0,
+   "flights": 23,
+   "makespan": 7724.88,
+   "energy": 68.19,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7724.88,
+    "energy": 68.19,
+    "flights": 23
+   }
+  },
+  {
+   "config": "mk_hyper",
+   "seed": 7,
+   "restart": 1,
+   "flights": 29,
+   "makespan": 7907.49,
+   "energy": 79.72,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7907.49,
+    "energy": 79.72,
+    "flights": 29
+   }
+  },
+  {
+   "config": "mk_hyper",
+   "seed": 11,
+   "restart": 1,
+   "flights": 27,
+   "makespan": 7439.3,
+   "energy": 73.95,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7439.3,
+    "energy": 73.95,
+    "flights": 27
+   }
+  },
+  {
+   "config": "mk_hyper",
+   "seed": 13,
+   "restart": 0,
+   "flights": 23,
+   "makespan": 7722.08,
+   "energy": 67.48,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7722.08,
+    "energy": 67.48,
+    "flights": 23
+   }
+  },
+  {
+   "config": "mk_hyper",
+   "seed": 13,
+   "restart": 1,
+   "flights": 29,
+   "makespan": 7884.83,
+   "energy": 84.09,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 0.0,
+    "tardy_max": 0.0,
+    "makespan": 7884.83,
+    "energy": 84.09,
+    "flights": 29
+   }
+  },
+  {
+   "config": "baseline",
+   "seed": 13,
+   "restart": 0,
+   "flights": 21,
+   "makespan": 9265.95,
+   "energy": 69.49,
+   "tardy_w": 8.22,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 8.22,
+    "tardy_max": 19.72,
+    "makespan": 9265.95,
+    "energy": 69.49,
+    "flights": 21
+   }
+  },
+  {
+   "config": "baseline",
+   "seed": 7,
+   "restart": 1,
+   "flights": 27,
+   "makespan": 7722.08,
+   "energy": 75.51,
+   "tardy_w": 131.15,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 131.15,
+    "tardy_max": 262.3,
+    "makespan": 7722.08,
+    "energy": 75.51,
+    "flights": 27
+   }
+  },
+  {
+   "config": "mk_ultra",
+   "seed": 11,
+   "restart": 0,
+   "flights": 30,
+   "makespan": 8869.14,
+   "energy": 85.24,
+   "tardy_w": 149.37,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 149.37,
+    "tardy_max": 262.3,
+    "makespan": 8869.14,
+    "energy": 85.24,
+    "flights": 30
+   }
+  },
+  {
+   "config": "mk_hyper",
+   "seed": 11,
+   "restart": 0,
+   "flights": 30,
+   "makespan": 8869.14,
+   "energy": 85.24,
+   "tardy_w": 149.37,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 149.37,
+    "tardy_max": 262.3,
+    "makespan": 8869.14,
+    "energy": 85.24,
+    "flights": 30
+   }
+  },
+  {
+   "config": "makespan_strong",
+   "seed": 11,
+   "restart": 0,
+   "flights": 31,
+   "makespan": 8376.39,
+   "energy": 83.22,
+   "tardy_w": 163.59,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 163.59,
+    "tardy_max": 327.19,
+    "makespan": 8376.39,
+    "energy": 83.22,
+    "flights": 31
+   }
+  },
+  {
+   "config": "balanced",
+   "seed": 11,
+   "restart": 0,
+   "flights": 29,
+   "makespan": 7892.53,
+   "energy": 75.92,
+   "tardy_w": 262.59,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 262.59,
+    "tardy_max": 525.19,
+    "makespan": 7892.53,
+    "energy": 75.92,
+    "flights": 29
+   }
+  },
+  {
+   "config": "baseline",
+   "seed": 11,
+   "restart": 0,
+   "flights": 25,
+   "makespan": 8192.15,
+   "energy": 71.36,
+   "tardy_w": 263.15,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 263.15,
+    "tardy_max": 526.3,
+    "makespan": 8192.15,
+    "energy": 71.36,
+    "flights": 25
+   }
+  },
+  {
+   "config": "makespan_strong",
+   "seed": 7,
+   "restart": 0,
+   "flights": 29,
+   "makespan": 8651.38,
+   "energy": 79.35,
+   "tardy_w": 295.59,
+   "hard_ok": true,
+   "time_s": 25.0,
+   "met": {
+    "hard_ok": true,
+    "tardy_w": 295.59,
+    "tardy_max": 591.19,
+    "makespan": 8651.38,
+    "energy": 79.35,
+    "flights": 29
+   }
+  }
+ ]
+}

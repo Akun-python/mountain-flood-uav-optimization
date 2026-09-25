@@ -166,9 +166,9 @@ def fig_partition():
         ax.scatter([x], [y], marker='^', s=150, c=ps.AREA_COLORS[g],
                    edgecolor=ps.C_BLACK, linewidth=0.8, zorder=6)
     # 分组标注（axes 坐标，避免与数据冲突）
-    ax.annotate('G1 西/北8区+东集团（11 区）', xy=(0.02, 0.04), xycoords='axes fraction',
+    ax.annotate('G1 西/北 10 区', xy=(0.02, 0.04), xycoords='axes fraction',
                 fontsize=10, color='black', fontweight='bold')
-    ax.annotate('G2 S011/S012/S013（3 区）', xy=(0.72, 0.30), xycoords='axes fraction',
+    ax.annotate('G2 东 4 区', xy=(0.72, 0.30), xycoords='axes fraction',
                 fontsize=10, color='black', fontweight='bold')
     ax.annotate('G3 S004（独立组）', xy=(0.60, 0.68), xycoords='axes fraction',
                 fontsize=10, color='black', fontweight='bold')

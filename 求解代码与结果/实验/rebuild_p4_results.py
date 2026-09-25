@@ -12,8 +12,8 @@ EVO17 = os.path.join(HERE, '..', '结果', '进化_v17')
 data = Data()
 
 com = json.load(open(os.path.join(EVO17, 'p4_partition_compare26.json'), encoding='utf-8'))
-K2 = next(r for r in com['ranking'] if r['name'] == 'K2_v25')
-K3 = next(r for r in com['ranking'] if r['name'] == 'K3_v25')
+K2 = next(r for r in com['ranking'] if r['name'] == 'K2_base')
+K3 = next(r for r in com['ranking'] if r['name'] == 'K3_base')
 
 def to_groups(kr):
     out = []
@@ -35,7 +35,7 @@ for K, kr in (('2', K2), ('3', K3)):
                               if bx['area'] in gd['areas']), 1)
 json.dump(out, open(os.path.join(RES, 'p4_results.json'), 'w', encoding='utf-8'),
           ensure_ascii=False, indent=1)
-print('p4_results.json rebuilt (v25):')
+print('p4_results.json rebuilt (v42):')
 for K in ('2', '3'):
     for g in out[K]['groups']:
         print('  K=%s %s nbox=%d mass=%.1f uav=%s relay=%d comp=%d mk=%d'
