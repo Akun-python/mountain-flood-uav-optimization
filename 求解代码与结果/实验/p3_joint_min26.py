@@ -19,7 +19,8 @@ import core
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RES = os.path.join(HERE, '..', 'results')
-OUTD = os.path.join(HERE, '..', '结果', '进化_v19')
+OUTD = os.path.join(HERE, '..', '结果', '进化_v20')
+TMP = os.path.join(HERE, '_jointmin_tmp')
 
 
 def data_of(sv):
@@ -54,8 +55,14 @@ def joint_of(sv, offsets):
     return obj, info
 
 
-def main(iters=4000, seed=7):
-    p3_co2.OUT = RES
+def main(iters=4000, seed=7, cand_path=None):
+    if cand_path:
+        import shutil
+        os.makedirs(TMP, exist_ok=True)
+        shutil.copy(cand_path, os.path.join(TMP, 'p2_results.json'))
+        p3_co2.OUT = TMP
+    else:
+        p3_co2.OUT = RES
     sv = Solver()
     rng = random.Random(seed)
     cur = {k: 0.0 for k in sv.base}
@@ -111,4 +118,5 @@ def main(iters=4000, seed=7):
 
 
 if __name__ == '__main__':
-    main()
+    main(iters=int(sys.argv[1]) if len(sys.argv) > 1 else 4000,
+         cand_path=sys.argv[2] if len(sys.argv) > 2 else None)

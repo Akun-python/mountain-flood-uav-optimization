@@ -17,7 +17,7 @@ from p3_co2 import Solver, P_W, P_E, P_N, POS_OF
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RES = os.path.join(HERE, '..', 'results')
-OUTD = os.path.join(HERE, '..', '结果', '进化_v19')
+OUTD = os.path.join(HERE, '..', '结果', '进化_v20')
 TMP = os.path.join(HERE, '_p2v19_tmp')
 
 champ = json.load(open(os.path.join(RES, 'p2_results.json'), encoding='utf-8'))
@@ -77,12 +77,12 @@ def pack(sv, res, name):
             'seg': {g: [(round(a), round(b)) for a, b in seg[g]] for g in seg}}
 
 r0 = pack(sv0, res0, 'official26')
-r1 = pack(sv1, res1, 'candidate27')
+r1 = pack(sv1, res1, 'candidate')
 print('\n== 官方 26 ==', flush=True)
 print(json.dumps(r0, ensure_ascii=False, indent=1), flush=True)
 print('\n== 候选 27 ==', flush=True)
 print(json.dumps(r1, ensure_ascii=False, indent=1), flush=True)
 os.makedirs(OUTD, exist_ok=True)
 with open(os.path.join(OUTD, 'p2v19_p3_e2e.json'), 'w', encoding='utf-8') as fh:
-    json.dump({'official26': r0, 'candidate27': r1}, fh, ensure_ascii=False, indent=1)
+    json.dump({'official26': r0, 'candidate': r1}, fh, ensure_ascii=False, indent=1)
 print('\nsaved p2v19_p3_e2e.json', flush=True)
