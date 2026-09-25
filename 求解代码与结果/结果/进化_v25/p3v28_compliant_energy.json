@@ -1,0 +1,42 @@
+{
+ "input": "p2v28d_compliant_energy.json",
+ "base_flights": 25,
+ "results": [
+  {
+   "seed": 7,
+   "tag": "energy",
+   "joint": 8090.5,
+   "joint_min": 134.8,
+   "transport_mk": 8090.5,
+   "transport_min": 134.8,
+   "transport_energy": 78.88,
+   "flights": 25,
+   "tardy_w": 144.744,
+   "hard_ok": true,
+   "relay_energy": 4.38,
+   "cover_bad": 0,
+   "overlap": 0.0,
+   "mpen": 0.0,
+   "battery_violations": 0,
+   "relay_ret_max": 7986.0
+  },
+  {
+   "seed": 77,
+   "tag": "energy",
+   "joint": 8090.5,
+   "joint_min": 134.8,
+   "transport_mk": 8090.5,
+   "transport_min": 134.8,
+   "transport_energy": 78.88,
+   "flights": 25,
+   "tardy_w": 660.292,
+   "hard_ok": true,
+   "relay_energy": 4.38,
+   "cover_bad": 0,
+   "overlap": 0.0,
+   "mpen": 0.0,
+   "battery_violations": 0,
+   "relay_ret_max": 7986.0
+  }
+ ]
+}
