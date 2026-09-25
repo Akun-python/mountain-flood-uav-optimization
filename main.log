@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  25 SEP 2026 15:31
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  25 SEP 2026 16:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1654,7 +1654,7 @@ File: figures/p1_sensitivity.png Graphic file (type bmp)
 <figures/p1_sensitivity.png>
 
 Overfull \hbox (35.86716pt too wide) in paragraph at lines 41--47
-\TU/SimSun(1)/m/n/12.045 次\TU/TimesNewRoman(0)/m/n/12.045 /116min/70.71kWh\TU/S
+\TU/SimSun(1)/m/n/12.045 次\TU/TimesNewRoman(0)/m/n/12.045 /115min/70.86kWh\TU/S
 imSun(1)/m/n/12.045 、|  节 能 均 衡 \TU/TimesNewRoman(0)/m/n/12.045 21 \TU/SimSun(1
 )/m/n/12.045 架 次\TU/TimesNewRoman(0)/m/n/12.045 /131min/62.46kWh \TU/SimSun(1)/
 m/n/12.045 与 最 低 能 耗 \TU/TimesNewRoman(0)/m/n/12.045 19 \TU/SimSun(1)/m/n/12.04
@@ -1675,20 +1675,20 @@ File: figures/p4_gap.png Graphic file (type bmp)
 <figures/p4_gap.png>
 ) (./sections/9_evaluation.tex
 [26])
-Underfull \hbox (badness 7203) in paragraph at lines 107--108
+Underfull \hbox (badness 7203) in paragraph at lines 109--110
 []\TU/SimSun(1)/m/n/12.045 新 华 社\TU/TimesNewRoman(0)/m/n/12.045 . \TU/SimSun(1)
 /m/n/12.045 记 者 手 记：|  抵 近 广 西 横 州 镇 龙 乡 \TU/TimesNewRoman(0)/m/n/12.045 [EB/OL
 ]. 2026-07-09[2026-08-07].
  []
 
 
-Overfull \hbox (3.42021pt too wide) in paragraph at lines 107--108
+Overfull \hbox (3.42021pt too wide) in paragraph at lines 109--110
 \TU/TimesNewRoman(0)/m/n/12.045 https://www.xinhuanet.com/politics/20260709/acf
 8e4b353304bb78007d8224f1cd2ef/c.html. 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 108--109
+Underfull \hbox (badness 10000) in paragraph at lines 110--111
 []\TU/SimSun(1)/m/n/12.045 新 华 每 日 电 讯\TU/TimesNewRoman(0)/m/n/12.045 . \TU/Sim
 Sun(1)/m/n/12.045 三 进 \TU/TimesNewRoman(0)/m/n/12.045 “\TU/SimSun(1)/m/n/12.045
  孤 岛 乡\TU/TimesNewRoman(0)/m/n/12.045 ”[EB/OL]. 2026-07-12[2026-08-07].
@@ -1733,10 +1733,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Here is how much of TeX's memory you used:
  35896 strings out of 476720
  761010 string characters out of 5801445
- 2409842 words of memory out of 5000000
+ 2444842 words of memory out of 5000000
  57155 multiletter control sequences out of 15000+600000
  573910 words of font info for 179 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  108i,11n,114p,476b,2127s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.xdv (31 pages, 488504 bytes).
+Output written on main.xdv (31 pages, 492524 bytes).
