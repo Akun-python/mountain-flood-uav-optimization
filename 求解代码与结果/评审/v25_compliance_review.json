@@ -1,0 +1,105 @@
+{
+ "verdicts": [
+  {
+   "item": "数据装载（15区/80箱/8机/14电池/2中继/6组件）",
+   "ok": true,
+   "detail": "{'areas': 15, 'boxes': 80, 'uavs': 8, 'batteries': {'A': 6, 'B': 4, 'C': 4}, 'relays': 2, 'relay_energy_n': 6}"
+  },
+  {
+   "item": "等效航程 L_g(q) 公式",
+   "ok": true,
+   "detail": "A型 q=10: L=23735.1 m (L0=25000 LF=20000 Q=25.0)"
+  },
+  {
+   "item": "航段时间三阶段公式",
+   "ok": true,
+   "detail": "O->S001 d=3049m 巡航=272.7m t=337.9s"
+  },
+  {
+   "item": "巡航海拔 = 沿线DEM最高+50",
+   "ok": true,
+   "detail": "cruise=272.7"
+  },
+  {
+   "item": "充电两阶段公式 s<0.9",
+   "ok": true,
+   "detail": "s=0.5 -> 1150 s"
+  },
+  {
+   "item": "充电两阶段公式 s>=0.9",
+   "ok": true,
+   "detail": "s=0.95 -> 315 s"
+  },
+  {
+   "item": "直连门限 Lmax 双向取min",
+   "ok": true,
+   "detail": "Lmax_uav2gw=122.00 dB"
+  },
+  {
+   "item": "FSPL 公式",
+   "ok": true,
+   "detail": "2400MHz/5km -> 114.03 dB"
+  },
+  {
+   "item": "架次数（28）",
+   "ok": true,
+   "detail": "28"
+  },
+  {
+   "item": "每架质量/体积/返航能量可行",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "返航安全余量 E <= (1-rho)E_use",
+   "ok": true,
+   "detail": "最小余量=0.197 kWh"
+  },
+  {
+   "item": "80箱唯一无缺",
+   "ok": true,
+   "detail": "80"
+  },
+  {
+   "item": "投递位置=箱属区（零跨区）",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "首飞批/医疗时限硬约束",
+   "ok": true,
+   "detail": "tardy_w=0.0"
+  },
+  {
+   "item": "电池组无时间重叠",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "中继能源预算定义 (1-rho)E_use",
+   "ok": true,
+   "detail": "2.560 kWh"
+  },
+  {
+   "item": "三布设点回程链路可行",
+   "ok": true,
+   "detail": "{'W': True, 'E': True, 'N': True}"
+  },
+  {
+   "item": "悬停离地高度 <= h_max(300 m)",
+   "ok": true,
+   "detail": "{'W': {'agl': np.float64(300.0), 'h_max': 300.0}, 'E': {'agl': np.float64(293.7), 'h_max': 300.0}, 'N': {'agl': np.float64(281.3), 'h_max': 300.0}}"
+  },
+  {
+   "item": "三班中继能耗 <= E_BUDGET",
+   "ok": true,
+   "detail": "{'W': np.float64(2.529), 'E': np.float64(1.549), 'N': np.float64(0.488)} 预算=2.560"
+  },
+  {
+   "item": "初始布设全覆盖 cover_bad=0",
+   "ok": true,
+   "detail": "cov_bad=0"
+  }
+ ],
+ "checks": {}
+}

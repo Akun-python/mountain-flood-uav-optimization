@@ -325,7 +325,7 @@ def fig3_relay_tl():
     ax.set_yticks([len(rows) - 1 - i for i in range(len(rows))])
     ax.set_yticklabels([rid for rid, _, _ in rows], fontsize=9)
     ax.set_xlabel('时间（s）')
-    ax.set_xlim(0, 9200)
+    ax.set_xlim(0, 9800)
     from matplotlib.patches import Patch
     ax.legend(handles=[Patch(color=ps.AREA_COLORS['W'], label='西点服务'),
                        Patch(color=ps.AREA_COLORS['E'], label='东点服务'),

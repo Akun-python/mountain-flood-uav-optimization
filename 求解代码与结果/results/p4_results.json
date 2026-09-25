@@ -9,6 +9,65 @@
   "relay": 2,
   "comp": 6
  },
+ "2": {
+  "groups": [
+   {
+    "name": "G1",
+    "areas": [
+     "S001",
+     "S002",
+     "S003",
+     "S005",
+     "S006",
+     "S007",
+     "S008",
+     "S009",
+     "S010",
+     "S011",
+     "S013",
+     "S014",
+     "S015"
+    ],
+    "nbox": 71,
+    "mass": 674.0,
+    "alloc_uav": {
+     "A": 4,
+     "B": 3,
+     "C": 3
+    },
+    "alloc_bat": {
+     "A": 6,
+     "B": 5,
+     "C": 5
+    },
+    "alloc_relay": 3,
+    "alloc_comp": 9,
+    "makespan": 8395
+   },
+   {
+    "name": "G2",
+    "areas": [
+     "S004",
+     "S012"
+    ],
+    "nbox": 9,
+    "mass": 84.0,
+    "alloc_uav": {
+     "A": 2,
+     "B": 2,
+     "C": 2
+    },
+    "alloc_bat": {
+     "A": 2,
+     "B": 2,
+     "C": 2
+    },
+    "alloc_relay": 4,
+    "alloc_comp": 3,
+    "makespan": 2177
+   }
+  ]
+ },
  "3": {
   "groups": [
    {
@@ -22,48 +81,48 @@
      "S007",
      "S008",
      "S009",
-     "S011",
+     "S010",
+     "S014",
      "S015"
     ],
-    "nbox": 62,
-    "mass": 599.0,
+    "nbox": 65,
+    "mass": 624.0,
     "alloc_uav": {
-     "A": 3,
+     "A": 4,
      "B": 3,
      "C": 3
     },
     "alloc_bat": {
-     "A": 4,
-     "B": 4,
-     "C": 4
+     "A": 6,
+     "B": 5,
+     "C": 5
     },
     "alloc_relay": 3,
-    "alloc_comp": 5,
-    "makespan": 8006
+    "alloc_comp": 10,
+    "makespan": 7640
    },
    {
     "name": "G2",
     "areas": [
-     "S010",
+     "S011",
      "S012",
-     "S013",
-     "S014"
+     "S013"
     ],
-    "nbox": 12,
-    "mass": 100.0,
+    "nbox": 9,
+    "mass": 75.0,
     "alloc_uav": {
-     "A": 3,
+     "A": 2,
      "B": 2,
-     "C": 2
+     "C": 0
     },
     "alloc_bat": {
-     "A": 4,
-     "B": 3,
-     "C": 3
+     "A": 2,
+     "B": 2,
+     "C": 0
     },
-    "alloc_relay": 3,
-    "alloc_comp": 5,
-    "makespan": 5182
+    "alloc_relay": 2,
+    "alloc_comp": 2,
+    "makespan": 7768
    },
    {
     "name": "G3",
@@ -74,76 +133,17 @@
     "mass": 59.0,
     "alloc_uav": {
      "A": 2,
-     "B": 2,
+     "B": 0,
      "C": 2
     },
     "alloc_bat": {
      "A": 2,
-     "B": 2,
+     "B": 0,
      "C": 2
     },
     "alloc_relay": 3,
-    "alloc_comp": 3,
-    "makespan": 4007
-   }
-  ]
- },
- "2": {
-  "groups": [
-   {
-    "name": "G1",
-    "areas": [
-     "S001",
-     "S002",
-     "S003",
-     "S004",
-     "S005",
-     "S006",
-     "S007",
-     "S008",
-     "S009",
-     "S011",
-     "S015"
-    ],
-    "nbox": 68,
-    "mass": 658.0,
-    "alloc_uav": {
-     "A": 3,
-     "B": 3,
-     "C": 3
-    },
-    "alloc_bat": {
-     "A": 4,
-     "B": 4,
-     "C": 4
-    },
-    "alloc_relay": 3,
-    "alloc_comp": 6,
-    "makespan": 9258
-   },
-   {
-    "name": "G2",
-    "areas": [
-     "S010",
-     "S012",
-     "S013",
-     "S014"
-    ],
-    "nbox": 12,
-    "mass": 100.0,
-    "alloc_uav": {
-     "A": 3,
-     "B": 2,
-     "C": 2
-    },
-    "alloc_bat": {
-     "A": 4,
-     "B": 3,
-     "C": 3
-    },
-    "alloc_relay": 3,
-    "alloc_comp": 5,
-    "makespan": 5182
+    "alloc_comp": 2,
+    "makespan": 2177
    }
   ]
  }
