@@ -1,0 +1,42 @@
+{
+ "input": "p2v28_compliant_makespan.json",
+ "base_flights": 28,
+ "results": [
+  {
+   "seed": 7,
+   "tag": "makespan",
+   "joint": 9999.0,
+   "joint_min": 166.7,
+   "transport_mk": 9981.8,
+   "transport_min": 166.4,
+   "transport_energy": 83.12,
+   "flights": 28,
+   "tardy_w": 4118.445,
+   "hard_ok": true,
+   "relay_energy": 4.87,
+   "cover_bad": 0,
+   "overlap": 0.0,
+   "mpen": 0.0,
+   "battery_violations": 0,
+   "relay_ret_max": 9999.0
+  },
+  {
+   "seed": 77,
+   "tag": "makespan",
+   "joint": 9369.0,
+   "joint_min": 156.2,
+   "transport_mk": 9351.4,
+   "transport_min": 155.9,
+   "transport_energy": 83.12,
+   "flights": 28,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "relay_energy": 4.585,
+   "cover_bad": 0,
+   "overlap": 0.0,
+   "mpen": 171.0,
+   "battery_violations": 0,
+   "relay_ret_max": 9369.0
+  }
+ ]
+}
