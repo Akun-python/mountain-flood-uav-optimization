@@ -1,8 +1,58 @@
-# D题：山区洪涝灾害下无人机运输与通信协同优化
+# 🚁 山区洪涝灾害下无人机运输与通信协同优化
 
-> 第二十三届中国研究生数学建模竞赛（华为杯）D题
+> **第二十三届中国研究生数学建模竞赛（华为杯）D 题 · 完整可复现解决方案**
 >
-> 本 README 面向论文阅读、代码复现和方案理解，系统整理本题的**问题背景、问题分析、建模假设、求解思路、计算过程与最终结论**。论文正文见 [`论文-山区洪涝无人机D题.pdf`](论文-山区洪涝无人机D题.pdf)，原始题目见 [`山区洪涝灾害下无人机运输与通信协同优化.docx`](山区洪涝灾害下无人机运输与通信协同优化.docx)。
+> 以 30 m DEM 地形数据与官方装备/货箱数据为输入，融合山区飞行能耗模型、异构机队调度、
+> 通信中继布设与资源配置，实现 80 箱应急物资的**零迟到投送与全程通信零盲区**。
+
+<p align="center">
+  <img src="https://img.shields.io/badge/2026_Huawei_Cup-Problem_D-orange" alt="competition"/>
+  <img src="https://img.shields.io/badge/license-MIT-blue" alt="license"/>
+  <img src="https://img.shields.io/badge/Python-3.11%2B-blue" alt="python"/>
+  <img src="https://img.shields.io/badge/LaTeX-XeLaTeX-green" alt="latex"/>
+  <img src="https://img.shields.io/badge/Paper-PDF-red" alt="paper"/>
+  <img src="https://img.shields.io/badge/status-complete-brightgreen" alt="status"/>
+</p>
+
+<p align="center">
+  📦 <b>80 货箱</b> &nbsp;·&nbsp; 🛸 <b>8 运输机 + 2 中继</b> &nbsp;·&nbsp; ⚡ <b>26 架次 / 约 116 min / 零迟到</b> &nbsp;·&nbsp; 📡 <b>盲区为零</b>
+</p>
+
+**文档导航**：论文成品 [`论文-山区洪涝无人机D题.pdf`](论文-山区洪涝无人机D题.pdf) · 题目原文 [`山区洪涝灾害下无人机运输与通信协同优化.docx`](山区洪涝灾害下无人机运输与通信协同优化.docx) · 结果模板 [`结果提交模板_填写.xlsx`](结果提交模板_填写.xlsx)
+
+---
+
+## 目录
+
+- [项目亮点](#项目亮点)
+- [论文摘要（最新）](#论文摘要最新)
+- [关键结果一览（图）](#关键结果一览图)
+- [技术栈](#技术栈)
+- [快速开始](#快速开始)
+- [一、问题背景](#一问题背景)
+- [二、题目任务概括](#二题目任务概括)
+- [三、统一建模假设](#三统一建模假设)
+- [四、基础物理模型](#四基础物理模型)
+- [五、问题一：单点安全载荷与货箱组批](#五问题一单点安全载荷与货箱组批)
+- [六、问题二：异构无人机多点多架次调度](#六问题二异构无人机多点多架次调度)
+- [七、问题三：运输与中继通信联合调度](#七问题三运输与中继通信联合调度)
+- [八、问题四：任务分区与资源配置](#八问题四任务分区与资源配置)
+- [九、完整求解流程](#九完整求解流程)
+- [十、结果复现](#十结果复现)
+- [十一、最终结论速览](#十一最终结论速览)
+- [十二、目录结构](#十二目录结构)
+- [十三、模型局限与推广方向](#十三模型局限与推广方向)
+- [许可证](#许可证)
+
+---
+
+## 项目亮点
+
+- 🧮 **统一物理口径**：等效航程能耗（指数 3/2）+ 爬升附加 + 20% 返航安全余量，45 组合二分求最大安全载荷
+- 🎯 **五族元启发式并行**：模拟退火 / 分组遗传 / ALNS / 禁忌搜索 / GRASP，多权重×多种子强化搜索逼近零迟到 Pareto 前沿
+- 📡 **通信-运输联合调度**：30 m DEM 遮挡判定 + 双向链路预算（122/116/126 dB），双中继三班时间分片，端到端零盲区
+- 🏗️ **任务分区 × 资源池化**：2/3 组分区方案、独立配置库存缺口论证，集中调度优于独立配置
+- ✅ **全链路可复现**：Python 求解 → JSON 结果 → 独立校验 → Excel 提交模板 → LaTeX 论文，任一数字可复算
 
 ---
 
@@ -23,6 +73,77 @@
 **灵敏度分析**表明模型结论稳健：安全余量扫描复现安全效率权衡并呈现机型结构切换；多目标权重在合理范围内只改变拆分粒度，不改变 C 型瓶颈结构；中继 W 点最长连续服务 95 min，占单架次能源上限对应时长约 140 min 的 68.3%，悬停功率扰动正负 10% 后方案不变；通信余量统计中 W 点最紧 1.00 dB、E 点 1.03 dB、N 点 13.43 dB，三个布设点均无低于 1 dB 的采样点，余量下压 1 dB 仅个别采样点接近门限，布设方案整体对链路参数不敏感。
 
 **关键词**：无人机调度 · 等效航程能耗模型 · 禁忌搜索 · 中继布设 · 任务分区 · 通信保障
+
+---
+
+## 关键结果一览（图）
+
+<p align="center">
+  <img src="figures/p1_dem_map.png" width="49%" alt="研究区 30m DEM 与服务区/中继点位"/>
+  <img src="figures/p2_gantt.png" width="49%" alt="问题二 26 架次调度甘特图"/>
+</p>
+<p align="center"><em>图 1　研究区 30 m DEM 与 15 个服务区、中继布设点（左）· 问题二 26 架次运输调度甘特图（右）</em></p>
+
+<p align="center">
+  <img src="figures/p2_routes.png" width="49%" alt="运输网络路由"/>
+  <img src="figures/p2_energy_decomp.png" width="49%" alt="26 架次能耗分解"/>
+</p>
+<p align="center"><em>图 2　运输网络路由与机型分工（左）· 26 架次能耗构成分解（右）</em></p>
+
+<p align="center">
+  <img src="figures/p3_relay_tl.png" width="49%" alt="中继服务时间线"/>
+  <img src="figures/p3_comm_tl.png" width="49%" alt="全程通信保障时间线"/>
+</p>
+<p align="center"><em>图 3　双中继三班服务时间线（左）· 全程通信保障时间线（右）</em></p>
+
+<p align="center">
+  <img src="figures/p3_coverage.png" width="49%" alt="需中继采样点覆盖分配"/>
+  <img src="figures/p4_partition.png" width="49%" alt="任务分区示意"/>
+</p>
+<p align="center"><em>图 4　需中继采样点覆盖分配（左）· 问题四任务分区与资源缺口（右）</em></p>
+
+### 核心指标速览
+
+| 指标 | 问题一 | 问题二 | 问题三（端到端） |
+|---|---:|---:|---:|
+| 架次数 | 18 | 26 | 26 + 中继 3 班 |
+| 完工时间 | 累计约 9.1 h | 约 116 min | 约 121 min |
+| 总能耗 | 59.02 kWh | 70.71 kWh | 约 74.26 kWh（含中继 3.55 kWh） |
+| 时限交付 | 返航 SOC ≥ 20% | 零迟到 | 零迟到、盲区为零 |
+
+---
+
+## 技术栈
+
+| 领域 | 工具 |
+|---|---|
+| 建模语言 | Python 3.11+ |
+| 数值计算 | NumPy / SciPy |
+| 数据处理 | pandas / openpyxl（官方 Excel）、scipy.io（30 m DEM .mat） |
+| 优化算法 | 模拟退火 / 分组遗传 / ALNS / 禁忌搜索 / GRASP（自研调度解码器 + 无人机-电池双资源就绪队列） |
+| 通信仿真 | DEM 沿线 30 m 步长遮挡判定 + 双向链路预算 |
+| 论文排版 | LaTeX（XeLaTeX + gmcmthesis 竞赛模板） |
+
+---
+
+## 快速开始
+
+```bash
+# 克隆仓库（仓库根目录即本题工作目录）
+git clone https://github.com/Akun-python/mountain-flood-uav-optimization.git
+cd mountain-flood-uav-optimization
+
+# 1. 五族算法公平对比（SA/GA/ALNS/Tabu/GRASP，60s × 3 种子）
+python -X utf8 求解代码与结果/实验/benchmark.py --seconds 60 --seeds 7,11,13
+
+# 2. 强化搜索并导出冠军（26 架次 / 约 116 min / 70.71 kWh）
+python -X utf8 求解代码与结果/实验/champion_search.py --export
+
+# 3. 运输-中继联合调度（中继三班 3.55 kWh，端到端约 121 min）
+python -X utf8 求解代码与结果/代码/p3_co2.py
+```
+
+完整复现、绘图与结果导出命令见 [十、结果复现](#十结果复现)。
 
 ---
 
@@ -557,3 +678,9 @@ D题/
 - 将中继扩展为可移动中继路径；
 - 建立多中继冗余通信和故障恢复机制；
 - 将模型推广到森林消防、海上搜救和大型活动通信保障等场景。
+
+---
+
+## 许可证
+
+本项目采用 [MIT License](LICENSE)，Copyright © 2026 Akun-python。
