@@ -1,0 +1,123 @@
+{
+ "frameworkA_baseline": {
+  "pos": {
+   "W": [
+    109.2103,
+    23.047134,
+    676.5
+   ],
+   "E": [
+    109.276017,
+    23.019401,
+    542.3
+   ],
+   "N": [
+    109.238171,
+    23.077841,
+    496.1
+   ]
+  },
+  "energy": 3.545,
+  "gaps": 0
+ },
+ "frameworkB_grid": {
+  "W": {
+   "pos": [
+    109.2063,
+    23.051134,
+    750
+   ],
+   "energy": 2.011,
+   "min_margin_db": 0.7,
+   "backhaul": true
+  },
+  "E": {
+   "pos": [
+    109.268017,
+    23.015400999999997,
+    650
+   ],
+   "energy": 1.008,
+   "min_margin_db": 0.03,
+   "backhaul": true
+  },
+  "N": {
+   "pos": [
+    109.230171,
+    23.061841,
+    450
+   ],
+   "energy": 0.437,
+   "min_margin_db": 0.09,
+   "backhaul": true
+  },
+  "total_energy": 3.456
+ },
+ "frameworkC_restart_hill": {
+  "W": {
+   "pos": [
+    109.208098,
+    23.044286,
+    700
+   ],
+   "energy": 1.973,
+   "min_margin_db": 0.48,
+   "backhaul": true
+  },
+  "E": {
+   "pos": [
+    109.266992,
+    23.012001,
+    650
+   ],
+   "energy": 0.999,
+   "min_margin_db": 0.45,
+   "backhaul": true
+  },
+  "N": {
+   "pos": [
+    109.243114,
+    23.058428,
+    600
+   ],
+   "energy": 0.43,
+   "min_margin_db": 8.96,
+   "backhaul": true
+  },
+  "total_energy": 3.403
+ },
+ "frameworkD_margin1dB": {
+  "E": {
+   "pos": [
+    109.268918,
+    23.012732,
+    650
+   ],
+   "energy": 1.009,
+   "min_margin_db": 1.11,
+   "backhaul": true
+  },
+  "N": {
+   "pos": [
+    109.234314,
+    23.059248,
+    600
+   ],
+   "energy": 0.429,
+   "min_margin_db": 9.4,
+   "backhaul": true
+  },
+  "total_energy": 1.438
+ },
+ "summary": {
+  "baseline_kwh": 3.545,
+  "grid_kwh": 3.456,
+  "restart_hill_kwh": 3.403,
+  "margin1dB_kwh": 1.438,
+  "grid_saving_kwh": 0.089,
+  "hill_saving_kwh": 0.143,
+  "margin1dB_saving_kwh": 2.107,
+  "note": "服务窗口按 26 架冠军：W 5724 / E 2668 / N 552 s；框架 D 要求最紧接入余量 >= 1 dB（margin_stats 口径）；D 对 W 未找到低于官方 1.979 kWh 的候选（官方即余量极限），故采纳组合 = 官方 W + D 的 E/N，合计 3.417 kWh",
+  "margin1dB_combo_kwh": 3.417
+ }
+}
