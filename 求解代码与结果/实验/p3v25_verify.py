@@ -16,7 +16,13 @@ data = p3_co2.data
 
 sol_file = sys.argv[1] if len(sys.argv) > 1 else os.path.join(
     HERE, '..', '结果', '进化_v25', 'p2v25_compress.json')
+maxdelay = float(sys.argv[2]) if len(sys.argv) > 2 else 3600.0
+if maxdelay < 3600.0:
+    p3_co2.MAXDELAY = maxdelay
+    p3_co2.MAXEARLY = maxdelay
 tag = os.path.splitext(os.path.basename(sol_file))[0]
+if maxdelay < 3600.0:
+    tag += '_md%d' % int(maxdelay)
 
 # 1. 加载 solution 并 dispatch
 sol = json.load(open(sol_file, encoding='utf-8'))
@@ -58,8 +64,9 @@ res = sv.finalize(best)
 m = res['met']
 print('\n== v25 P3 端到端 ==')
 print('联合完工: %.1f s (%.1f min)  运输完工 %.1f s' % (m['makespan'], m['makespan'] / 60, met['makespan']))
+cov_bad, overlap, _, _ = sv.relay_load(res['missions'])
 print('cover_bad=%d  R2_overlap=%.0fs  machine_pen=%.0fs  零迟到=%s' % (
-    res['seg']['cov_bad'], res['seg']['overlap'], res['mpen'], m['tardy_w'] < 1e-6))
+    cov_bad, overlap, res['mpen'], m['tardy_w'] < 1e-6))
 json.dump({'offsets': best, 'obj': best_obj, 'tag': tag,
            'met': {k: (round(v, 2) if isinstance(v, float) else v)
                    for k, v in m.items() if k != 'box_time'},
