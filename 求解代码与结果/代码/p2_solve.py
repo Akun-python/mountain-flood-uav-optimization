@@ -336,7 +336,9 @@ def dispatch(data, flights, releases=None, limit=None):
                     return None, None
         bat = avail[0]
         uav['ready'] = start + f.duration()
-        bat_end = start + f.prep + f.flight_time()
+        # 电池充电最早只能在架次完全结束（返场、含各服务区交接）后开始：
+        # 交接发生在服务区，电池随无人机执行，期间无法充电。
+        bat_end = start + f.duration()
         soc_end = 1.0 - f.energy() / data.uav_types[model]['E_use']
         bat['ready'] = bat_end + charge_time(soc_end, data.batteries[model]['T_full'])
         deliveries = f.delivery_times(start)
@@ -349,15 +351,20 @@ def dispatch(data, flights, releases=None, limit=None):
 
 
 def evaluate(data, flights, schedule):
-    """指标：加权迟到（硬约束检验）、makespan、能耗、架次数。"""
+    """指标：加权迟到（硬约束检验）、投递位置正确性、makespan、能耗、架次数。"""
     hard_ok = True
     tardy_w = 0.0
     tardy_max = 0.0
     box_time = {}
+    bad_zones = []
     for fid, sch in schedule.items():
         for sid, bid, t in sch['deliveries']:
             box_time[bid] = t
             bx = data.boxes[bid]
+            # 投递位置必须与附件指定服务区一致（route 段区 = 箱属区）
+            if bid.split('-')[0] != sid:
+                hard_ok = False
+                bad_zones.append((fid, bid, sid))
             if bx['first_batch'] and t > bx['deadline_first'] + 1e-6:
                 hard_ok = False
             if bx['type'] == '医疗物资' and t > bx['deadline_exp'] + 1e-6:
@@ -375,7 +382,7 @@ def evaluate(data, flights, schedule):
     nfl = len(flights)
     return {'hard_ok': hard_ok, 'tardy_w': tardy_w, 'tardy_max': tardy_max,
             'makespan': makespan, 'energy': energy, 'flights': nfl,
-            'box_time': box_time}
+            'box_time': box_time, 'bad_zones': bad_zones}
 
 
 def objective(metrics):

@@ -339,19 +339,24 @@ def _neighborhood_move(data, flights, rng):
                 fl.pop(hi)
                 return fl, ('merge', lo, hi)
         elif op < 0.65 and n > 1:
-            # 移箱（同区优先，允许跨区产生可行新组合）
+            # 移箱（只允许移到该箱属区段，保证投递位置正确；目标架次无该区段时允许加段）
             i = rng.randrange(n)
             j = rng.randrange(n)
             if i == j:
                 continue
             ri = rng.randrange(len(fl[i].route))
-            rj = rng.randrange(len(fl[j].route))
             bs = fl[i].route[ri][1]
             if not bs:
                 continue
             b = rng.choice(bs)
+            pjx = b.split('-')[0]
+            hit = [k for k, (s, _) in enumerate(fl[j].route) if s == pjx]
+            if hit:
+                rj = rng.choice(hit)
+                fl[j].route[rj] = (fl[j].route[rj][0], fl[j].route[rj][1] + [b])
+            else:
+                fl[j].route.append((pjx, [b]))
             fl[i].route[ri] = (fl[i].route[ri][0], [x for x in bs if x != b])
-            fl[j].route[rj] = (fl[j].route[rj][0], fl[j].route[rj][1] + [b])
             normalize_flight(fl[i], data)
             normalize_flight(fl[j], data)
             fl = [f for f in fl if f.box_ids]
