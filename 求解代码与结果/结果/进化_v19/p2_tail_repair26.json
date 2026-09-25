@@ -1,0 +1,59 @@
+{
+ "baseline": {
+  "hard_ok": true,
+  "tardy_w": 0.0,
+  "tardy_max": 0.0,
+  "makespan": 6959.81,
+  "energy": 70.71,
+  "flights": 26
+ },
+ "best": {
+  "hard_ok": true,
+  "tardy_w": 0.0,
+  "tardy_max": 0.0,
+  "makespan": 6896.51,
+  "energy": 70.16,
+  "flights": 27
+ },
+ "verdict": "IMPROVED",
+ "lower_bounds": {
+  "LB1_single_box": 2090.6,
+  "LB2_workload_balance": 6320.8,
+  "n_uavs": {
+   "A": 4,
+   "B": 2,
+   "C": 2
+  },
+  "workload_s": {
+   "A": 24546.8,
+   "B": 12641.6,
+   "C": 10875.0
+  }
+ },
+ "gap_to_LB2_pct": 9.1,
+ "moves_log": [
+  {
+   "round": 1,
+   "op": "split",
+   "from": 5,
+   "r1": [
+    [
+     "S005",
+     2
+    ]
+   ],
+   "r2": [
+    [
+     "S011",
+     2
+    ]
+   ],
+   "m1": "A",
+   "m2": "A",
+   "mk": 6896.5,
+   "en": 70.158,
+   "fl": 27
+  }
+ ],
+ "note": "尾部阈值 6200 s；接受准则=零迟到 + (makespan, energy) 字典序；逐候选完整 dispatch 重排程；下界 LB2 为机型负载均衡下界（makespan >= max_g 累计任务时长/机型架数）"
+}
