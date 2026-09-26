@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""v125：Nature 级统一绘图样式（论文全部配图共用）。
+"""v127：Nature 级统一绘图样式（论文全部配图共用）。
 - 无图内标题、去上右脊、细网格、白底
 - 克制三族配色（中性灰 + 信号色 + 强调色），色盲友好
 - 字号阶梯 7/8/9/11，行文可读；PDF+PNG 双格式 300dpi 导出
@@ -23,9 +23,10 @@ for f in _font_candidates:
         font_manager.fontManager.addfont(os.path.abspath(f))
 
 plt.rcParams.update({
-    # 字体：英文数字优先 Helvetica/Arial，中文回退微软雅黑
+    # 字体：中文优先（微软雅黑/黑体），英文数字回退 Helvetica/Arial
     'font.family': 'sans-serif',
-    'font.sans-serif': ['Helvetica', 'Arial', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans'],
+    'font.sans-serif': ['Microsoft YaHei', 'SimHei', 'SimSun',
+                        'Helvetica', 'Arial', 'DejaVu Sans'],
     'axes.unicode_minus': False,
     'figure.dpi': 300,
     'savefig.dpi': 300,

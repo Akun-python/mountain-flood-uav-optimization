@@ -1,0 +1,40 @@
+{
+ "solver": "v92-authoritative",
+ "met": {
+  "hard_ok": true,
+  "makespan": 6571.4,
+  "energy": 69.77,
+  "flights": 25
+ },
+ "n_need_relay": 1394,
+ "cov_bad": 0,
+ "mpen": 1662.7,
+ "relay_energy": 3.483,
+ "joint_makespan": 7077,
+ "sorties": [
+  {
+   "pos": "W",
+   "t0": 686,
+   "t1": 6777,
+   "dur": 6091,
+   "energy": 2.091,
+   "ok": true
+  },
+  {
+   "pos": "E",
+   "t0": 760,
+   "t1": 3101,
+   "dur": 2341,
+   "energy": 0.909,
+   "ok": true
+  },
+  {
+   "pos": "N",
+   "t0": 2562,
+   "t1": 3289,
+   "dur": 727,
+   "energy": 0.483,
+   "ok": true
+  }
+ ]
+}

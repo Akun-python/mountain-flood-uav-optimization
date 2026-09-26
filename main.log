@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  26 SEP 2026 12:39
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  27 SEP 2026 07:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1600,26 +1600,30 @@ Package fontspec Info: Font family 'SimSun(1)' created for font 'SimSun' with
 
  [3
 
-]) (./sections/3_assumptions.tex)
-(./sections/4_symbols.tex) (./sections/5_problem1.tex [4]
+]) (./sections/2_analysis.tex)
+(./sections/3_assumptions.tex [4]) (./sections/4_symbols.tex)
+(./sections/5_problem1.tex [5]
 File: figures/p1_dem_map.png Graphic file (type bmp)
 <figures/p1_dem_map.png>
 File: figures/p1_alt_profiles.png Graphic file (type bmp)
 <figures/p1_alt_profiles.png>
- [5] [6]
+ [6] [7]
 File: figures/p1_lg_curve.png Graphic file (type bmp)
 <figures/p1_lg_curve.png>
- [7]
+ [8]
 File: figures/p1_qstar.png Graphic file (type bmp)
 <figures/p1_qstar.png>
- [8]
 File: figures/p1_soc.png Graphic file (type bmp)
 <figures/p1_soc.png>
-)
-(./sections/6_problem2.tex [9] [10]
+ [9]) (./sections/6_problem2.tex
+[10] [11]
+Overfull \hbox (7.71704pt too wide) in paragraph at lines 130--145
+ [][] 
+ []
+
 File: figures/p2_pareto2d.png Graphic file (type bmp)
 <figures/p2_pareto2d.png>
- [11]
+[12]
 File: figures/p2_network.png Graphic file (type bmp)
 <figures/p2_network.png>
 File: figures/routes3d_all.png Graphic file (type bmp)
@@ -1628,6 +1632,7 @@ File: figures/routes3d_model.png Graphic file (type bmp)
 <figures/routes3d_model.png>
 File: figures/routes3d_alt.png Graphic file (type bmp)
 <figures/routes3d_alt.png>
+ [13]
 File: figures/p2_gantt.png Graphic file (type bmp)
 <figures/p2_gantt.png>
 File: figures/p2_energy_decomp.png Graphic file (type bmp)
@@ -1638,69 +1643,39 @@ File: figures/p2_soc_curves.png Graphic file (type bmp)
 <figures/p2_soc_curves.png>
 File: figures/p2_delivery.png Graphic file (type bmp)
 <figures/p2_delivery.png>
- [12]) (./sections/7_problem3.tex
-[13] [14] [15] [16] [17] [18]
+ [14]) (./sections/7_problem3.tex [15] [16] [17] [18] [19] [20]
 File: figures/p3_coverage.png Graphic file (type bmp)
 <figures/p3_coverage.png>
- [19
+
+[21
 
 ]
 File: figures/p3_relay_coverage.png Graphic file (type bmp)
 <figures/p3_relay_coverage.png>
 File: figures/p3_relay_tl.png Graphic file (type bmp)
 <figures/p3_relay_tl.png>
- [20] [21]
+ [22] [23]
 File: figures/p3_comm_tl.png Graphic file (type bmp)
 <figures/p3_comm_tl.png>
 File: figures/p3_gantt.png Graphic file (type bmp)
 <figures/p3_gantt.png>
- [22])
-(./sections/8_sensitivity.tex [23]
+ [24] [25]) (./sections/8_sensitivity.tex
 File: figures/p1_sensitivity.png Graphic file (type bmp)
 <figures/p1_sensitivity.png>
-
-Overfull \hbox (44.90091pt too wide) in paragraph at lines 41--47
-\TU/SimSun(1)/m/n/12.045 次\TU/TimesNewRoman(0)/m/n/12.045 /118.5min/70.28kWh\TU
-/SimSun(1)/m/n/12.045 、|  节 能 均 衡 \TU/TimesNewRoman(0)/m/n/12.045 21 \TU/SimSun
-(1)/m/n/12.045 架 次\TU/TimesNewRoman(0)/m/n/12.045 /131min/62.46kWh \TU/SimSun(1
-)/m/n/12.045 与 最 低 能 耗 \TU/TimesNewRoman(0)/m/n/12.045 19 \TU/SimSun(1)/m/n/12.
-045 架 次\TU/TimesNewRoman(0)/m/n/12.045 /132min/60.40kWh\TU/SimSun(1)/m/n/12.045
- ，|
- []
-
-[24]
+ [26]
 File: figures/p3_margin_hist.png Graphic file (type bmp)
 <figures/p3_margin_hist.png>
-) (./sections/10_problem4.tex [25]
+)
+(./sections/10_problem4.tex [27]
 File: figures/p4_partition.png Graphic file (type bmp)
 <figures/p4_partition.png>
 File: figures/p4_load.png Graphic file (type bmp)
 <figures/p4_load.png>
- [26]
+ [28] [29]
 File: figures/p4_gap.png Graphic file (type bmp)
 <figures/p4_gap.png>
 ) (./sections/9_evaluation.tex
-[27] [28])
-Underfull \hbox (badness 7203) in paragraph at lines 116--117
-[]\TU/SimSun(1)/m/n/12.045 新 华 社\TU/TimesNewRoman(0)/m/n/12.045 . \TU/SimSun(1)
-/m/n/12.045 记 者 手 记：|  抵 近 广 西 横 州 镇 龙 乡 \TU/TimesNewRoman(0)/m/n/12.045 [EB/OL
-]. 2026-07-09[2026-08-07].
- []
-
-
-Overfull \hbox (3.42021pt too wide) in paragraph at lines 116--117
-\TU/TimesNewRoman(0)/m/n/12.045 https://www.xinhuanet.com/politics/20260709/acf
-8e4b353304bb78007d8224f1cd2ef/c.html. 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 117--118
-[]\TU/SimSun(1)/m/n/12.045 新 华 每 日 电 讯\TU/TimesNewRoman(0)/m/n/12.045 . \TU/Sim
-Sun(1)/m/n/12.045 三 进 \TU/TimesNewRoman(0)/m/n/12.045 “\TU/SimSun(1)/m/n/12.045
- 孤 岛 乡\TU/TimesNewRoman(0)/m/n/12.045 ”[EB/OL]. 2026-07-12[2026-08-07].
- []
-
-(./sections/A_code.tex
+[30]) (./sections/AI_declaration.tex
 
 Package fontspec Info: Could not resolve font "FangSong/BI" (it probably
 (fontspec)             doesn't exist).
@@ -1724,25 +1699,72 @@ Package fontspec Info: Font family 'FangSong(0)' created for font 'FangSong'
 (fontspec)             <->"FangSong/OT:script=hani;language=dflt;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
- [29]
+)
+Underfull \hbox (badness 7203) in paragraph at lines 130--131
+[]\TU/SimSun(1)/m/n/12.045 新 华 社\TU/TimesNewRoman(0)/m/n/12.045 . \TU/SimSun(1)
+/m/n/12.045 记 者 手 记：|  抵 近 广 西 横 州 镇 龙 乡 \TU/TimesNewRoman(0)/m/n/12.045 [EB/OL
+]. 2026-07-09[2026-08-07].
+ []
+
+
+Overfull \hbox (3.42021pt too wide) in paragraph at lines 130--131
+\TU/TimesNewRoman(0)/m/n/12.045 https://www.xinhuanet.com/politics/20260709/acf
+8e4b353304bb78007d8224f1cd2ef/c.html. 
+ []
+
+[31]
+Underfull \hbox (badness 10000) in paragraph at lines 131--132
+[]\TU/SimSun(1)/m/n/12.045 新 华 每 日 电 讯\TU/TimesNewRoman(0)/m/n/12.045 . \TU/Sim
+Sun(1)/m/n/12.045 三 进 \TU/TimesNewRoman(0)/m/n/12.045 “\TU/SimSun(1)/m/n/12.045
+ 孤 岛 乡\TU/TimesNewRoman(0)/m/n/12.045 ”[EB/OL]. 2026-07-12[2026-08-07].
+ []
+
+(./sections/B_support.tex
+
+LaTeX Font Warning: Font shape `TU/FangSong(0)/m/it' undefined
+(Font)              using `TU/FangSong(0)/m/n' instead on input line 19.
+
+
+Overfull \hbox (236.17142pt too wide) in paragraph at lines 15--38
+ [][] 
+ []
+
+[32]
+Overfull \hbox (47.80577pt too wide) in paragraph at lines 42--45
+[]\TU/SimSun(1)/m/n/12.045 结 果 验 收 以 三 套 校 验 程 序 交 叉 核 验  |（\TU/CourierNew(0)/m
+/n/12.045 dispatch_compliant\TU/SimSun(1)/m/n/12.045 、| \TU/CourierNew(0)/m/n/1
+2.045 eval_full\TU/SimSun(1)/m/n/12.045 、| \TU/CourierNew(0)/m/n/12.045 check_b
+attery\TU/SimSun(1)/m/n/12.045 ）|
+ []
+
+
+Overfull \hbox (584.34103pt too wide) in paragraph at lines 50--68
+ [][] 
+ []
+
+) (./sections/A_code.tex [33]
 (c:/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/02/21 1.10 listings language file
-) [30]) [31]
+) [34]) [35]
 (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2022/08/05>
  ***********
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 880AC1A08EA56CABDEB9A9DDA9C09981;7305.
+(rerunfilecheck)             Checksum: 138CE1727CCEC6A71E56767219E9838D;8834.
  ) 
 Here is how much of TeX's memory you used:
- 35934 strings out of 476720
- 762436 string characters out of 5801445
- 2328842 words of memory out of 5000000
- 57190 multiletter control sequences out of 15000+600000
- 573910 words of font info for 179 fonts, out of 8000000 for 9000
+ 36164 strings out of 476720
+ 775763 string characters out of 5801445
+ 2384842 words of memory out of 5000000
+ 57406 multiletter control sequences out of 15000+600000
+ 573950 words of font info for 184 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 108i,11n,114p,476b,1988s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,11n,114p,476b,2024s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.xdv (32 pages, 498184 bytes).
+Output written on main.pdf (36 pages).
