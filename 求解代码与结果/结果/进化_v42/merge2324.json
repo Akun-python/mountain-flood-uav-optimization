@@ -1,0 +1,73 @@
+{
+ "solver": "v42-merge-23-24",
+ "conclusion": "23/24 flights unreachable: 0 feasible A-merge pairs (25kg/0.06m^3 limits)",
+ "base25": {
+  "flights": 25,
+  "makespan": 7112.8,
+  "energy": 70.28
+ },
+ "a_single_area_trips": 10,
+ "feasible_merge_pairs": 0,
+ "all_pairs": [
+  {
+   "pair": [
+    15,
+    21
+   ],
+   "area": "S014",
+   "mass": 25.0,
+   "vol": 0.067,
+   "ok": false
+  },
+  {
+   "pair": [
+    16,
+    19
+   ],
+   "area": "S002",
+   "mass": 28.0,
+   "vol": 0.054,
+   "ok": false
+  },
+  {
+   "pair": [
+    16,
+    20
+   ],
+   "area": "S002",
+   "mass": 28.0,
+   "vol": 0.054,
+   "ok": false
+  },
+  {
+   "pair": [
+    19,
+    20
+   ],
+   "area": "S002",
+   "mass": 28.0,
+   "vol": 0.054,
+   "ok": false
+  },
+  {
+   "pair": [
+    17,
+    18
+   ],
+   "area": "S006",
+   "mass": 39.0,
+   "vol": 0.094,
+   "ok": false
+  },
+  {
+   "pair": [
+    22,
+    25
+   ],
+   "area": "S005",
+   "mass": 39.0,
+   "vol": 0.094,
+   "ok": false
+  }
+ ]
+}
