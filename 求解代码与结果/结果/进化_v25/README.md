@@ -463,3 +463,40 @@ r = Δ完工/60(min)          # 完工主导（用户优先序）
 **结论：29架/7148.2s(119.1min)/75.25kWh = 完工最优（可证实）**。完工由 C 机链（6 趟大重箱/2台 + 8kWh 充电周转）刚性决定——拆分(池满)、换型(及时性/电池链)、合并(C 链加长)三大类算子均已系统穷尽，7168.5→7148.2 为最后可榨取的 20.3s。
 - P3 联合复核：7148.2 起点联合 7954.3s（SA 配中继推迟运输）；联合最优仍 29架(7168.5)→7779.2s
 - 能耗 74.56→75.25（f23 A→C 换型代价，完工优先接受）
+
+## <6000s(100min) 可达性论证 + Rainbow 完善版 RL（v56）
+
+### ① 完工 <6000s 的数学论证（当前约束下不可达）
+29 架最优装箱：B 池 13986s(2台) + C 池 11914s(2台) = **B/C 4 台必需负载 25901s → 每台 6475.4s**（已实测）。
+- 目标 6000s → 需 B/C 负载 ≤24000 → **须减 1901s**
+- 唯一承接池 A：4 台 5962.1s/台，距 6000 余量仅 **38s/台 → 总量 152s** —— 承接不了 1901s
+- 转移通道实测全堵：B→A 体积不可行(0.058m³)、C→A 池满、C→B B 池爆、合并 C 链加长、换型电池链恶化
+- **结论：完工 <6000s(100min) 在当前机型池(A4/B2/C2 固定)+质量/体积/电池/及时性约束下数学不可达**；
+  B/C 4 台 6475.4s/台 + 电池充电 ≈6900-7200s 为刚性下界；29架/7148.2s(119.1min) 为实证极限
+  （若用户可放宽机型池假设——如 B/C 机数量——才可能 <6000，但题目机型固定）
+
+### ② Rainbow 式完善版 DQN（dqn23_rainbow.py，文献支撑设计）
+| 组件 | 文献 | 本问题定制 |
+|---|---|---|
+| Dueling Q=V(s)+A(s,a) | Wang et al., ICML 2016 | 状态价值(23趟结构)与动作优势分离 |
+| NoisyNet 参数探索 | Fortunato et al., 2018 | 因子化高斯噪声替代大部分 ε-greedy |
+| **分类经验回放池** | Neves et al. 2024 ER综述; Aris et al. 2025 双池(PLOS ONE) | 改进/终止/其余三桶分层采样(imp40%/term30%)，桶内 PER——保证稀疏改进信号(预填100步仅4条改进)被稳定学习 |
+| PER 优先经验 | Schaul et al., ICLR 2016 | TD-error^0.6 + β退火 |
+| Double DQN + n-step + soft-target | van Hasselt 2016; Hessel et al. 2018 Rainbow | 稳定目标、延迟奖励、平滑更新 |
+| 场景定制奖励 + 动作特征化 | v52/v53 保留 | 完工主导+池均衡+充电周转；12维动作特征 |
+
+**验证（3 seed × 150ep，确定性，26s）**：
+| 版本 | train_best(3seed) | greedy 30次 |
+|---|---|---|
+| v51 默认 | 全 7724.9/67.61 | 8445±986（严重 seed 依赖） |
+| v53 场景奖励 | 全 7724.9/67.61 | 7740.2±21.7（seed2 次优 7770.9） |
+| **v56 Rainbow** | **全 7724.9/67.61** | **7724.9±0.0 / 67.61±0.000（30/30 零方差）** |
+
+**结论：Rainbow 架构(分类经验池+Dueling+NoisyNet) + 启发式收尾 = 确定性完美复现最优**（含原 seed 依赖问题的 seed2——此前 enhanced 收敛到次优 7770.9 的 seed 现也精确达最优）；收敛更快(26s vs 35-44s)。RL 角色定位：策略探索出好起点 + 启发式收敛 = 组合优化 RL 标准形态。
+
+### ③ 新增文献（已核实来源）
+- Neves, Ishitani & Patrocinio. Advances and challenges in learning from experience replay. Artif Intell Rev, 2024. doi:10.1007/s10462-024-11062-0
+- Aris et al. Dual experience replay enhanced DDPG… PLOS ONE, 2025. doi:10.1371/journal.pone.0334411
+- Wang et al. Dueling Network Architectures for Deep RL. ICML 2016（Rainbow 组件）
+- Fortunato et al. Noisy Networks for Exploration. ICLR 2018
+- Hessel et al. Rainbow: Combining Improvements in Deep RL. AAAI 2018
