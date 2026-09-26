@@ -213,23 +213,24 @@ def build_candidates_x(fls):
             sidx.append(i)
             didx.append(i)
     # 拆分（动作完备性：满载单区趟(≥3箱) → A/B 子趟；≥3 保证每趟至多拆 1 次）
-    for i, fi in enumerate(fls):
-        if len(fi.route) != 1 or len(fi.box_ids) < 3:
-            continue
-        parts = split_into_ab(fls, fi, data)
-        if not parts:
-            continue
-        pi = pt[fi.model] / np_[fi.model]
-        sc_ = 0.01  # 拆分偏好低（完工优先下多为反效果，留给 RL 判断）
-        c.append(('sp', fi.fid, -1, None, None))
-        fa.append([0.0, 0.0, 0.0, pi / 7000.0, pi / 7000.0,
-                  fi.total_mass / 80.0, parts[0].duration() / 3000.0, len(fi.box_ids) / 8.0,
-                  fi.duration() / 3000.0, 0.0, sc_, 2.0,
-                  (25.0 - parts[0].total_mass) / 25.0, (0.058 - parts[0].total_vol) / 0.058,
-                  max(0.0, (1.0 - 0.2) * 4.5 - parts[0].energy()) / 2.0, 0.0])
-        sc.append(sc_)
-        sidx.append(i)
-        didx.append(i)
+    if not os.environ.get('DISABLE_SPLIT'):
+        for i, fi in enumerate(fls):
+            if len(fi.route) != 1 or len(fi.box_ids) < 3:
+                continue
+            parts = split_into_ab(fls, fi, data)
+            if not parts:
+                continue
+            pi = pt[fi.model] / np_[fi.model]
+            sc_ = 0.01  # 拆分偏好低（完工优先下多为反效果，留给 RL 判断）
+            c.append(('sp', fi.fid, -1, None, None))
+            fa.append([0.0, 0.0, 0.0, pi / 7000.0, pi / 7000.0,
+                      fi.total_mass / 80.0, parts[0].duration() / 3000.0, len(fi.box_ids) / 8.0,
+                      fi.duration() / 3000.0, 0.0, sc_, 2.0,
+                      (25.0 - parts[0].total_mass) / 25.0, (0.058 - parts[0].total_vol) / 0.058,
+                      max(0.0, (1.0 - 0.2) * 4.5 - parts[0].energy()) / 2.0, 0.0])
+            sc.append(sc_)
+            sidx.append(i)
+            didx.append(i)
     if len(c) > K:
         ord_ = np.argsort(-np.array(sc))[:K]
         c = [c[o] for o in ord_]
@@ -250,6 +251,8 @@ def build_candidates_x(fls):
         DI[i] = didx[i]
     F[K] = [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     S[K] = -10.0
+    if os.environ.get('DISABLE_FA_X'):  # 消融：关闭动作约束余量/时限差增强（fa 12 维等效）
+        F[:, 12:] = 0.0
     return c, F, S, SI, DI
 
 
@@ -472,6 +475,8 @@ def state_x(fls, m):
     # 额外趟统计（拆分后 >29 趟折叠：趟数 + 总时长）
     extra = srt[29:]
     v += [len(extra) / 10.0, sum(f.duration() for f in extra) / 9000.0]
+    if os.environ.get('DISABLE_STATE_X'):  # 消融：关闭增强段（电池/余量/超趟/额外趟）→ 等价 170 维
+        v = v[:170] + [0.0] * (S_DIM_X - 170)
     v = np.asarray(v, np.float32)
     if len(v) < S_DIM_X:
         v = np.concatenate([v, np.zeros(S_DIM_X - len(v), np.float32)])
