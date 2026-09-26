@@ -213,9 +213,9 @@ def fig_p3_gantt():
                 ha='center', va='center', fontsize=8, color=ns.C_TEXT, zorder=4)
     lo, hi = 2562, 3289
     ax.axvspan(lo, hi, ymin=(y_relay['R2'] - 0.45) / (len(rows) + 2),
-               ymax=(y_relay['R2'] + 0.45) / (len(rows) + 2), color='#F87171', alpha=0.18, zorder=1)
+               ymax=(y_relay['R2'] + 0.45) / (len(rows) + 2), color=ns.C_C, alpha=0.18, zorder=1)
     ax.text((lo + hi) / 2, y_relay['R2'] + 0.42, 'E/N 重叠 727 s（机器级需协调）',
-            ha='center', fontsize=7.5, color='#B91C1C')
+            ha='center', fontsize=7.5, color='#B45309')
     handles = [Patch(color=ns.MODEL_COLORS[m], label='%s 型运输机' % m) for m in 'ABC']
     handles += [Patch(color=ns.AREA_COLORS[g], label='中继 %s 位置服务时段' % g) for g in 'WEN']
     ax.legend(handles=handles, loc='upper right', fontsize=9, ncol=2, frameon=False)
@@ -252,9 +252,9 @@ def fig_relay_tl():
             ax.text((t0 + t1) / 2, i, '%s\n[%d, %d]' % (tag.split('（')[0], t0, t1),
                     ha='center', va='center', fontsize=8.2, color='white', zorder=4)
             placed.append((t0, t1))
-    ax.axvspan(2562, 3289, ymin=0.30, ymax=0.70, color='#F87171', alpha=0.30, zorder=2)
+    ax.axvspan(2562, 3289, ymin=0.30, ymax=0.70, color=ns.C_C, alpha=0.30, zorder=2)
     ax.text(2926, 1.42, 'E/N 需求重叠 727 s（机器级需协调）', ha='center', va='top',
-            fontsize=8.2, color='#B91C1C', zorder=5)
+            fontsize=8.2, color='#B45309', zorder=5)
     ax.set_yticks([0, 1]); ax.set_yticklabels(['R1 中继 1', 'R2 中继 2'], fontsize=9)
     ax.set_xlabel('时间（s）'); ax.set_xlim(0, 7600); ax.set_ylim(-0.45, 1.62)
     ax.grid(axis='x', alpha=0.35)

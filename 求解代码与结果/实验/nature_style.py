@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-"""v127：Nature 级统一绘图样式（论文全部配图共用）。
-- 无图内标题、去上右脊、细网格、白底
-- 克制三族配色（中性灰 + 信号色 + 强调色），色盲友好
-- 字号阶梯 7/8/9/11，行文可读；PDF+PNG 双格式 300dpi 导出
+"""v128：论文统一绘图样式（萱草橙色系 + Nature 级排版）。
+- 配色：暖橙色系（萱草色板）——与论文原色一致（plot_style 同源）：
+  A 金茶 #F39800 / B 柑子 #F6AD49 / C 鉛丹 #EC6D51 /
+  W 萱草 #F8B862 / E 蜜柑 #F08300 / N 黄丹 #EE7948，图内文字一律黑色
+- 排版：白底、无图内标题、去上右脊、细网格、字体 Microsoft YaHei 优先（不乱码）
+- 字号阶梯 7/8/9/11；PDF+PNG 双格式 300dpi 导出
 """
 import os
 import matplotlib
@@ -10,7 +12,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
 
-# 中文字体：优先模板随附字体，避免依赖系统安装
+# 中文字体：优先模板随附字体，避免依赖系统安装（Microsoft YaHei 优先 → 无乱码）
 _font_candidates = [
     os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '..', 'SimHei.ttf'),
     r'..\..\SimHei.ttf',
@@ -66,21 +68,20 @@ plt.rcParams.update({
 })
 
 # ============================================================
-# Nature 级克制配色（三族 + 强调）
-# 机型信号族：A 蓝 / B 琥珀 / C 朱红
-# 中继区域族：W 青绿 / E 靛紫 / N 松绿
-# 中性灰：文字/网格/辅助
+# 萱草橙色系色板（与论文原色一致）：
+# 萱草 #F8B862 / 柑子 #F6AD49 / 金茶 #F39800 / 蜜柑 #F08300 /
+# 鉛丹 #EC6D51 / 黄丹 #EE7948；图内文字一律黑色。
 # ============================================================
-C_A = '#1F6FB2'       # A 型（信号蓝）
-C_B = '#E8A33D'       # B 型（琥珀）
-C_C = '#C73E1D'       # C 型（朱红）
-C_W = '#0E7C7B'       # W 中继（青绿）
-C_E = '#6C5CE7'       # E 中继（靛紫）
-C_N = '#3CA55C'       # N 中继（松绿）
-C_HERO = '#D8315B'    # 冠军/强调（玫红）
-C_GRAY = '#6B7280'    # 中性灰
-C_LIGHT = '#E5E7EB'   # 浅灰（背景条/网格）
-C_TEXT = '#111111'    # 文字
+C_A = '#F39800'       # A 型（金茶）
+C_B = '#F6AD49'       # B 型（柑子色）
+C_C = '#EC6D51'       # C 型（鉛丹色 / 强调）
+C_W = '#F8B862'       # W 中继（萱草色）
+C_E = '#F08300'       # E 中继（蜜柑色）
+C_N = '#EE7948'       # N 中继（黄丹）
+C_HERO = '#EC6D51'    # 冠军/强调（鉛丹色，与 C 型同族）
+C_GRAY = '#6B7280'    # 中性灰（辅助线/网格）
+C_LIGHT = '#E5E7EB'   # 浅灰（背景条/充电段）
+C_TEXT = '#222222'    # 文字（深灰）
 
 MODEL_COLORS = {'A': C_A, 'B': C_B, 'C': C_C}
 AREA_COLORS = {'W': C_W, 'E': C_E, 'N': C_N}
