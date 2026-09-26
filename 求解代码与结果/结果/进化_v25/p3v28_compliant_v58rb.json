@@ -1,0 +1,42 @@
+{
+ "input": "p2v58_rainbow_greedy.json",
+ "base_flights": 29,
+ "results": [
+  {
+   "seed": 7,
+   "tag": "v58rb",
+   "joint": 7927.5,
+   "joint_min": 132.1,
+   "transport_mk": 7927.5,
+   "transport_min": 132.1,
+   "transport_energy": 75.22,
+   "flights": 29,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "relay_energy": 3.641,
+   "cover_bad": 0,
+   "overlap": 0.0,
+   "mpen": 390.0,
+   "battery_violations": 0,
+   "relay_ret_max": 7785.0
+  },
+  {
+   "seed": 77,
+   "tag": "v58rb",
+   "joint": 7845.2,
+   "joint_min": 130.8,
+   "transport_mk": 7845.2,
+   "transport_min": 130.8,
+   "transport_energy": 75.22,
+   "flights": 29,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "relay_energy": 3.704,
+   "cover_bad": 0,
+   "overlap": 0.0,
+   "mpen": 580.0,
+   "battery_violations": 0,
+   "relay_ret_max": 7785.0
+  }
+ ]
+}
