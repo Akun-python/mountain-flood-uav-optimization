@@ -27,7 +27,11 @@ print('device', DEV, flush=True)
 A_DIM = K + 1
 FEAT_DIM = 12
 S_DIM = 170
-NSTEP = 3
+NSTEP = int(os.environ.get('NSTEP', '3'))          # n-step 回报长度（次优陷阱突破）
+W_EN = float(os.environ.get('W_EN', '0.5'))         # 能耗权重
+W_POOL = float(os.environ.get('W_POOL', '0.05'))    # 池均衡权重（消融）
+W_CHG = float(os.environ.get('W_CHG', '0.02'))      # 充电周转权重（消融）
+TAG = os.environ.get('TAG', '')                      # 结果文件标识
 
 
 class Net(nn.Module):
@@ -57,7 +61,7 @@ def make_state(fls):
 
 def terminal_r(fls):
     m, s, v, nc = eval_full(data, fls)
-    return -(m['makespan'] / 60.0 + 0.5 * m['energy']) + 250.0
+    return -(m['makespan'] / 60.0 + W_EN * m['energy']) + 250.0
 
 
 SID_MAP = {sid: i for i, sid in enumerate(sorted(set(b.split('-')[0] for b in data.boxes)))}
@@ -146,7 +150,7 @@ def eval_improve_scene(fls, cand):
     d_en = m0['energy'] - m1['energy']
     ps0, ch0 = pool_stats(fls)
     ps1, ch1 = pool_stats(nf)
-    r = d_mk / 60.0 + 0.5 * d_en + 0.05 * (ps0 - ps1) - 0.02 * (ch1 - ch0)
+    r = d_mk / 60.0 + W_EN * d_en + W_POOL * (ps0 - ps1) - W_CHG * (ch1 - ch0)
     return r, nf
 
 
@@ -340,6 +344,31 @@ def train_seed(seed, n_ep=150):
                 imp = eval_improve_scene(fls, c[a])
                 if imp is not None:
                     fls = imp[1]
+        # 启发式局部收尾（v46 接受标准：完工降 或 完工平且能耗降——与用户优先序一致，
+        # 既突破次优陷阱又不把能耗推向场景奖励次优）
+        while True:
+            c2, _, _ = build_candidates_f(fls)
+            if not c2:
+                break
+            m0c, _, _, _ = eval_full(data, fls)
+            best_ls = None
+            for i in range(min(len(c2), K)):
+                imp2 = eval_improve_scene(fls, c2[i])
+                if imp2 is None:
+                    continue
+                _, nf2 = imp2
+                m2c, _, v2c, nc2c = eval_full(data, nf2)
+                if m2c is None or v2c > 0 or nc2c > 0 or (not m2c['hard_ok']):
+                    continue
+                ok = (m2c['makespan'] < m0c['makespan'] - 1e-6) or \
+                     (abs(m2c['makespan'] - m0c['makespan']) < 1e-6 and
+                      m2c['energy'] < m0c['energy'] - 0.02)
+                if ok and (best_ls is None or
+                           (m2c['makespan'], m2c['energy']) < (best_ls[0]['makespan'], best_ls[0]['energy'])):
+                    best_ls = (m2c, nf2)
+            if best_ls is None:
+                break
+            fls = best_ls[1]
         m, s2, v, nc = eval_full(data, fls)
         if m and v == 0 and nc == 0:
             gkeys.append((m['makespan'], m['energy']))
@@ -347,7 +376,7 @@ def train_seed(seed, n_ep=150):
         d = {'best': {'makespan': best_key[0], 'energy': best_key[1]},
              'solution': [{'fid': f.fid, 'model': f.model,
                            'route': [(s2, list(bs)) for s2, bs in f.route]} for f in best_fls]}
-        json.dump(d, open(os.path.join(OUTD, 'p2v52_dqn23e_seed%d.json' % seed), 'w', encoding='utf-8'),
+        json.dump(d, open(os.path.join(OUTD, 'p2v53_abl%s_seed%d.json' % (TAG, seed)), 'w', encoding='utf-8'),
                   ensure_ascii=False, indent=1)
     return best_key, gkeys
 
@@ -381,15 +410,15 @@ def main():
         ens = [k[1] for _, k in all_greedy]
         print('  greedy: mk=%.1f±%.1f, en=%.2f±%.3f (n=%d)' % (
             np.mean(mks), np.std(mks), np.mean(ens), np.std(ens), len(mks)), flush=True)
-    json.dump({'summary': 'DQN-enhanced(动作特征化12维+PER(alpha0.6,beta0.4->1)+nstep3+启发式引导探索70%%-概率) 3seed×%dep' % n_ep,
+    json.dump({'summary': 'DQN-enhanced(动作特征化12维+PER(alpha0.6,beta0.4->1)+nstep%d+启发式引导探索70%%-概率) W_EN=%.2f W_POOL=%.2f W_CHG=%.2f 3seed×%dep' % (NSTEP, W_EN, W_POOL, W_CHG, n_ep),
                'all_seed_best': {str(s): list(k) for s, k in all_best},
                'greedy_mean': [float(np.mean([k[0] for _, k in all_greedy])),
                                float(np.mean([k[1] for _, k in all_greedy]))] if all_greedy else None,
                'greedy_std': [float(np.std([k[0] for _, k in all_greedy])),
                               float(np.std([k[1] for _, k in all_greedy]))] if all_greedy else None},
-              open(os.path.join(OUTD, 'p2v52_dqn23e.json'), 'w', encoding='utf-8'),
+              open(os.path.join(OUTD, 'p2v53_abl%s.json' % TAG), 'w', encoding='utf-8'),
               ensure_ascii=False, indent=1)
-    print('saved p2v52_dqn23e.json 用时 %.0fs' % (time.time() - t0), flush=True)
+    print('saved p2v53_abl%s.json 用时 %.0fs' % (TAG, time.time() - t0), flush=True)
 
 
 if __name__ == '__main__':

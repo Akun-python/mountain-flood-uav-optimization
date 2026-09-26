@@ -1,5 +1,5 @@
 {
- "summary": "DQN-enhanced(动作特征化12维+PER(alpha0.6,beta0.4->1)+nstep3+启发式引导探索70%-概率) 3seed×150ep",
+ "summary": "DQN-enhanced(动作特征化12维+PER(alpha0.6,beta0.4->1)+nstep3+启发式引导探索70%-概率) W_EN=0.50 W_POOL=0.00 W_CHG=0.02 3seed×150ep",
  "all_seed_best": {
   "0": [
    7724.880711443586,
@@ -11,7 +11,7 @@
   ],
   "2": [
    7724.880711443586,
-   67.61126781587855
+   67.6060163115999
   ]
  },
  "greedy_mean": [
