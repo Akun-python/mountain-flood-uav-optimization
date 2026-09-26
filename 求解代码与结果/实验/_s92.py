@@ -1,0 +1,10 @@
+﻿import json
+r = json.load(open('求解代码与结果/results/p3_final.json', encoding='utf-8'))
+print('旧p3_final sorties:')
+for s in r['sorties']: print('  ', s)
+print('旧p3_final schedule keys sample:', list(r['schedule'].keys())[:3])
+print('met:', r['met'])
+v = json.load(open('求解代码与结果/结果/进化_v25/p3v92_review.json', encoding='utf-8'))
+print('v92 sorties:')
+for s in v['sorties']: print('  ', s)
+print('v92 met:', v['met'], 'joint:', v['joint_makespan'], 'relay_en:', v['relay_energy'])

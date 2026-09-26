@@ -1,0 +1,40 @@
+{
+ "solver": "v91-p2v89",
+ "met": {
+  "hard_ok": true,
+  "makespan": 6495.6,
+  "energy": 69.77,
+  "flights": 25
+ },
+ "n_need_relay": 1394,
+ "cov_bad": 0,
+ "mpen": 1069.8,
+ "relay_energy": 3.55,
+ "joint_makespan": 7077,
+ "sorties": [
+  {
+   "pos": "W",
+   "t0": 716,
+   "t1": 6777,
+   "dur": 6061,
+   "energy": 2.082,
+   "ok": true
+  },
+  {
+   "pos": "E",
+   "t0": 760,
+   "t1": 3354,
+   "dur": 2594,
+   "energy": 0.986,
+   "ok": true
+  },
+  {
+   "pos": "N",
+   "t0": 3409,
+   "t1": 4135,
+   "dur": 726,
+   "energy": 0.483,
+   "ok": true
+  }
+ ]
+}
