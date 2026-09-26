@@ -89,7 +89,7 @@ def run_episode(env, policy, data, greedy=False):
             R -= nc * 1e6
             R -= m['makespan'] * 1.0
             R -= m['energy'] * 6.0
-    return R, np.array(logps), fls, (used, m, nc), None
+    return R, (np.array(logps) if logps else None), fls, (used, m, nc), None
 
 
 def main():
