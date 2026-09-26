@@ -57,13 +57,10 @@ class Env23:
             return False
         if self.slot_sid[j] is None:
             return True
-        if self.slots[j][0][0] != self.slots[j][0][0]:
-            return False
-        sid = self.slot_sid[j]
-        if self.boxes[bi].split('-')[0] != sid:
+        if self.boxes[bi].split('-')[0] != self.slot_sid[j]:
             return False
         bs = [self.boxes[k] for k in self.slots[j]] + [self.boxes[bi]]
-        return pick_model(self.data, sid, bs) is not None
+        return pick_model(self.data, self.slot_sid[j], bs) is not None
 
     def mask(self):
         m = np.zeros((self.nb, N_SLOTS), dtype=np.float32)
@@ -74,17 +71,18 @@ class Env23:
                 if self._slot_ok(j, bi):
                     m[bi, j] = 1.0
         if m.sum() == 0:
-            # 无合法动作：强开空槽（若还有空槽）
+            # 死锁兜底：未分配箱强制可放任意槽（保证动作空间非空；
+            # 区覆盖不足/超容量 → final_reward 负奖励，RL 学到尽早覆盖各区）
             for bi in range(self.nb):
                 if self.assigned[bi]:
                     continue
                 for j in range(N_SLOTS):
-                    if self.slot_sid[j] is None:
-                        m[bi, j] = 1.0
+                    m[bi, j] = 1.0
         return m
 
     def step(self, bi, j):
-        if self.assigned[bi] or not (self.slot_sid[j] is None or self.boxes[bi].split('-')[0] == self.slot_sid[j]):
+        # 放宽区一致性（死锁兜底允许强制放），超容量/跨区由 final_reward 判定（负奖励）
+        if self.assigned[bi]:
             return self.obs(), -1e6, self.done, {}
         if self.slot_sid[j] is None:
             self.slot_sid[j] = self.boxes[bi].split('-')[0]
@@ -98,15 +96,20 @@ class Env23:
         return self.obs(), 0.0, False, {}
 
     def final_reward(self):
-        # 构造 23 趟 Flight
+        # 构造 23 趟 Flight（先区一致性校验）
         fls = []
         used = 0
+        covered = set()
         for j in range(N_SLOTS):
             if not self.slots[j]:
                 continue
             used += 1
             sid = self.slot_sid[j]
             bs = [self.boxes[k] for k in self.slots[j]]
+            # 跨区箱 → 非法解
+            if any(b.split('-')[0] != sid for b in bs):
+                return -1e7
+            covered.add(sid)
             gm = pick_model(self.data, sid, bs)
             if gm is None:
                 return -1e7
@@ -115,6 +118,8 @@ class Env23:
         if m is None or v > 0:
             return -1e7
         r = -1e7 if (not m['hard_ok']) else 0.0
+        all_sids = set(b.split('-')[0] for b in self.boxes)
+        r -= 3e4 * len(all_sids - covered)   # 区覆盖不足惩罚
         r -= 1e5 * abs(used - N_SLOTS)   # 恰好 23 趟
         r -= nc * 1e6                     # 紧时限违规
         r -= m['makespan'] * 1.0          # 完工（第二优先）
