@@ -19,7 +19,16 @@ import torch.optim as optim
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from dqn23_enhanced import (data, OUTD, K, A_DIM, FEAT_DIM, S_DIM, state_vec, eval_full,
                             eval_improve_scene, build_candidates_f, make_mask, make_experience,
-                            terminal_r, load_init, clone)
+                            terminal_r, clone)
+from p2_solve import Flight
+
+START = os.environ.get('START_JSON', 'p2v46_23local.json')  # 起点解（23架最优 或 29架完工最优）
+
+
+def load_init():
+    d0 = json.load(open(os.path.join(OUTD, START), encoding='utf-8'))
+    return [Flight(f['fid'], [(s, list(bs)) for s, bs in f['route']], f['model'], data)
+            for f in d0['solution']]
 
 torch.manual_seed(0)
 np.random.seed(0)
@@ -298,6 +307,7 @@ def train_seed(seed, n_ep=150):
                     seed, ep + 1, m['makespan'], m['energy'], time.time() - t0), flush=True)
     q.eval()
     gkeys = []
+    saved_g = [False]
     for _ in range(10):
         fls = clone(init)
         for t in range(10):
@@ -344,6 +354,13 @@ def train_seed(seed, n_ep=150):
         m, s2, v, nc = eval_full(data, fls)
         if m and v == 0 and nc == 0:
             gkeys.append((m['makespan'], m['energy']))
+            if not saved_g[0]:
+                json.dump({'best': {'makespan': m['makespan'], 'energy': m['energy']},
+                           'solution': [{'fid': f.fid, 'model': f.model,
+                                         'route': [(s2, list(bs)) for s2, bs in f.route]} for f in fls]},
+                          open(os.path.join(OUTD, 'p2v58_rainbow_greedy.json'), 'w', encoding='utf-8'),
+                          ensure_ascii=False, indent=1)
+                saved_g[0] = True
     if best_fls is not None:
         d = {'best': {'makespan': best_key[0], 'energy': best_key[1]},
              'solution': [{'fid': f.fid, 'model': f.model,
