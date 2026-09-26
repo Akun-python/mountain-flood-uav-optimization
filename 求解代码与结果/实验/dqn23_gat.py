@@ -33,9 +33,9 @@ TAG = os.environ.get('TAG', '')
 START = os.environ.get('START_JSON', 'p2v54_mk_rettype.json')
 ROUNDS = int(os.environ.get('ROUNDS', '1'))  # 持续进化轮数（跨轮经验池保留）
 EPS0, EPS_END = 0.5, 0.05
-GF = 12
+GF = 13  # 12 + 紧急箱数（及时性第一优先序的直接感知）
 GH = 32
-S_DIM_X = 224  # 增强状态：170(23趟) + 电池4 + 余量3 + 超额趟6×7 + 额外趟统计2 = 221→224
+S_DIM_X = 226  # 224 + 全局紧急箱数 + 全局下一时限
 FA_X = 16  # 增强动作特征：12 + 约束余量3 + 时限差1
 
 
@@ -74,6 +74,7 @@ def build_graph(fls, m=None, mig_edges=None):
         X[i, 9] = float(sum(ord(ch) for ch in f.route[0][0]) % 16) / 15.0
         X[i, 10] = mk / 8000.0
         X[i, 11] = f.duration() / 3000.0
+        X[i, 12] = sum(1 for b in f.box_ids if data.boxes[b]['deadline_exp'] <= 3600.0) / 8.0  # 紧急箱数
     A = np.zeros((NP, NP), np.uint8)
     for i in range(N):
         A[i, i] = 1
@@ -108,6 +109,17 @@ def apply_cand_x(fls, c):
         if not nfb.is_feasible():
             return None
         return [u for u in fls if u.fid not in (a, b)] + [nfa, nfb]
+    if t == 'mer':
+        # 整趟合并：源单区趟 a 全部箱并入目标同区趟 b，删除 a（1 步代替多步迁移链）
+        fa_ = next(u for u in fls if u.fid == a)
+        fb_ = next(u for u in fls if u.fid == b)
+        if len(fa_.route) != 1 or len(fb_.route) != 1 or fa_.route[0][0] != fb_.route[0][0]:
+            return None
+        nb = list(fa_.route[0][1]) + list(fb_.route[0][1])
+        nfb = Flight(fb_.fid, [(fb_.route[0][0], nb)], fb_.model, data)
+        if not nfb.is_feasible():
+            return None
+        return [u for u in fls if u.fid not in (a, b)] + [nfb]
     if t == 'sp':
         f = next(u for u in fls if u.fid == a)
         parts = split_into_ab(fls, f, data)
@@ -212,6 +224,31 @@ def build_candidates_x(fls):
             sc.append(sc_)
             sidx.append(i)
             didx.append(i)
+        # 合并（动作完备性：同区单区趟 a 全箱并入同区未满载趟 b，1 步整趟合并）
+    if not os.environ.get('DISABLE_MER'):
+        for i, fi in enumerate(fls):
+            if len(fi.route) != 1:
+                continue
+            sid_a = fi.route[0][0]
+            for j, fj in enumerate(fls):
+                if j == i or len(fj.route) != 1 or fj.route[0][0] != sid_a:
+                    continue
+                Qj = {'A': 25.0, 'B': 30.0, 'C': 80.0}[fj.model]
+                Vj = {'A': 0.058, 'B': 0.071, 'C': 0.25}[fj.model]
+                if fj.total_mass + fi.total_mass > Qj + 1e-9 or fj.total_vol + fi.total_vol > Vj + 1e-9:
+                    continue
+                pi = pt[fi.model] / np_[fi.model]
+                pj = pt[fj.model] / np_[fj.model]
+                sc_ = (pi - pj) / 7000.0 - 0.005 * len(fi.box_ids)  # 源池减负为主
+                c.append(('mer', fi.fid, fj.fid, -1, sid_a))
+                fa.append([0.0, 1.0, 0.0, pi / 7000.0, pj / 7000.0,
+                          fi.total_mass / 80.0, (fj.duration() + fi.duration()) / 3000.0,
+                          len(fj.box_ids) / 8.0, fi.duration() / 3000.0, 0.0, sc_, 1.0,
+                          (Qj - fj.total_mass - fi.total_mass) / Qj, (Vj - fj.total_vol - fi.total_vol) / Vj,
+                          max(0.0, (1.0 - 0.2) * {'A': 4.5, 'B': 4.0, 'C': 8.0}[fj.model] - fj.energy()) / 2.0, 0.0])
+                sc.append(sc_)
+                sidx.append(i)
+                didx.append(j)
     # 拆分（动作完备性：满载单区趟(≥3箱) → A/B 子趟；≥3 保证每趟至多拆 1 次）
     if not os.environ.get('DISABLE_SPLIT'):
         for i, fi in enumerate(fls):
@@ -398,24 +435,41 @@ class PER:
 
 
 class ClassifiedReplay:
+    """v67 四桶分层回放：imp_big(完工降>30s)/imp_small(完工降≤30s或能耗降)/term/rest。
+    修复三桶缺陷：term 近空占 30% 配额浪费、imp 桶混淆大幅/小幅改善。
+    空桶配额自动转移给 imp_big；push 优先级按奖励幅度加权（完工改善大的经验优先回放）。"""
+
     def __init__(self, cap=60000, alpha=0.6, beta0=0.4):
-        self.b = {'imp': PER(cap // 2, alpha, beta0),
-                  'term': PER(cap // 4, alpha, beta0),
+        self.b = {'imp_big': PER(cap // 4, alpha, beta0),
+                  'imp_small': PER(cap // 4, alpha, beta0),
+                  'term': PER(cap // 8, alpha, beta0),
                   'rest': PER(cap // 4, alpha, beta0)}
 
     def push(self, e, p=1.0):
-        kind = 'term' if e[10] > 0.5 else ('imp' if e[5] > 1e-3 else 'rest')  # e[10]=done, e[5]=r
-        self.b[kind].push(e, p)
+        r = e[5]
+        if e[10] > 0.5:
+            kind = 'term'
+        elif r > 0.5:  # 完工降 >30s（d_mk/60>0.5）
+            kind = 'imp_big'
+        elif r > 1e-3:
+            kind = 'imp_small'
+        else:
+            kind = 'rest'
+        self.b[kind].push(e, p * (1.0 + 3.0 * max(0.0, r)))  # 奖励幅度加权优先级（温和）
 
     def total(self):
         return sum(len(b.buf) for b in self.b.values())
 
     def sample(self, n):
-        q_imp = int(n * IMP_R)
-        q_term = int(n * 0.30)
-        quota = {'imp': q_imp, 'term': q_term, 'rest': n - q_imp - q_term}
+        quota = {'imp_big': int(n * 0.15), 'imp_small': int(n * 0.35),
+                 'term': int(n * 0.10), 'rest': n - int(n * 0.15) - int(n * 0.35) - int(n * 0.10)}
         out, w, refs = [], [], []
-        for k in ['imp', 'term', 'rest']:
+        # 空桶配额 → imp_big（term 常空，修复配额浪费）
+        for k in ['term', 'rest', 'imp_small']:
+            if not self.b[k].buf and quota[k] > 0:
+                quota['imp_big'] += quota[k]
+                quota[k] = 0
+        for k in ['imp_big', 'imp_small', 'term', 'rest']:
             bk = self.b[k]
             if not bk.buf:
                 continue
@@ -475,6 +529,10 @@ def state_x(fls, m):
     # 额外趟统计（拆分后 >29 趟折叠：趟数 + 总时长）
     extra = srt[29:]
     v += [len(extra) / 10.0, sum(f.duration() for f in extra) / 9000.0]
+    # 全局及时性特征（2）：未完成紧急箱数 + 全局下一时限
+    all_urg = sum(1 for f in fls for b in f.box_ids if data.boxes[b]['deadline_exp'] <= 3600.0)
+    next_dl = min(data.boxes[b]['deadline_exp'] for f in fls for b in f.box_ids)
+    v += [all_urg / 25.0, next_dl / 14400.0]
     if os.environ.get('DISABLE_STATE_X'):  # 消融：关闭增强段（电池/余量/超趟/额外趟）→ 等价 170 维
         v = v[:170] + [0.0] * (S_DIM_X - 170)
     v = np.asarray(v, np.float32)
@@ -626,8 +684,9 @@ def train_seed(seed, n_ep=150, rp=None):
         s2, x2, a2, pv2 = exp_graph(nf)
         rp.push((s, x, adj, pv, bi, r, s2, x2, a2, pv2, 0.0, mk, feats[bi], sidx[bi], didx[bi]), p=2.0)
         fls = nf
-    print('[seed%d] 预填 %d 条 (imp/term/rest=%d/%d/%d)' % (
-        seed, rp.total(), len(rp.b['imp'].buf), len(rp.b['term'].buf), len(rp.b['rest'].buf)), flush=True)
+    print('[seed%d] 预填 %d 条 (imp_big/imp_small/term/rest=%d/%d/%d/%d)' % (
+        seed, rp.total(), len(rp.b['imp_big'].buf), len(rp.b['imp_small'].buf),
+        len(rp.b['term'].buf), len(rp.b['rest'].buf)), flush=True)
     eps = EPS0
     best_fls = None
     best_key = None
@@ -658,7 +717,7 @@ def train_seed(seed, n_ep=150, rp=None):
                     seed, ep + 1, m['makespan'], m['energy'], time.time() - t0), flush=True)
     q.eval()
     gkeys = []
-    saved_g = [False]
+    gbest = None
     for _ in range(10):
         fls = clone(init)
         for t in range(10):
@@ -713,13 +772,13 @@ def train_seed(seed, n_ep=150, rp=None):
         m, s2, v, nc = eval_full(data, fls)
         if m and v == 0 and nc == 0:
             gkeys.append((m['makespan'], m['energy']))
-            if not saved_g[0]:
+            if gbest is None or (m['makespan'], m['energy']) < gbest:
+                gbest = (m['makespan'], m['energy'])
                 json.dump({'best': {'makespan': m['makespan'], 'energy': m['energy']},
                            'solution': [{'fid': f.fid, 'model': f.model,
                                          'route': [(s2, list(bs)) for s2, bs in f.route]} for f in fls]},
                           open(os.path.join(OUTD, 'p2v61_gat%s_greedy.json' % TAG), 'w', encoding='utf-8'),
                           ensure_ascii=False, indent=1)
-                saved_g[0] = True
     if best_fls is not None:
         json.dump({'best': {'makespan': best_key[0], 'energy': best_key[1]},
                    'solution': [{'fid': f.fid, 'model': f.model,
