@@ -1,0 +1,42 @@
+{
+ "input": "p2v40_mk_tol6_0.json",
+ "base_flights": 29,
+ "results": [
+  {
+   "seed": 7,
+   "tag": "v40mk",
+   "joint": 7954.3,
+   "joint_min": 132.6,
+   "transport_mk": 7954.3,
+   "transport_min": 132.6,
+   "transport_energy": 74.56,
+   "flights": 29,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "relay_energy": 3.749,
+   "cover_bad": 0,
+   "overlap": 0.0,
+   "mpen": 405.0,
+   "battery_violations": 0,
+   "relay_ret_max": 7907.0
+  },
+  {
+   "seed": 77,
+   "tag": "v40mk",
+   "joint": 7779.2,
+   "joint_min": 129.7,
+   "transport_mk": 7779.2,
+   "transport_min": 129.7,
+   "transport_energy": 74.56,
+   "flights": 29,
+   "tardy_w": 0.0,
+   "hard_ok": true,
+   "relay_energy": 3.785,
+   "cover_bad": 0,
+   "overlap": 0.0,
+   "mpen": 580.0,
+   "battery_violations": 0,
+   "relay_ret_max": 7724.0
+  }
+ ]
+}
