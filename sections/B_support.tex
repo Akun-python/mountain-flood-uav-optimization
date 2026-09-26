@@ -1,0 +1,75 @@
+%%==================== 支撑材料说明（附录：结果验收清单 + 运行环境）====================
+\section{支撑材料说明}
+
+全部程序、结果与数据随支撑材料提供。压缩包内目录为：\texttt{求解代码与结果/代码/}
+（模型求解、校验与图表源程序）、\texttt{求解代码与结果/结果/}（结果文件与
+\texttt{进化\_v25} 迭代明细）、\texttt{求解代码与结果/实验/}（迭代实验脚本）、
+\texttt{求解代码与结果/结果/结果提交模板.xlsx}（结果提交模板，六个工作表）。
+结果文件由对应源程序直接生成，在 Python 3.14 环境（依赖 numpy、scipy、pandas、
+openpyxl、matplotlib、torch）下按随附说明依次运行即可复现全部数值结果。
+
+\begin{table}[!htbp]
+\caption{支撑材料文件列表（节选）：程序与结果}\label{tab:support}
+\centering
+\small
+\begin{tabular}{ll}
+\toprule
+文件名 & 说明 \\
+\midrule
+\multicolumn{2}{l}{\textit{（一）模型求解与校验程序（\texttt{代码/}）}} \\
+\texttt{core.py} & 数据装载、DEM 读取、航线几何、等效航程能耗、两阶段充电、链路损耗与遮挡、中继转场 \\
+\texttt{p1\_solve.py} & 问题一最大安全载荷二分求解与货箱组批 \\
+\texttt{p2\_solve.py} 与 \texttt{p2v28\_compliant.py} & 问题二调度器与严格电池口径 EDF 派单 \\
+\texttt{p3\_co2.py}、\texttt{p3\_construct.py}、\texttt{p3\_margins.py} & 问题三中继覆盖、时序构造与链路余量 \\
+\texttt{p4\_solve.py} 与 \texttt{实验/v119\_p4\_24f.py} & 问题四最小机队搜索与分区核算（趟级分量） \\
+\texttt{export\_excel.py} & 写入《结果提交模板.xlsx》六个工作表 \\
+\midrule
+\multicolumn{2}{l}{\textit{（二）结果文件（\texttt{结果/进化\_v25/}）}} \\
+\texttt{v113\_best.json} & 问题二 24 架冠军（24 架 / 6571.4 s / 69.13 kWh，与 v112 一致） \\
+\texttt{p2v89\_champion25.json} & 25 架历史基准 \\
+\texttt{p3v117\_24f.json} & 问题三 24 架联动重算（中继 3.56 kWh、联合完工 7077 s） \\
+\texttt{p2flights24\_tab.tex} & 论文 tab:p2flights 表体（24 架真实调度） \\
+\midrule
+\multicolumn{2}{l}{\textit{（三）说明文件}} \\
+\texttt{README.md} & 迭代总览、严格口径定义、验证链与诚实边界 \\
+\texttt{AI 工具使用详情} & AI 工具、使用环节、提示方式与人工核验记录（随支撑材料） \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{结果验收清单}
+
+结果验收以三套校验程序交叉核验（\texttt{dispatch\_compliant}、\texttt{eval\_full}、
+\texttt{check\_battery}）加独立审计脚本（\texttt{实验/v120\_audit.py}）执行，全部通过，
+覆盖结构正确、数值自洽、物理合法三个层面，摘要见表 \ref{tab:verify}。
+
+\begin{table}[!htbp]
+\caption{结果验收清单（全部通过）}\label{tab:verify}
+\centering
+\small
+\begin{tabular}{ll}
+\toprule
+层面 & 验收项 \\
+\midrule
+问题一 & 45 个（机型$\times$服务区）组合二分结果与逐区载荷核算一致；组批 18 架次 /
+59.02 kWh，各架次返航荷电状态均不低于 20\% \\
+问题二 & 24 架 / 6571.4 s / 69.13 kWh（A 11、B 7、C 6）；严格口径 hard=True、
+vv=0、nn=0、区一致 0 违例、电池 0 违规；80/80 箱全覆盖无重复；完工等于 B 池
+U06 链条返场上限 6571.4 s；v112 与 v113 冠军文件逐字节一致 \\
+问题三 & 1394 个需中继采样点全覆盖（cover\_bad=0）；W/E/N 能耗 2.091/0.986/
+0.483 kWh 与逐班核算一致；联合完工 7077 s（中继代价 +506 s）；E/N 需求窗口
+重叠 727 s 已如实审计（机器级需协调或增配第 3 架） \\
+问题四 & 三组分区 57/17/6 箱并集恰为 80 箱无重复；最小机队与冗余配置（表 10.1）
+与核算一致；两组 57/23 箱、质量 546/212 kg 与逐箱归组一致 \\
+物理自检 & 等效航程、两阶段充电、链路损耗与遮挡判定公式与题给规则逐项对照一致
+（见附录 A 节选与论文正文） \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{运行环境}
+
+全部计算在一台 Windows 11 单机（CPU 计算，无需 GPU）上完成：Python 3.14
+（numpy、scipy、pandas、openpyxl、matplotlib；强化学习部分使用 torch），
+LaTeX 环境为 TeX Live 2024（XeLaTeX 编译）。全部实验统一设置
+\texttt{PYTHONHASHSEED=0} 保证确定性，结果与随附结果文件逐位一致。
