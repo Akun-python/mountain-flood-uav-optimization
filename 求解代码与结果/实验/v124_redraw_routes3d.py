@@ -19,6 +19,7 @@ from mpl_toolkits.mplot3d import Axes3D  # noqa
 from core import Data, node_positions
 from p2_solve import Flight
 from p2v28_compliant import dispatch_compliant
+import nature_style as ns
 
 FIG = 'figures'
 os.makedirs(FIG, exist_ok=True)
@@ -28,7 +29,7 @@ FL = [Flight(f['fid'], [(s, list(bs)) for s, bs in f['route']], f['model'], data
 sch, _ = dispatch_compliant(data, FL)
 print('24架 mk=%.1f' % max(sch[f.fid]['return'] for f in FL))
 
-MODEL_COLOR = {'A': '#1f77b4', 'B': '#ff7f0e', 'C': '#d62728'}
+MODEL_COLOR = ns.MODEL_COLORS
 PHASE_COLOR = {'climb': '#2ca02c', 'cruise': '#1f77b4', 'descent': '#d62728', 'prep': '#999999'}
 LAT0 = data.centers[data.OID]['lat']; LON0 = data.centers[data.OID]['lon']
 KX = 111320.0 * math.cos(math.radians(LAT0)); KY = 110540.0
@@ -129,10 +130,10 @@ def fig_key():
     ax.plot_surface(x, y, z, cmap='terrain', alpha=0.26, linewidth=0, antialiased=True, rstride=3, cstride=3)
     for f in FL:
         if f.fid in C_ids:
-            plot_flight(ax, f, color='#d62728', lw=1.5, alpha=1.0, label='C 型满载' if f.fid == min(C_ids) else None)
+            plot_flight(ax, f, color=ns.C_C, lw=1.5, alpha=1.0, label='C 型满载' if f.fid == min(C_ids) else None)
     for f in FL:
         if f.fid in B_chain:
-            plot_flight(ax, f, color='#ff7f0e', lw=1.5, alpha=1.0, label='B 型链条' if f.fid == min(B_chain) else None)
+            plot_flight(ax, f, color=ns.C_B, lw=1.5, alpha=1.0, label='B 型链条' if f.fid == min(B_chain) else None)
     plot_sites(ax)
     ax.legend(loc='upper right', fontsize=8)
     style_ax(ax, '满载长链特写：C 型 6 趟重区满载与 B 型两条机链（U05/U06）')
