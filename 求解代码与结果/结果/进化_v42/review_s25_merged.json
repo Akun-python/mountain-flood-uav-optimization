@@ -1,0 +1,50 @@
+{
+ "name": "s25_merged",
+ "verdicts": [
+  {
+   "item": "架次数",
+   "ok": true,
+   "detail": "25"
+  },
+  {
+   "item": "每架质量/体积/返航能量可行",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "返航安全余量",
+   "ok": true,
+   "detail": "最小余量=0.244 kWh"
+  },
+  {
+   "item": "80箱唯一无缺",
+   "ok": true,
+   "detail": "80"
+  },
+  {
+   "item": "区一致零跨区",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "硬时限/零迟到",
+   "ok": true,
+   "detail": "tardy=0.00"
+  },
+  {
+   "item": "口径 makespan/能耗",
+   "ok": true,
+   "detail": "mk=7112.8 en=70.28 fl=25"
+  },
+  {
+   "item": "电池满充",
+   "ok": true,
+   "detail": "[]"
+  }
+ ],
+ "met": {
+  "flights": 25,
+  "makespan": 7112.8,
+  "energy": 70.28
+ }
+}

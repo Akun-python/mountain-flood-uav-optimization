@@ -9,15 +9,14 @@ import p3_co2
 from p2_solve import Flight, dispatch, evaluate
 
 data = p3_co2.data
+RES = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'results')
 OUTV = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '结果', '进化_v42')
 tmpdir = os.path.join(OUTV, 'p3in')
 p3_co2.OUT = tmpdir
 
-sol = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..',
-                                  '结果', '进化_v25', 'p2v41_mk_tol6_0.json'),
-                     encoding='utf-8'))['solution']
+sol = json.load(open(os.path.join(RES, 'p2_results.json'), encoding='utf-8'))
 fls = [Flight(f['fid'], [(s, list(bs)) for s, bs in f['route']], f['model'], data)
-       for f in sol]
+       for f in sol['flights']]
 schedule, _ = dispatch(data, fls)
 met = evaluate(data, fls, schedule)
 
@@ -27,12 +26,15 @@ cov_bad = sum(1 for m in m_base if m['n_cov'] < m['n'])
 mp, minfo, esum = sv.machine_penalty(m_base)
 n_need = sum(m['n'] for m in m_base)
 
-BANDS = {'W': (716, 6777), 'E': (760, 3354), 'N': (2638, 3365)}
 REL = data.relay_type
 EB = (1 - REL['rho']) * REL['E_use']
 sorties = []
 relay_e = 0.0
-for k, (g, (t0, t1)) in enumerate(BANDS.items()):
+for k, (g, lst) in enumerate(minfo.items()):
+    if not lst:
+        continue
+    t0 = min(x[0] for x in lst)
+    t1 = max(x[1] for x in lst)
     e = p3_co2.relay_mission_energy(*p3_co2.POS_OF[g], data, t1 - t0)
     relay_e += e
     sorties.append({'relay': 'R01' if g == 'W' else 'R02', 'pos': g,
@@ -49,7 +51,7 @@ for f in sorted(fls, key=lambda x: x.fid):
 
 jc = max(met['makespan'], max(s['t1'] + 300 for s in sorties))
 j = {
-    'solver': 'v42-baseline', 'input': 'p2v41_mk_tol6_0.json',
+    'solver': 'v42-25merge', 'input': 'results/p2_results.json (25舏)',
     'offsets': {}, 'obj': 0.0,
     'met': {'hard_ok': met['hard_ok'], 'tardy_w': met['tardy_w'],
             'makespan': round(met['makespan'], 1), 'energy': round(met['energy'], 2),
