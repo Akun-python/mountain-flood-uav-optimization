@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  26 SEP 2026 09:05
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  26 SEP 2026 12:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1622,6 +1622,12 @@ File: figures/p2_pareto2d.png Graphic file (type bmp)
  [11]
 File: figures/p2_network.png Graphic file (type bmp)
 <figures/p2_network.png>
+File: figures/routes3d_all.png Graphic file (type bmp)
+<figures/routes3d_all.png>
+File: figures/routes3d_model.png Graphic file (type bmp)
+<figures/routes3d_model.png>
+File: figures/routes3d_alt.png Graphic file (type bmp)
+<figures/routes3d_alt.png>
 File: figures/p2_gantt.png Graphic file (type bmp)
 <figures/p2_gantt.png>
 File: figures/p2_energy_decomp.png Graphic file (type bmp)
@@ -1633,22 +1639,23 @@ File: figures/p2_soc_curves.png Graphic file (type bmp)
 File: figures/p2_delivery.png Graphic file (type bmp)
 <figures/p2_delivery.png>
  [12]) (./sections/7_problem3.tex
-[13] [14] [15] [16]
+[13] [14] [15] [16] [17] [18]
 File: figures/p3_coverage.png Graphic file (type bmp)
 <figures/p3_coverage.png>
- [17
+ [19
 
 ]
 File: figures/p3_relay_coverage.png Graphic file (type bmp)
 <figures/p3_relay_coverage.png>
 File: figures/p3_relay_tl.png Graphic file (type bmp)
 <figures/p3_relay_tl.png>
- [18] [19]
+ [20] [21]
 File: figures/p3_comm_tl.png Graphic file (type bmp)
 <figures/p3_comm_tl.png>
 File: figures/p3_gantt.png Graphic file (type bmp)
 <figures/p3_gantt.png>
- [20]) (./sections/8_sensitivity.tex [21]
+ [22])
+(./sections/8_sensitivity.tex [23]
 File: figures/p1_sensitivity.png Graphic file (type bmp)
 <figures/p1_sensitivity.png>
 
@@ -1661,19 +1668,19 @@ Overfull \hbox (44.90091pt too wide) in paragraph at lines 41--47
  ，|
  []
 
-[22]
+[24]
 File: figures/p3_margin_hist.png Graphic file (type bmp)
 <figures/p3_margin_hist.png>
-) (./sections/10_problem4.tex [23]
+) (./sections/10_problem4.tex [25]
 File: figures/p4_partition.png Graphic file (type bmp)
 <figures/p4_partition.png>
 File: figures/p4_load.png Graphic file (type bmp)
 <figures/p4_load.png>
- [24]
+ [26]
 File: figures/p4_gap.png Graphic file (type bmp)
 <figures/p4_gap.png>
 ) (./sections/9_evaluation.tex
-[25] [26])
+[27] [28])
 Underfull \hbox (badness 7203) in paragraph at lines 116--117
 []\TU/SimSun(1)/m/n/12.045 新 华 社\TU/TimesNewRoman(0)/m/n/12.045 . \TU/SimSun(1)
 /m/n/12.045 记 者 手 记：|  抵 近 广 西 横 州 镇 龙 乡 \TU/TimesNewRoman(0)/m/n/12.045 [EB/OL
@@ -1717,25 +1724,25 @@ Package fontspec Info: Font family 'FangSong(0)' created for font 'FangSong'
 (fontspec)             <->"FangSong/OT:script=hani;language=dflt;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
- [27]
+ [29]
 (c:/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/02/21 1.10 listings language file
-) [28]) [29]
+) [30]) [31]
 (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2022/08/05>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 7919A49BF3817EA8089A0697BFB4730A;7305.
+(rerunfilecheck)             Checksum: 880AC1A08EA56CABDEB9A9DDA9C09981;7305.
  ) 
 Here is how much of TeX's memory you used:
- 35895 strings out of 476720
- 760995 string characters out of 5801445
+ 35934 strings out of 476720
+ 762436 string characters out of 5801445
  2328842 words of memory out of 5000000
- 57154 multiletter control sequences out of 15000+600000
+ 57190 multiletter control sequences out of 15000+600000
  573910 words of font info for 179 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  108i,11n,114p,476b,1988s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (30 pages).
+Output written on main.xdv (32 pages, 498184 bytes).
