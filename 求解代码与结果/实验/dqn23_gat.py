@@ -20,6 +20,7 @@ import torch.optim as optim
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from dqn23_enhanced import (data, OUTD, K, A_DIM, FEAT_DIM, S_DIM, state_vec, eval_full,
                             pool_stats, make_mask, terminal_r, clone)
+from p2v35_mk import split_into_ab
 from p2_solve import Flight
 
 torch.manual_seed(0)
@@ -34,6 +35,8 @@ ROUNDS = int(os.environ.get('ROUNDS', '1'))  # 持续进化轮数（跨轮经验
 EPS0, EPS_END = 0.5, 0.05
 GF = 12
 GH = 32
+S_DIM_X = 224  # 增强状态：170(23趟) + 电池4 + 余量3 + 超额趟6×7 + 额外趟统计2 = 221→224
+FA_X = 16  # 增强动作特征：12 + 约束余量3 + 时限差1
 
 
 def load_init():
@@ -47,9 +50,10 @@ def zone_of(bid):
 
 
 def build_graph(fls, m=None, mig_edges=None):
-    """趟图：节点特征 (N,12) + 邻接（同池/同区/可行迁移对）。"""
+    """趟图：节点特征 (NP=32,12) + 邻接（同池/同区/可行迁移对），pad 固定节点数（拆分改变趟数）。"""
+    NP = 48
     N = len(fls)
-    X = np.zeros((N, GF), np.float32)
+    X = np.zeros((NP, GF), np.float32)
     pt = {'A': 0.0, 'B': 0.0, 'C': 0.0}
     np_ = {'A': 4, 'B': 2, 'C': 2}
     E_USE = {'A': 4.5, 'B': 4.0, 'C': 8.0}
@@ -70,7 +74,7 @@ def build_graph(fls, m=None, mig_edges=None):
         X[i, 9] = float(sum(ord(ch) for ch in f.route[0][0]) % 16) / 15.0
         X[i, 10] = mk / 8000.0
         X[i, 11] = f.duration() / 3000.0
-    A = np.zeros((N, N), np.uint8)
+    A = np.zeros((NP, NP), np.uint8)
     for i in range(N):
         A[i, i] = 1
         for j in range(i + 1, N):
@@ -104,6 +108,12 @@ def apply_cand_x(fls, c):
         if not nfb.is_feasible():
             return None
         return [u for u in fls if u.fid not in (a, b)] + [nfa, nfb]
+    if t == 'sp':
+        f = next(u for u in fls if u.fid == a)
+        parts = split_into_ab(fls, f, data)
+        if not parts:
+            return None
+        return [u for u in fls if u.fid != a] + parts
     if t == 'ret':
         f = next(u for u in fls if u.fid == a)
         nf = Flight(f.fid, f.route, x, data)
@@ -165,10 +175,18 @@ def build_candidates_x(fls):
                 pi = pt[fi.model] / np_[fi.model]
                 pj = pt[fj.model] / np_[fj.model]
                 sc_ = (pi - pj) / 7000.0
+                Qj = {'A': 25.0, 'B': 30.0, 'C': 80.0}[fj.model]
+                Vj = {'A': 0.058, 'B': 0.071, 'C': 0.25}[fj.model]
+                Ejm = (1.0 - 0.2) * {'A': 4.5, 'B': 4.0, 'C': 8.0}[fj.model] - fj.energy()
+                csrc = min(data.boxes[bb]['deadline_exp'] for bb in fi.box_ids)
+                cdst = min(data.boxes[bb]['deadline_exp'] for bb in fj.box_ids)
+                c_ = (csrc - cdst) / 14400.0
                 c.append(('mig', fi.fid, fj.fid, b, zb))
                 fa.append([0.0, 1.0, 0.0, pi / 7000.0, pj / 7000.0,
                           nb['mass'] / 80.0, fj.duration() / 3000.0, len(fj.box_ids) / 8.0,
-                          fi.duration() / 3000.0, 0.0, sc_, 1.0])
+                          fi.duration() / 3000.0, 0.0, sc_, 1.0,
+                          (Qj - fj.total_mass) / Qj, (Vj - fj.total_vol) / Vj,
+                          max(0.0, Ejm / 2.0), c_])
                 sc.append(sc_)
                 sidx.append(i)
                 didx.append(j)
@@ -182,13 +200,36 @@ def build_candidates_x(fls):
             pi = pt[fi.model] / np_[fi.model]
             pj = pt[gm] / np_[gm]
             sc_ = (pi - pj) / 7000.0 + 0.02
+            Qg = {'A': 25.0, 'B': 30.0, 'C': 80.0}[gm]
+            Vg = {'A': 0.058, 'B': 0.071, 'C': 0.25}[gm]
+            Egm = (1.0 - 0.2) * {'A': 4.5, 'B': 4.0, 'C': 8.0}[gm] - nf.energy()
             c.append(('ret', fi.fid, -1, None, gm))
             fa.append([1.0, 0.0, 0.0, pi / 7000.0, pj / 7000.0,
                       fi.total_mass / 80.0, nf.duration() / 3000.0, len(fi.box_ids) / 8.0,
-                      fi.duration() / 3000.0, 0.0, sc_, 0.0])
+                      fi.duration() / 3000.0, 0.0, sc_, 0.0,
+                      (Qg - nf.total_mass) / Qg, (Vg - nf.total_vol) / Vg,
+                      max(0.0, Egm / 2.0), 0.0])
             sc.append(sc_)
             sidx.append(i)
             didx.append(i)
+    # 拆分（动作完备性：满载单区趟(≥3箱) → A/B 子趟；≥3 保证每趟至多拆 1 次）
+    for i, fi in enumerate(fls):
+        if len(fi.route) != 1 or len(fi.box_ids) < 3:
+            continue
+        parts = split_into_ab(fls, fi, data)
+        if not parts:
+            continue
+        pi = pt[fi.model] / np_[fi.model]
+        sc_ = 0.01  # 拆分偏好低（完工优先下多为反效果，留给 RL 判断）
+        c.append(('sp', fi.fid, -1, None, None))
+        fa.append([0.0, 0.0, 0.0, pi / 7000.0, pi / 7000.0,
+                  fi.total_mass / 80.0, parts[0].duration() / 3000.0, len(fi.box_ids) / 8.0,
+                  fi.duration() / 3000.0, 0.0, sc_, 2.0,
+                  (25.0 - parts[0].total_mass) / 25.0, (0.058 - parts[0].total_vol) / 0.058,
+                  max(0.0, (1.0 - 0.2) * 4.5 - parts[0].energy()) / 2.0, 0.0])
+        sc.append(sc_)
+        sidx.append(i)
+        didx.append(i)
     if len(c) > K:
         ord_ = np.argsort(-np.array(sc))[:K]
         c = [c[o] for o in ord_]
@@ -197,7 +238,7 @@ def build_candidates_x(fls):
         sidx = [sidx[o] for o in ord_]
         didx = [didx[o] for o in ord_]
     # pad 到 K+1（STOP 在 K，特征/评分/节点索引对齐）
-    F = np.zeros((K + 1, FEAT_DIM), np.float32)
+    F = np.zeros((K + 1, FA_X), np.float32)
     S = np.zeros(K + 1, np.float32)
     SI = np.zeros(K + 1, np.int64)
     DI = np.zeros(K + 1, np.int64)
@@ -207,7 +248,7 @@ def build_candidates_x(fls):
         S[i] = sc[i]
         SI[i] = sidx[i]
         DI[i] = didx[i]
-    F[K] = [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    F[K] = [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     S[K] = -10.0
     return c, F, S, SI, DI
 
@@ -293,8 +334,8 @@ class GATNet(nn.Module):
         np.random.seed(seed)
         self.g1 = GATLayer(GF, GH)
         self.g2 = GATLayer(GH, GH)
-        self.senc = nn.Sequential(nn.Linear(S_DIM, 128), nn.ReLU(), nn.Linear(128, 128), nn.ReLU())
-        self.aenc = nn.Sequential(nn.Linear(FEAT_DIM, 64), nn.ReLU())
+        self.senc = nn.Sequential(nn.Linear(S_DIM_X, 128), nn.ReLU(), nn.Linear(128, 128), nn.ReLU())
+        self.aenc = nn.Sequential(nn.Linear(FA_X, 64), nn.ReLU())
         # 边级动作表征：g(e_src, e_dst, e_dst-e_src, fa) → 64
         self.edge = nn.Sequential(nn.Linear(GH * 3 + 64, 64), nn.ReLU())
         self.v = nn.Sequential(nn.Linear(GH * 2 + 5, 128), nn.ReLU(), nn.Linear(128, 1))  # 中心化 V：readout→标量
@@ -307,9 +348,11 @@ class GATNet(nn.Module):
 
     def readout(self, x, adj, pv):
         emb = self.embed(x, adj)
-        r = torch.cat([emb.mean(dim=1), emb.max(dim=1)[0],
+        valid = (x.sum(dim=-1, keepdim=True) > 0).float()  # (B,N,1) pad 掩码
+        r = torch.cat([(emb * valid).sum(dim=1) / valid.sum(dim=1).clamp(min=1e-3),
+                       ((emb * valid) + (1 - valid) * (-1e9)).max(dim=1)[0],
                        pv, pv.max(dim=-1, keepdim=True).values, pv.mean(dim=-1, keepdim=True)], dim=-1)
-        return self.v(r), emb  # (B,128), (B,N,GH)
+        return self.v(r), emb  # (B,1), (B,N,GH)
 
     def q(self, s, x, adj, pv, fa, sidx, didx):
         hs = self.senc(s)  # (B,128)
@@ -393,11 +436,53 @@ class ClassifiedReplay:
             self.b[k].update([i], [d])
 
 
+def state_x(fls, m):
+    """增强状态：170(23趟标准) + 电池周转4 + 约束余量3 + 超额趟特征(29架全编码, 6趟×7)。
+    修复 v58-v61 缺口：29 架时 state_vec 仅编码 23 趟，第 24-29 趟状态丢失。"""
+    v = list(state_vec(fls, m))
+    # 电池周转特征（4）：各池充电小时近似（隐性容量，dispatch 硬约束的软感知）
+    T_FULL = {'A': 1800.0, 'B': 2400.0, 'C': 3000.0}
+    E_USE = {'A': 4.5, 'B': 4.0, 'C': 8.0}
+    ch = {'A': 0.0, 'B': 0.0, 'C': 0.0}
+    for f in fls:
+        ch[f.model] += T_FULL[f.model] * (1.0 - min(1.0, f.energy() / E_USE[f.model])) / 3600.0
+    v += [ch['A'] / 8.0, ch['B'] / 8.0, ch['C'] / 10.0, (ch['A'] + ch['B'] + ch['C']) / 26.0]
+    # 约束余量（3）：全局 min 质量/体积/能量余量（感知约束紧度）
+    Q = {'A': 25.0, 'B': 30.0, 'C': 80.0}
+    V = {'A': 0.058, 'B': 0.071, 'C': 0.25}
+    qm, vm, em = 1.0, 1.0, 1.0
+    for f in fls:
+        qm = min(qm, (Q[f.model] - f.total_mass) / Q[f.model])
+        vm = min(vm, (V[f.model] - f.total_vol) / V[f.model])
+        em = min(em, (1.0 - 0.2) * E_USE[f.model] - f.energy())
+    v += [qm, vm, min(1.0, em / 2.0)]
+    # 超额趟（29 架时第 24-29 趟特征）
+    srt = sorted(fls, key=lambda f: f.fid)
+    for i in range(23, 29):
+        if i < len(srt):
+            f = srt[i]
+            mn = min(data.boxes[b]['deadline_exp'] for b in f.box_ids)
+            sid = f.route[0][0] if f.route else 'S000'
+            v += [f.duration() / 3000.0, f.energy() / 7.0, f.total_mass / 80.0,
+                  len(f.box_ids) / 8.0, mn / 14400.0,
+                  0.0 if f.model == 'A' else (0.5 if f.model == 'B' else 1.0),
+                  float(sum(ord(c) for c in sid) % 16) / 15.0]
+        else:
+            v += [0.0] * 7
+    # 额外趟统计（拆分后 >29 趟折叠：趟数 + 总时长）
+    extra = srt[29:]
+    v += [len(extra) / 10.0, sum(f.duration() for f in extra) / 9000.0]
+    v = np.asarray(v, np.float32)
+    if len(v) < S_DIM_X:
+        v = np.concatenate([v, np.zeros(S_DIM_X - len(v), np.float32)])
+    return v[:S_DIM_X]
+
+
 def exp_graph(fls, m=None):
     if m is None:
         m, _, _, _ = eval_full(data, fls)
     x, adj, pv = build_graph(fls, m, mig_edges_of(fls))
-    return state_vec(fls, m), x, adj, pv
+    return state_x(fls, m), x, adj, pv
 
 
 def rollout_step(qnet, fls, eps, rp, ring, cnt):
@@ -485,7 +570,7 @@ def train_batch(q, qt, opt, rp):
     FA = torch.tensor(np.array([e[12] for e in batch]), dtype=torch.float32).to(DEV)  # e[12]=fa
     SI = torch.tensor([e[13] for e in batch], dtype=torch.int64).to(DEV)
     DI = torch.tensor([e[14] for e in batch], dtype=torch.int64).to(DEV)
-    fnext = torch.zeros((len(batch), FEAT_DIM), dtype=torch.float32).to(DEV)
+    fnext = torch.zeros((len(batch), FA_X), dtype=torch.float32).to(DEV)
     fnext[:, 2] = 1.0  # STOP 特征
     with torch.no_grad():
         qt.eval()
