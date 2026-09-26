@@ -23,6 +23,9 @@ from dqn23_enhanced import (data, OUTD, K, A_DIM, FEAT_DIM, S_DIM, state_vec, ev
 from p2_solve import Flight
 
 START = os.environ.get('START_JSON', 'p2v46_23local.json')  # 起点解（23架最优 或 29架完工最优）
+NSTEP = int(os.environ.get('NSTEP', '3'))      # 经验池 n-step 采样步数（灵敏度实验）
+IMP_R = float(os.environ.get('IMP_RATIO', '0.4'))  # 改进经验采样配额（灵敏度实验）
+TAG = os.environ.get('TAG', '')                # 结果文件标识
 
 
 def load_init():
@@ -34,7 +37,6 @@ torch.manual_seed(0)
 np.random.seed(0)
 DEV = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print('device', DEV, flush=True)
-NSTEP = 3
 EPS0 = 0.5
 EPS_END = 0.05
 
@@ -144,7 +146,9 @@ class ClassifiedReplay:
         return sum(len(b.buf) for b in self.b.values())
 
     def sample(self, n, beta):
-        quota = {'imp': int(n * 0.40), 'term': int(n * 0.30), 'rest': n - int(n * 0.40) - int(n * 0.30)}
+        q_imp = int(n * IMP_R)
+        q_term = int(n * 0.30)
+        quota = {'imp': q_imp, 'term': q_term, 'rest': n - q_imp - q_term}
         out = []
         w = []
         refs = []  # (bucket, local_idx)
@@ -358,14 +362,14 @@ def train_seed(seed, n_ep=150):
                 json.dump({'best': {'makespan': m['makespan'], 'energy': m['energy']},
                            'solution': [{'fid': f.fid, 'model': f.model,
                                          'route': [(s2, list(bs)) for s2, bs in f.route]} for f in fls]},
-                          open(os.path.join(OUTD, 'p2v58_rainbow_greedy.json'), 'w', encoding='utf-8'),
+                          open(os.path.join(OUTD, 'p2v58_rb%s_greedy.json' % TAG), 'w', encoding='utf-8'),
                           ensure_ascii=False, indent=1)
                 saved_g[0] = True
     if best_fls is not None:
         d = {'best': {'makespan': best_key[0], 'energy': best_key[1]},
              'solution': [{'fid': f.fid, 'model': f.model,
                            'route': [(s2, list(bs)) for s2, bs in f.route]} for f in best_fls]}
-        json.dump(d, open(os.path.join(OUTD, 'p2v56_rainbow_seed%d.json' % seed), 'w', encoding='utf-8'),
+        json.dump(d, open(os.path.join(OUTD, 'p2v56_rb%s_seed%d.json' % (TAG, seed)), 'w', encoding='utf-8'),
                   ensure_ascii=False, indent=1)
     return best_key, gkeys
 
@@ -398,15 +402,15 @@ def main():
         ens = [k[1] for _, k in all_greedy]
         print('  greedy: mk=%.1f±%.1f, en=%.2f±%.3f (n=%d)' % (
             np.mean(mks), np.std(mks), np.mean(ens), np.std(ens), len(mks)), flush=True)
-    json.dump({'summary': 'Rainbow(Dueling+NoisyNet+分类经验池imp40%%/term30%%+PER+nstep3+Double+软目标) 3seed×%dep' % n_ep,
+    json.dump({'summary': 'Rainbow(Dueling+NoisyNet+分类池imp%d%%/term30%%+PER+nstep%d+Double) 3seed×%dep' % (int(IMP_R * 100), NSTEP, n_ep),
                'all_seed_best': {str(s): list(k) for s, k in all_best},
                'greedy_mean': [float(np.mean([k[0] for _, k in all_greedy])),
                                float(np.mean([k[1] for _, k in all_greedy]))] if all_greedy else None,
                'greedy_std': [float(np.std([k[0] for _, k in all_greedy])),
                               float(np.std([k[1] for _, k in all_greedy]))] if all_greedy else None},
-              open(os.path.join(OUTD, 'p2v56_rainbow.json'), 'w', encoding='utf-8'),
+              open(os.path.join(OUTD, 'p2v56_rb%s.json' % TAG), 'w', encoding='utf-8'),
               ensure_ascii=False, indent=1)
-    print('saved p2v56_rainbow.json 用时 %.0fs' % (time.time() - t0), flush=True)
+    print('saved p2v56_rb%s.json 用时 %.0fs' % (TAG, time.time() - t0), flush=True)
 
 
 if __name__ == '__main__':
