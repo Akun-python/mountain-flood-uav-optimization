@@ -34,13 +34,13 @@
      "C": 3
     },
     "alloc_bat": {
-     "A": 6,
-     "B": 4,
-     "C": 5
+     "A": 5,
+     "B": 3,
+     "C": 4
     },
     "alloc_relay": 3,
-    "alloc_comp": 10,
-    "makespan": 9291
+    "alloc_comp": 5,
+    "makespan": 9011
    },
    {
     "name": "G2",
@@ -54,17 +54,17 @@
     "mass": 100.0,
     "alloc_uav": {
      "A": 2,
-     "B": 2,
+     "B": 3,
      "C": 0
     },
     "alloc_bat": {
      "A": 3,
-     "B": 3,
+     "B": 4,
      "C": 0
     },
     "alloc_relay": 2,
-    "alloc_comp": 4,
-    "makespan": 5414
+    "alloc_comp": 2,
+    "makespan": 3903
    }
   ]
  },
@@ -87,18 +87,18 @@
     "nbox": 62,
     "mass": 599.0,
     "alloc_uav": {
-     "A": 3,
+     "A": 4,
      "B": 2,
      "C": 3
     },
     "alloc_bat": {
      "A": 5,
-     "B": 4,
-     "C": 5
+     "B": 3,
+     "C": 4
     },
     "alloc_relay": 2,
-    "alloc_comp": 11,
-    "makespan": 10047
+    "alloc_comp": 5,
+    "makespan": 9011
    },
    {
     "name": "G2",
@@ -112,17 +112,17 @@
     "mass": 100.0,
     "alloc_uav": {
      "A": 2,
-     "B": 2,
+     "B": 3,
      "C": 0
     },
     "alloc_bat": {
      "A": 3,
-     "B": 3,
+     "B": 4,
      "C": 0
     },
     "alloc_relay": 2,
-    "alloc_comp": 4,
-    "makespan": 5414
+    "alloc_comp": 2,
+    "makespan": 3903
    },
    {
     "name": "G3",
@@ -132,18 +132,18 @@
     "nbox": 6,
     "mass": 59.0,
     "alloc_uav": {
-     "A": 2,
+     "A": 0,
      "B": 0,
      "C": 2
     },
     "alloc_bat": {
-     "A": 2,
+     "A": 0,
      "B": 0,
      "C": 2
     },
     "alloc_relay": 3,
     "alloc_comp": 2,
-    "makespan": 2177
+    "makespan": 2300
    }
   ]
  }

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  26 SEP 2026 01:36
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.1.6)  26 SEP 2026 09:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1636,22 +1636,24 @@ File: figures/p2_delivery.png Graphic file (type bmp)
 [13] [14] [15] [16]
 File: figures/p3_coverage.png Graphic file (type bmp)
 <figures/p3_coverage.png>
- [17]
+ [17
+
+]
 File: figures/p3_relay_coverage.png Graphic file (type bmp)
 <figures/p3_relay_coverage.png>
 File: figures/p3_relay_tl.png Graphic file (type bmp)
 <figures/p3_relay_tl.png>
- [18]
+ [18] [19]
 File: figures/p3_comm_tl.png Graphic file (type bmp)
 <figures/p3_comm_tl.png>
 File: figures/p3_gantt.png Graphic file (type bmp)
 <figures/p3_gantt.png>
- [19]) (./sections/8_sensitivity.tex [20]
+ [20]) (./sections/8_sensitivity.tex [21]
 File: figures/p1_sensitivity.png Graphic file (type bmp)
 <figures/p1_sensitivity.png>
 
 Overfull \hbox (44.90091pt too wide) in paragraph at lines 41--47
-\TU/SimSun(1)/m/n/12.045 次\TU/TimesNewRoman(0)/m/n/12.045 /118.5min/74.56kWh\TU
+\TU/SimSun(1)/m/n/12.045 次\TU/TimesNewRoman(0)/m/n/12.045 /118.5min/70.28kWh\TU
 /SimSun(1)/m/n/12.045 、|  节 能 均 衡 \TU/TimesNewRoman(0)/m/n/12.045 21 \TU/SimSun
 (1)/m/n/12.045 架 次\TU/TimesNewRoman(0)/m/n/12.045 /131min/62.46kWh \TU/SimSun(1
 )/m/n/12.045 与 最 低 能 耗 \TU/TimesNewRoman(0)/m/n/12.045 19 \TU/SimSun(1)/m/n/12.
@@ -1659,39 +1661,39 @@ Overfull \hbox (44.90091pt too wide) in paragraph at lines 41--47
  ，|
  []
 
-[21]
+[22]
 File: figures/p3_margin_hist.png Graphic file (type bmp)
 <figures/p3_margin_hist.png>
-) (./sections/10_problem4.tex [22]
+) (./sections/10_problem4.tex [23]
 File: figures/p4_partition.png Graphic file (type bmp)
 <figures/p4_partition.png>
 File: figures/p4_load.png Graphic file (type bmp)
 <figures/p4_load.png>
- [23] [24]
+ [24]
 File: figures/p4_gap.png Graphic file (type bmp)
 <figures/p4_gap.png>
 ) (./sections/9_evaluation.tex
-[25])
-Underfull \hbox (badness 7203) in paragraph at lines 115--116
+[25] [26])
+Underfull \hbox (badness 7203) in paragraph at lines 116--117
 []\TU/SimSun(1)/m/n/12.045 新 华 社\TU/TimesNewRoman(0)/m/n/12.045 . \TU/SimSun(1)
 /m/n/12.045 记 者 手 记：|  抵 近 广 西 横 州 镇 龙 乡 \TU/TimesNewRoman(0)/m/n/12.045 [EB/OL
 ]. 2026-07-09[2026-08-07].
  []
 
 
-Overfull \hbox (3.42021pt too wide) in paragraph at lines 115--116
+Overfull \hbox (3.42021pt too wide) in paragraph at lines 116--117
 \TU/TimesNewRoman(0)/m/n/12.045 https://www.xinhuanet.com/politics/20260709/acf
 8e4b353304bb78007d8224f1cd2ef/c.html. 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 116--117
+Underfull \hbox (badness 10000) in paragraph at lines 117--118
 []\TU/SimSun(1)/m/n/12.045 新 华 每 日 电 讯\TU/TimesNewRoman(0)/m/n/12.045 . \TU/Sim
 Sun(1)/m/n/12.045 三 进 \TU/TimesNewRoman(0)/m/n/12.045 “\TU/SimSun(1)/m/n/12.045
  孤 岛 乡\TU/TimesNewRoman(0)/m/n/12.045 ”[EB/OL]. 2026-07-12[2026-08-07].
  []
 
-[26] (./sections/A_code.tex
+(./sections/A_code.tex
 
 Package fontspec Info: Could not resolve font "FangSong/BI" (it probably
 (fontspec)             doesn't exist).
@@ -1715,11 +1717,11 @@ Package fontspec Info: Font family 'FangSong(0)' created for font 'FangSong'
 (fontspec)             <->"FangSong/OT:script=hani;language=dflt;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
-
+ [27]
 (c:/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/02/21 1.10 listings language file
-) [27] [28])
-[29] (./main.aux)
+) [28]) [29]
+(./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2022/08/05>
@@ -1730,10 +1732,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Here is how much of TeX's memory you used:
  35895 strings out of 476720
  760995 string characters out of 5801445
- 2444842 words of memory out of 5000000
+ 2328842 words of memory out of 5000000
  57154 multiletter control sequences out of 15000+600000
  573910 words of font info for 179 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 108i,11n,114p,476b,2127s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,11n,114p,476b,1988s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on main.pdf (30 pages).
