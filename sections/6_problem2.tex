@@ -145,17 +145,44 @@ $C_{\max}=\max_k t_{\mathrm{return},k}$ 为完工时间，$E_{\mathrm{tot}}$ 为
 均衡方案共 25 架次，其中 A 型 11、B 型 8、C 型 6，全部 80 箱按时交付，即硬
 约束满足且加权迟到为零，投递位置全部落在箱属服务区（区一致复核零违例），
 完工时间约 118.5\,min（7113\,s），总能耗 70.28\,kWh。图
-\ref{fig:p2net} 给出 25 架次在数字高程背景上的航线网络，可见 C 型航线构成
-远距重载走廊，A、B 型负责短途轻载区，多区架次均按段序依次真实访问各服务区
-投送对应货箱；表 \ref{tab:p2flights} 给出架次明细，
-图 \ref{fig:p2gantt} 给出各无人机的时间线，完整逐箱交付时刻见《结果提交
-模板》Q2 工作表。
+\ref{fig:p2net} 给出 25 架次在数字高程背景上的航线网络，图
+\ref{fig:routes3d_all} 与图 \ref{fig:routes3d_model} 进一步以三维地形
+底图展示航线空间形态（C 型航线构成远距重载走廊，A、B 型负责短途轻载
+区，多区架次均按段序依次真实访问各服务区投送对应货箱），图
+\ref{fig:routes3d_alt} 给出代表性架次的高度剖面；表 \ref{tab:p2flights}
+给出架次明细，图 \ref{fig:p2gantt} 给出各无人机的时间线，完整逐箱交付
+时刻见《结果提交模板》Q2 工作表。
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.82\textwidth]{figures/p2_network.png}
 \caption{问题二均衡方案航线网络（按机型着色）}
 \label{fig:p2net}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/routes3d_all.png}
+\caption{均衡方案三维航线总图（30\,m DEM 地形底图；按机型着色：
+C 型红色远距重载走廊、B 型橙色满载链、A 型蓝色短途轻载；统一视角
+elev=26°、azim=-58°）}
+\label{fig:routes3d_all}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1.0\textwidth]{figures/routes3d_model.png}
+\caption{分机型三维航线：C 型 6 架次构成重区满载走廊，B 型 8 架次
+以三箱满载链覆盖轻区与中距区，A 型 11 架次执行短途轻载与尾箱投送}
+\label{fig:routes3d_model}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/routes3d_alt.png}
+\caption{代表性架次高度剖面（爬升-巡航-下降相位着色）：体现航线严格贴
+地形走廊 +50\,m 巡航、终点下降至服务区上方 30\,m 投送}
+\label{fig:routes3d_alt}
 \end{figure}
 
 \begin{table}[htbp]
