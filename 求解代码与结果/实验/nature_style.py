@@ -1,0 +1,97 @@
+# -*- coding: utf-8 -*-
+"""v125：Nature 级统一绘图样式（论文全部配图共用）。
+- 无图内标题、去上右脊、细网格、白底
+- 克制三族配色（中性灰 + 信号色 + 强调色），色盲友好
+- 字号阶梯 7/8/9/11，行文可读；PDF+PNG 双格式 300dpi 导出
+"""
+import os
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+from matplotlib import font_manager
+
+# 中文字体：优先模板随附字体，避免依赖系统安装
+_font_candidates = [
+    os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '..', 'SimHei.ttf'),
+    r'..\..\SimHei.ttf',
+    r'C:\Windows\Fonts\msyh.ttc',
+    r'C:\Windows\Fonts\simhei.ttf',
+    r'C:\Windows\Fonts\simsun.ttc',
+]
+for f in _font_candidates:
+    if os.path.exists(f):
+        font_manager.fontManager.addfont(os.path.abspath(f))
+
+plt.rcParams.update({
+    # 字体：英文数字优先 Helvetica/Arial，中文回退微软雅黑
+    'font.family': 'sans-serif',
+    'font.sans-serif': ['Helvetica', 'Arial', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans'],
+    'axes.unicode_minus': False,
+    'figure.dpi': 300,
+    'savefig.dpi': 300,
+    'savefig.bbox': 'tight',
+    'savefig.pad_inches': 0.06,
+    'pdf.fonttype': 42,
+    'ps.fonttype': 42,
+    # 字号阶梯（Nature 默认 7pt 起步）
+    'font.size': 9,
+    'axes.labelsize': 11,
+    'axes.titlesize': 0,          # 不画图内标题（图注在正文）
+    'xtick.labelsize': 9,
+    'ytick.labelsize': 9,
+    'legend.fontsize': 8.5,
+    # 框架：去上右脊、细轴、白底
+    'text.color': '#111111',
+    'axes.labelcolor': '#111111',
+    'xtick.color': '#111111',
+    'ytick.color': '#111111',
+    'legend.labelcolor': '#111111',
+    'axes.edgecolor': '#444444',
+    'axes.linewidth': 0.8,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'axes.grid': True,
+    'grid.color': '#D6D8DC',
+    'grid.alpha': 0.55,
+    'grid.linewidth': 0.55,
+    'legend.frameon': False,
+    'legend.edgecolor': 'none',
+    'legend.handlelength': 1.4,
+    'legend.handletextpad': 0.6,
+    'legend.columnspacing': 1.0,
+    'figure.facecolor': 'white',
+    'axes.facecolor': 'white',
+    'savefig.facecolor': 'white',
+})
+
+# ============================================================
+# Nature 级克制配色（三族 + 强调）
+# 机型信号族：A 蓝 / B 琥珀 / C 朱红
+# 中继区域族：W 青绿 / E 靛紫 / N 松绿
+# 中性灰：文字/网格/辅助
+# ============================================================
+C_A = '#1F6FB2'       # A 型（信号蓝）
+C_B = '#E8A33D'       # B 型（琥珀）
+C_C = '#C73E1D'       # C 型（朱红）
+C_W = '#0E7C7B'       # W 中继（青绿）
+C_E = '#6C5CE7'       # E 中继（靛紫）
+C_N = '#3CA55C'       # N 中继（松绿）
+C_HERO = '#D8315B'    # 冠军/强调（玫红）
+C_GRAY = '#6B7280'    # 中性灰
+C_LIGHT = '#E5E7EB'   # 浅灰（背景条/网格）
+C_TEXT = '#111111'    # 文字
+
+MODEL_COLORS = {'A': C_A, 'B': C_B, 'C': C_C}
+AREA_COLORS = {'W': C_W, 'E': C_E, 'N': C_N}
+
+# 色盲友好检验序列（预览用）
+SWATCHES = {'A': C_A, 'B': C_B, 'C': C_C, 'W': C_W, 'E': C_E, 'N': C_N}
+
+
+def save(fig, name, dpi=300, figdir='figures'):
+    """PNG（论文用）+ PDF（矢量源）双格式导出。"""
+    os.makedirs(figdir, exist_ok=True)
+    fig.savefig(os.path.join(figdir, name + '.png'), dpi=dpi)
+    fig.savefig(os.path.join(figdir, name + '.pdf'), dpi=dpi)
+    plt.close(fig)
+    print('saved %s.png/pdf' % name)
