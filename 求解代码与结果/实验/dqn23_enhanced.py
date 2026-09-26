@@ -17,7 +17,7 @@ import torch.nn as nn
 import torch.optim as optim
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from ppo23_env import data, OUTD, K, state_vec, eval_full, build_candidates, eval_improve
+from ppo23_env import data, OUTD, K, state_vec, eval_full, build_candidates, eval_improve, apply_cand
 from p2_solve import Flight
 
 torch.manual_seed(0)
@@ -57,7 +57,7 @@ def make_state(fls):
 
 def terminal_r(fls):
     m, s, v, nc = eval_full(data, fls)
-    return -(m['makespan'] / 60.0 + 1.5 * m['energy']) + 250.0
+    return -(m['makespan'] / 60.0 + 0.5 * m['energy']) + 250.0
 
 
 SID_MAP = {sid: i for i, sid in enumerate(sorted(set(b.split('-')[0] for b in data.boxes)))}
@@ -113,6 +113,41 @@ def build_candidates_f(fls):
     # STOP 动作特征 + 评分（最高优先尝试? 评分仅引导 ε 探索, STOP 给 0）
     feats[K] = feat_for(('stop', -1, -1, None, None), fls)
     return c, feats, scores
+
+
+def pool_stats(fls):
+    """场景域知识：池负载结构（完工 = max 池 T/台）。"""
+    POOL_N = {'A': 4, 'B': 2, 'C': 2}
+    E_USE = {'A': 4.5, 'B': 4.0, 'C': 8.0}
+    T_FULL = {'A': 1800.0, 'B': 2400.0, 'C': 3000.0}
+    pt = {'A': 0.0, 'B': 0.0, 'C': 0.0}
+    ch = 0.0
+    for f in fls:
+        pt[f.model] += f.duration()
+        ch += T_FULL[f.model] * (1.0 - min(1.0, f.energy() / E_USE[f.model]))  # 充电时长/E_use 近似
+    loads = [pt[g] / POOL_N[g] for g in 'ABC']
+    m_ = sum(loads) / 3.0
+    return float(np.sqrt(np.mean([(x - m_) ** 2 for x in loads]))), ch / 3600.0
+
+
+def eval_improve_scene(fls, cand):
+    """针对本问题场景的定制奖励（完工主导 + 能耗 + 池均衡 + 充电周转引导）：
+    r = Δ完工/60(min) + 0.5·Δ能耗(kWh) + 0.05·Δ池负载std(s) + 0.02·Δ充电时长(h)。
+    约束仍为硬门槛：违规/电池/hard 不满足 → 返回 None（不可执行）。
+    """
+    nf = apply_cand(fls, cand)
+    if nf is None:
+        return None
+    m0, s0, v0, nc0 = eval_full(data, fls)
+    m1, s1, v1, nc1 = eval_full(data, nf)
+    if m1 is None or v1 > 0 or nc1 > 0 or (not m1['hard_ok']):
+        return None
+    d_mk = m0['makespan'] - m1['makespan']
+    d_en = m0['energy'] - m1['energy']
+    ps0, ch0 = pool_stats(fls)
+    ps1, ch1 = pool_stats(nf)
+    r = d_mk / 60.0 + 0.5 * d_en + 0.05 * (ps0 - ps1) - 0.02 * (ch1 - ch0)
+    return r, nf
 
 
 def make_mask(c):
@@ -179,7 +214,7 @@ def train_seed(seed, n_ep=150):
         best_imp = None
         bi = -1
         for i in range(min(len(c), K)):
-            imp = eval_improve(fls, c[i])
+            imp = eval_improve_scene(fls, c[i])
             if imp is not None and (best_imp is None or imp[0] > best_imp[0]):
                 best_imp = imp
                 bi = i
@@ -226,7 +261,7 @@ def train_seed(seed, n_ep=150):
                 done = False
                 s2 = s
             else:
-                imp = eval_improve(fls, c[a])
+                imp = eval_improve_scene(fls, c[a])
                 if imp is None:
                     r = -0.2
                     done = False
@@ -302,7 +337,7 @@ def train_seed(seed, n_ep=150):
             if a == K:
                 break
             if a < len(c):
-                imp = eval_improve(fls, c[a])
+                imp = eval_improve_scene(fls, c[a])
                 if imp is not None:
                     fls = imp[1]
         m, s2, v, nc = eval_full(data, fls)
